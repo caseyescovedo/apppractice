@@ -1,5 +1,5 @@
-const mongoose = require("mongoose")
-mongoose.Schema = mongoose.schema;
+const mongoose = require("mongoose");
+const Schema = mongoose.Schema;
 
 
 // v-- REPLACE THE EMPTY STRING WITH YOUR LOCAL/MLAB/ELEPHANTSQL URI
@@ -14,7 +14,7 @@ const URI = process.env.MONGO_URI || myURI;
 
 const taskSchema = new Schema({
     item: String,
-    createdAt: Date.now
+    createdAt: {type: Date, default: Date.now}
 });
 
 const Task = mongoose.model("Task", taskSchema);
