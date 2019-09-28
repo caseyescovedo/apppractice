@@ -3,8 +3,9 @@ const { pool } = require('../models/TaskModel');
 module.exports = {
     postTask: (req, res, next) => {
         const { task } = req.body;
-        pool.query('INSERT INTO "Task" (item) VALUES ($1)', [task])
+        pool.query('INSERT INTO "Task" (item) VALUES ($1) RETURNING _id', [task])
         .then((result) => {
+            res.locals.id = result.rows[0]._id;
             return next();
         })
         .catch((err) => {

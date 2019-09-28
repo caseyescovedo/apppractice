@@ -1,38 +1,47 @@
 const path = require('path');
 const express = require('express');
 const bodyParser = require('body-parser');
-const taskRouter = require('./controllers/taskController');
+const cookieParser = require('cookie-parser');
+const taskController = require('./controllers/taskController');
+const authController = require('./controllers/authController');
 
 const app = express();
 const PORT = 3333;
 
 app.use(bodyParser.json());
+app.use(bodyParser.urlencoded({ extended: true}));
+app.use(cookieParser());
 
-app.use('/assets', express.static(path.join(__dirname, '../assets')));
+app.use('/secret', express.static(path.join(__dirname, '../assets')));
+app.use('/', express.static(path.join(__dirname, '../assets')));
 
-app.get('/task', taskRouter.getTasks, (req, res) => {
-    res.status(200).json(res.locals.items);
+app.post('/signin', authController.verifyUser, (req, res) => {
+    return res.redirect('/secret');
+});
+
+app.get('/task', taskController.getTasks, (req, res) => {
+    return res.status(200).json(res.locals.items);
 })
 
-app.post('/task', taskRouter.postTask, (req, res) => {
-    res.status(200).json("Success: task is added.");
+app.post('/task', taskController.postTask, (req, res) => {
+    return res.status(200).json(res.locals.id);
 })
 
-app.delete('/task', taskRouter.deleteTask, (req, res) => {
-    res.status(200).json("Success: task is deleted.");
+app.delete('/task', taskController.deleteTask, (req, res) => {
+    return res.status(200).json("Success: task is deleted.");
 })
 
-app.get('/secret', (req, res) => {
-    res.status(200).sendFile(path.join(__dirname, '../views/secret.html'));
+app.get('/secret', authController.isLoggedIn, (req, res) => {
+    return res.status(200).sendFile(path.join(__dirname, '../views/secret.html'));
 })
 
 app.get('/', (req, res) => {
-    res.status(200).sendFile(path.join(__dirname, '../views/index.html'));
+    return res.status(200).sendFile(path.join(__dirname, '../views/index.html'));
 })
 
 // show 404 page if nothing found
 app.all('*', (req, res) => {
-    res.status(404).send('Page Not Found');
+    return res.status(404).send('Page Not Found');
 })
 
 // global error handler
@@ -45,7 +54,7 @@ app.use((err, req, res) => {
 
     const errObj = Object.assign(defaultErr, err);
     console.log(errObj.log);
-    res.status(errObj.status).json(errObj.message);
+    return res.status(errObj.status).json(errObj.message);
 });
 
 // start server
