@@ -20,12 +20,12 @@ $(document).ready(function() {
     })
 
     $('#retrieve').click(function() {
+        $('#task-list').empty();
         const taskList = $('#task-list');
         $.ajax({
             type: "GET",
             url: "/task",
             success: function(data) {
-                console.log(data);
                 data.forEach(obj => {
                     const taskDOM = $(`<li id=${obj._id}>${obj.item}<button class='remove'>X</button></li>`)
                     taskList.append(taskDOM);
@@ -35,7 +35,8 @@ $(document).ready(function() {
     })
 
     $('.remove').click(function(event) {
-        console.lob(event.target.id);
+        console.log('in click remove');
+        console.log(event.target.id);
         $.ajax({
             type: "DELETE",
             url: "/task",

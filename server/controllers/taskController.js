@@ -31,6 +31,7 @@ module.exports = {
     },
 
     deleteTask: (req, res, next) => {
+        console.log( req.body );
         const { id } = req.body;
         pool.query('DELETE FROM "Task" WHERE _id = $1', [id])
         .then((result) => {
