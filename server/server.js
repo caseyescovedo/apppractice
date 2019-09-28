@@ -45,7 +45,7 @@ app.post("/tasks", taskController.postTask, (req, res) =>{
 });
 
 app.delete("tasks/:id", taskController.deleteTask, (req, res) => {
-    res.status(200)
+    res.status(200).json()
 })
 
 
