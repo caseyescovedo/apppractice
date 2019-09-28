@@ -2,16 +2,19 @@ const db = require('../models/TaskModel.js');
 
 module.exports = {
   getTasks: (req, res, next) => {
-    res.locals.tasks = ['item1', 'item2'];
+    const query = `SELECT * FROM tasks`;
+    const results = db.sendToDatabase(query);
+
+    res.locals.tasks = result.rows;
     return next();
   },
 
   postTask: (req, res, next) => {
     const query = `INSERT INTO tasks (item, created_at) VALUES ('${req.body.task}', CURRENT_TIMESTAMP) returning *`;
 
-    const taskId = db.sendToDatabase(query);
+    const result = db.sendToDatabase(query);
     // return taskId to use on front-end
-    res.locals.taskId = taskId;
+    res.locals.taskId = result.rows[0]._id;
     return next();
   },
 

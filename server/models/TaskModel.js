@@ -25,15 +25,15 @@ pg.connect(URI, (err, db) => {
 
 module.exports = {
   sendToDatabase: async (statement) => {
-    let taskId;
+    let results;
 
     await pg.connect(URI, async (err, db) => {
       await db.query(statement, (err, result) => {
-        taskId = result.rows[0]._id;
+        results = result;
         db.end();
       });
     });
     // return task id to populate list on front end
-    return taskId;
+    return results;
   }
 };
