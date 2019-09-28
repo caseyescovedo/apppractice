@@ -1,4 +1,4 @@
-const pg = require('pg')
+const pg = require('pg');
 // v-- REPLACE THE EMPTY STRING WITH YOUR LOCAL/MLAB/ELEPHANTSQL URI
 const myURI = 'postgresql://localhost/assessment';
 
@@ -8,7 +8,7 @@ const myURI = 'postgresql://localhost/assessment';
 // UNCOMMENT THE LINE BELOW IF USING POSTGRESQL
 const URI = process.env.PG_URI || myURI;
 
-pg.connect(uri, (err, db) => {
+pg.connect(URI, (err, db) => {
   if (err) throw new Error(err);
 
   const table = `CREATE TABLE IF NOT EXISTS tasks
@@ -23,16 +23,17 @@ pg.connect(uri, (err, db) => {
   });
 });
 
-module.exports = function(item) {
-  pg.connect(uri, (err, db) => {
-    const query = {
-      text: `INSERT INTO tasks (item, created_at)
-             VALUES ($1, CURRENT_TIMESTAMP)
-             RETURNING *`,
-      values: item
-    }
+module.exports = {
+  sendToDatabase: async (statement) => {
+    let taskId;
 
-    db.query(query)
-    db.end();
-  });
+    await pg.connect(URI, async (err, db) => {
+      await db.query(statement, (err, result) => {
+        taskId = result.rows[0]._id;
+        db.end();
+      });
+    });
+    // return task id to populate list on front end
+    return taskId;
+  }
 };
