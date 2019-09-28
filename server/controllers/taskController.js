@@ -7,12 +7,15 @@ let taskController = {}
 
     taskController.postTask = (req, res, next) => {
         console.log("inside create Controller")
+        console.log("RB",req.body)
         Task.create({item: req.body.item}, (err,thing) => {
             if(err){
                 return next({err: "Error in postTask Controller"})
             } else {
                 console.log("created a task");
-                console.log(thing)
+                console.log("thing",thing)
+                res.locals.thing = thing
+                
                 
             }
             return next();

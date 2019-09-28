@@ -37,11 +37,11 @@ app.get("/secret", (req, res) => {
 });
 
 app.get("/tasks", taskController.getTasks, (req, res) =>{
-    res.status(200).json(res.locals.data)
+    res.status(200).json(res.locals.tasks)
 });
 
 app.post("/tasks", taskController.postTask, (req, res) =>{
-    res.status(200).json()
+    res.status(200).json(res.locals.thing)
 });
 
 app.delete("tasks/:id", taskController.deleteTask, (req, res) => {
