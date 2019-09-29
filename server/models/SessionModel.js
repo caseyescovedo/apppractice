@@ -7,12 +7,12 @@ const myURI = 'mongodb+srv://assessment:123@nodeproject-o98p0.mongodb.net/test?r
 const URI = process.env.MONGO_URI || myURI;
 mongoose.connect(URI);
 
-const TaskSchema = new Schema({
-  item: {type: String, require: true},
+const SessionSchema = new Schema({
+  cookieId: {type: String, require: true, unique: true},
   created_at: {type: Date, default: Date.now}
 })
 
-const Task = mongoose.model('Task', TaskSchema)
+const Session = mongoose.model('Session', SessionSchema)
 
 
-module.exports = Task; // <-- export your model
+module.exports = Session; // <-- export your model

@@ -7,12 +7,12 @@ const myURI = 'mongodb+srv://assessment:123@nodeproject-o98p0.mongodb.net/test?r
 const URI = process.env.MONGO_URI || myURI;
 mongoose.connect(URI);
 
-const TaskSchema = new Schema({
-  item: {type: String, require: true},
-  created_at: {type: Date, default: Date.now}
+const UserSchema = new Schema({
+  username: {type: String, require: true},
+  password: {type: String, require: true}
 })
 
-const Task = mongoose.model('Task', TaskSchema)
+const Users = mongoose.model('User', UserSchema)
 
 
-module.exports = Task; // <-- export your model
+module.exports = Users; // <-- export your model
