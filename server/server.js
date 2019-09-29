@@ -12,6 +12,7 @@ const taskController = require('./controllers/taskController');
 
 // parse request bodies for JSON
 app.use(bodyParser.json());
+app.use(bodyParser.urlencoded({ extended: true }));
 // parse cookies
 app.use(cookieParser());
 
@@ -28,14 +29,13 @@ app.get('/', (req, res) => {
 })
 
 // serve to-do page/app
-app.get('/secret', (req, res) => {
+app.get('/secret', authController.setCookie, authController.verifyCookie, (req, res) => {
   res.sendFile(path.resolve(__dirname, './../views/secret.html'))
 }) 
 
-// redirect to /secret when /signin form is submitted at /
-// app.post('/sigin', (req, res) => {
-//   res.redirect('/secret')
-// })
+app.post('/signin', authController.verifyUser, (req, res) => {
+  res.json('unsuccessful login attempt')
+})
 
 // handler for posting a new item to db; middleware ends within taskController
 app.post('/secret/items', taskController.postTask)

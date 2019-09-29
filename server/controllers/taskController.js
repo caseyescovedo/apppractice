@@ -1,6 +1,5 @@
 const db = require('../models/TaskModel')
 
-
 const postTask = (req, res,) => {
   console.log('post received from index.js')
   const { item } = req.body;
