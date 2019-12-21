@@ -1,6 +1,7 @@
 const express = require('express')
 const path = require('path')
 const bodyParser = require('body-parser')
+const cookieParser = require('cookie-parser')
 
 const taskController = require('./controllers/taskController')
 
@@ -9,7 +10,7 @@ const PORT = 3333;
 
 app.use(bodyParser.urlencoded({extended:true}))
 app.use(bodyParser.json())
-
+app.use(cookieParser())
 
 app.use('/assets', express.static(path.resolve(__dirname, '../assets')));
 
@@ -26,7 +27,7 @@ app.get('/tasks', taskController.getTasks, (req, res) => {
 })
 
 app.post('/tasks', taskController.postTask, (req, res) => {
-    res.status(200).json('Task Updated')
+    res.status(200).json(res.locals.addedTask)
 })
 
 app.delete('/tasks', taskController.deleteTask, (req, res) => {
