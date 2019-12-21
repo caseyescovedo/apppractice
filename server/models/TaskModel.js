@@ -14,8 +14,8 @@ const Schema = mongoose.Schema;
 // UNCOMMENT THE LINE BELOW IF USING POSTGRESQL
 // const URI = process.env.PG_URI || myURI;
 const taskSchema = new Schema({
-  item: String,
-  createdAt: {  type: Date, default: Date.now }
+  item: { type: String, required: true},
+  created_at: {  type: Date, default: Date.now() }
 });
 
 const Task = mongoose.model('task',taskSchema)

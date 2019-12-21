@@ -1,4 +1,5 @@
 
+window.onload= start;
 
 function getAllTasks(){
   fetch("/getAllTasks")
@@ -16,7 +17,7 @@ function getAllTasks(){
     const deleteButton = document.createElement('button')
     deleteButton.innerHTML= 'x';
     deleteButton.addEventListener('click',() => {
-      deleteMessage(res[i]._id)
+      deleteTask(res[i]._id)
     })
     list.appendChild(taskItem);
     console.log("taskItem in get all in index, line 20",taskItem)
@@ -60,13 +61,13 @@ function getAllTasks(){
     const list =document.getElementById('task-list')
     list.removeChild(itemToDelete)
 
-    fetch("/delete/"+id,{
+    fetch(`/delete/${id}`,{
       method:'DELETE',
-    }).then((res)=>res.json()).then((res)=>console.log("res on line 63 of index js",res))
+      headers:{ 'Content-type': 'application/json'}
+    })
   }
 
 
-window.onload= start;
 
 
 

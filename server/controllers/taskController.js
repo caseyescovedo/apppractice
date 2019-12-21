@@ -7,18 +7,13 @@ taskController.createTask = (req, res, next) => {
   const item  = req.body.item;
   Task.create({
     item
+  },(err,task) => {
+    if(err){
+      return next(err)
+    }
   })
-  .then(taskDoc => {
-    res.locals.item = taskDoc.item;
-
+    res.locals.item = task;
     return next();
-  })
-  .catch(err => {
-    next({
-    log: `taskController.postTask: ERROR: ${err}`,
-    message: { err: 'Error in taskController post, check logs'}
-  });
-});
 }
 
 //  READ
