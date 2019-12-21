@@ -1,6 +1,7 @@
 const express = require('express');
 const path = require('path')
 
+const taskController = require('./controllers/taskController')
 const app = express();
 const port = 3333;
 
@@ -13,17 +14,36 @@ app.use('/', express.static(path.join(__dirname, '../views')))
 app.use('/', express.static(path.join(__dirname, '../assets')))
 app.use('/secret', express.static(path.join(__dirname, '../assets')))
 
-//SERVING INDEX
-app.get('/', (req,res) => {
-  res.sendFile(path.join(__dirname, '../views/index.html'))
-})
 
 //SERVING SECRET
 app.get('/secret', (req,res) => {
   res.sendFile(path.join(__dirname, '../views/secret.html'))
 })
 
+
+//SERVING INDEX
+app.get('/', (req,res) => {
+  res.sendFile(path.join(__dirname, '../views/index.html'))
+})
+
+
 //------------------------ROUTES-------------------------//
+
+
+//GET
+app.get('/tasks', taskController.getTasks, (req,res)=> {
+  res.json(res.locals.tasks)
+})
+
+//POST
+app.post('/tasks', taskController.postTask, (req, res) => {
+  res.send(res.locals.tasks)
+})
+
+//DELETE
+app.delete('/tasks', taskController.deleteTask, (req, res) => {
+  res.json(res.locals.tasks)
+})
 
 
 
