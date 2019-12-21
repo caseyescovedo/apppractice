@@ -2,11 +2,9 @@
  const Task = require('../models/TaskModel');
  const taskController = {};
 
-
 //CREATE
-taskController.postTask = (req, res, next) => {
+taskController.createTask = (req, res, next) => {
   const item  = req.body.item;
- 
   Task.create({
     item
   })
@@ -24,8 +22,8 @@ taskController.postTask = (req, res, next) => {
 }
 
 //  READ
-taskController.getTasks = (req, res, next) => {
-  Task.find({}).execc()
+taskController.getAllTasks = (req, res, next) => {
+  Task.find({}).exec()
   .then(taskDocs => {
       res.locals.tasks = taskDocs;
       next();
