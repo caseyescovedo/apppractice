@@ -4,6 +4,7 @@ const bodyParser = require('body-parser')
 const cookieParser = require('cookie-parser')
 
 const taskController = require('./controllers/taskController')
+const authController = require('./controllers/authController')
 
 const app = express()
 const PORT = 3333;
@@ -18,7 +19,7 @@ app.get('/', (req, res) => {
     res.status(200).sendFile(path.resolve(__dirname, '../views/index.html'));
   });
 
-app.get('/secret', (req, res) => {
+app.get('/secret', authController.verifyCokie,  (req, res) => {
 res.status(200).sendFile(path.resolve(__dirname, '../views/secret.html'));
 });
 
@@ -32,6 +33,10 @@ app.post('/tasks', taskController.postTask, (req, res) => {
 
 app.delete('/tasks', taskController.deleteTask, (req, res) => {
     res.status(200).json('Task Deleted')
+})
+
+app.post('/signin', authController.verifyUser, authController.setCookie, (req, res) => {
+    res.redirect('/secret')
 })
 
 app.use('*', (req, res) => {
