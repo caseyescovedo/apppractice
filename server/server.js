@@ -30,9 +30,14 @@ app.get('/', authController.setCookie, (req, res) => {
   res.status(200).sendFile(path.join(__dirname,`../views/index.html`));
 })
 
-// logged-in secret route
-app.get('/secret',authController.createUser, (req, res) => {
+// sign-up route
+app.get('/', authController.createUser, (req, res) => {
   res.status(200).redirect('/secret');
+})
+
+// logged-in secret route
+app.get('/secret',authController.verifyUser, (req, res) => {
+  res.status(200).sendFile(path.join(__dirname,`../views/secret.html`));
 })
 
 // catch-all route
