@@ -1,6 +1,8 @@
 //getting tasks on button click
 const getTasks = document.getElementById("retrieve");
 const taskList = document.getElementById('task-list');
+const addTask = document.getElementById("task-button");
+const textField = document.getElementById("task");
 
 document.getElementById("retrieve").addEventListener('click', () => {
   fetch('/getTasks')
@@ -17,11 +19,10 @@ document.getElementById("retrieve").addEventListener('click', () => {
 })
 
 //adding tasks on button click
-const addTask = document.getElementById("task-button");
-const textField = document.getElementById("task");
 
 addTask.addEventListener('click', () => {
   const text = textField.value;
+  textField.value = '';
   console.log(text);
   fetch('/postTask', {
     method: 'POST',
@@ -38,17 +39,10 @@ addTask.addEventListener('click', () => {
     const listItem = document.createElement('li');
     listItem.id = task[0].item_id;
     listItem.innerHTML = `${task[0].item}<button class='remove'>X</button>`;
-    // listItem.id = task[0].item_id;
     taskList.append(listItem);
     addDeleteFunction();
   })
 })
-
-//
-// function deleteParent() {
-//   const parent = this.parent;
-//   parent.remove();
-// }
 
 //deleting tasks on button click
 function addDeleteFunction() {
