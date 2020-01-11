@@ -14,7 +14,7 @@ app.get('/todo', taskController.getTasks, (req, res) => {
 // and go to http://localhost:3333/todo, can see [{"item":"do laundry","created_at":"2020-01-12T05:45:32.445Z"}]
 
 app.post('/todo', taskController.postTask, (req, res) => {
-  // res.json(res.locals.taskPosted);
+  res.json(res.locals.taskPosted);
 });
 
 app.delete('/todo', taskController.deleteTask, (req, res) => {
