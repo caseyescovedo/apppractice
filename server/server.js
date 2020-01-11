@@ -18,7 +18,7 @@ app.post('/todo', taskController.postTask, (req, res) => {
 });
 
 app.delete('/todo', taskController.deleteTask, (req, res) => {
-  // res.json(res.locals.taskDeleted);
+  res.json(res.locals.taskDeleted);
 });
 
 app.get('/', (req, res) => {

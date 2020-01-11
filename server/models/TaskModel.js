@@ -2,6 +2,7 @@
 const myURI = 'postgres://tckclrgc:pwivedVvFU00GvzK2n7WO9feVxDKeh4s@rajje.db.elephantsql.com:5432/tckclrgc';
 // Table created in ElephantSQL using this query string:
 // CREATE TABLE Task (
+//   id SERIAL PRIMARY KEY,
 //   item varchar(100) NOT NULL,
 //   created_at timestamp
 // );
