@@ -1,11 +1,14 @@
 const express = require('express');
 const app = express();
 const path = require('path');
+const cookieParser = require('cookie-parser');
 const PORT = 3333;
 const taskController = require('./controllers/taskController');
+const authController = require('./controllers/authController');
 
 app.use(express.json());
 app.use(express.static('assets'));
+app.use(cookieParser());
 
 app.get('/todo', taskController.getTasks, (req, res) => {
   res.json(res.locals.tasks);
@@ -25,7 +28,11 @@ app.get('/', (req, res) => {
   res.sendFile(path.join(__dirname, '../views/index.html'));
 });
 
-app.get('/secret', (req, res) => {
+app.post('/signin', authController.getUserInfo, (req, res) => {
+  res.redirect('/secret');
+});
+
+app.get('/secret', authController.checkCookie, (req, res) => {
   res.sendFile(path.join(__dirname, '../views/secret.html'));
 });
 
