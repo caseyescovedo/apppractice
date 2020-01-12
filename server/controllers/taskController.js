@@ -6,9 +6,9 @@ const TaskController = {};
 
 // post task controller
 TaskController.postTask = (req, res, next) => {
-  console.log('req.body', req.body);
-  const { item } = req.body;
-  Task.create({ item }, (err, newTask) => {
+  console.log('req', req.body);
+  const item = req.body;
+  Task.create(item, (err, newTask) => {
     if (err) {
       return next({
         log: 'Error: ERROR: Error creating tasks in DB.',
@@ -17,7 +17,6 @@ TaskController.postTask = (req, res, next) => {
         }
       });
     }
-    res.locals.newTask = newTask;
     return next();
   });
 };
@@ -40,7 +39,6 @@ TaskController.getTasks = (req, res, next) => {
 
 // delete a task controller
 TaskController.deleteTask = (req, res, next) => {
-  // console.log(req.query);
   Task.findByIdAndDelete(req.query.id, (err, task) => {
     if (err) {
       return next({

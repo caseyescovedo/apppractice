@@ -20,9 +20,9 @@
 const btnGetTasks = document.getElementById('retrieve');
 const btnAddTask = document.getElementById('task-button');
 btnGetTasks.addEventListener('click', getTasks);
-// btnAddTask.addEventListener('click', addTask);
+btnAddTask.addEventListener('click', addTask);
 
-// clears contents of tasklist
+// clears contents of tasklist before getting tasks again
 function clear() {
   const tasks = document.getElementById('task-list');
   while (tasks.firstChild) tasks.removeChild(tasks.firstChild);
@@ -45,12 +45,25 @@ async function getTasks() {
     removeTask.id = i._id;
     removeTask.class = 'remove';
     removeTask.textContent = `X`;
-    // removeTask.setAttribute('id', `${i.id}`);
-    // removeTask.id = `/secret?id=${i.id}`;
-    removeTask.addEventListener('click', () => {
-      fetch(`/secret?id=${removeTask.id}`, { method: 'DELETE' });
+    removeTask.addEventListener('click', async () => {
+      const response2 = await fetch(`/secret?id=${removeTask.id}`, { method: 'DELETE' });
+      const result2 = await response2.json();
       console.log('deleted', removeTask.id);
+      getTasks();
     });
-    taskItem.appendChild(document.createElement('br'));
   });
+}
+
+async function addTask() {
+  const inputTask = document.getElementById('task');
+  const payload = {
+    item: inputTask.value
+  };
+  console.log(payload);
+  await fetch('/secret', {
+    headers: { 'content-type': 'application/json; charset=UTF-8' },
+    body: JSON.stringify(payload),
+    method: 'POST'
+  });
+  console.log('addedTask', inputTask.value.toString());
 }

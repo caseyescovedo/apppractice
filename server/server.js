@@ -23,7 +23,7 @@ app.get('/secret', (req, res) => {
 });
 
 // posts new task and returns all current tasks
-app.post('/secret', TaskController.postTask, TaskController.getTasks, (req, res) => {
+app.post('/secret', TaskController.postTask, (req, res) => {
   res.status(200).json(res.locals.tasks);
 });
 
