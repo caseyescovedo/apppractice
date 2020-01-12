@@ -45,16 +45,17 @@ app.get('/secret', (req, res) => {
   }
 })
 
+//get all the tasks
 app.get('/getTasks', taskController.getTasks, (req, res) => {
-  console.log('getting all items');
   res.json(res.locals.tasks);
 })
 
+//add an item to databse and sends back that result to update things without refresh
 app.post('/postTask', taskController.postTask, (req, res) => {
-  console.log('item posted');
   res.json(res.locals.oneTask);
 }) 
 
+//deletes an item from databse
 app.delete('/deleteTask', taskController.deleteTask, (req, res) => {
   res.sendStatus(200);
 })

@@ -6,7 +6,7 @@ window.onload = function () { //doing this instead of differing the script
   document.getElementById("retrieve").addEventListener("click", function () {
     const list = document.getElementById("task-list");
     while (list.firstChild) {
-      //this is to clean the lsit so we dont have duplicates stacked up
+      //this is to clean the list so we dont have duplicates stacked up
       list.removeChild(list.firstChild);
     }
 
@@ -44,8 +44,7 @@ window.onload = function () { //doing this instead of differing the script
   })
 
 
-  //this is the delete item button
-
+  //this is the delete item element function, to be invoked when we hit the delete button to give the impression of a dynamic list
   function deleteElement(id) {
     let task = document.getElementById(`task ${id}`);
 
