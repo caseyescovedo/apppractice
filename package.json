@@ -9,7 +9,7 @@
     "update-package": "node test/update-package.js",
     "merge": "node test/merge.js",
     "lint": "node test/lint.js server/server.js assets/js/index.js",
-    "start": "node server/server.js",
+    "start": "nodemon server/server.js -w server",
     "start-dev": "nodemon server/server"
   },
   "author": "Brandon Mizuno",
@@ -21,6 +21,10 @@
     "nodemon": "^1.11.0",
     "request": "^2.81.0",
     "supertest": "^3.0.0",
-    "zombie": "^5.0.7"
+    "zombie": "^6.1.4"
+  },
+  "dependencies": {
+    "express": "^4.17.1",
+    "mongoose": "^5.8.7"
   }
 }
