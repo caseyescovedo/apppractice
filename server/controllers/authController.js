@@ -1,5 +1,5 @@
 const authController = {};
-module.exports =  authController;
+
 const adminUser = "codesmith";
 const adminPass = "ilovetesting"
 authController.checkCred = (req, res, next) => {
@@ -17,3 +17,5 @@ authController.checkCred = (req, res, next) => {
     next();
   }
 }
+
+module.exports =  authController;
