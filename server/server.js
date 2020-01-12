@@ -30,7 +30,7 @@ app.post('/signin', authController.checkCred, (req, res) => {
     res.sendFile(path.join(__dirname, "../views/secret.html"))
   }
   else {
-    res.status(401).send("You must be signed in to view this page")
+    res.status(401).send("unsuccessful login attempt")
   }
 })
 

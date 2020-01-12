@@ -21,7 +21,6 @@ taskController.getTasks =(req, res, next) => {
   sqlQuery = `SELECT * FROM "Task"`
   db.query(sqlQuery) //grabbing all entries with a SELECT * of the table
   .then(response => {
-    console.log(response.rows);
     res.locals.tasks = response.rows; //save it to res.locals.task
     next();
     })
@@ -31,7 +30,6 @@ taskController.getTasks =(req, res, next) => {
 
 taskController.postTask = (req, res, next) => {
   const  { task } = req.body;
-  console.log(task); //checking data from the front end
   const values = [task]; //add it to values
 
   sqlQuery = `INSERT INTO "Task" (item, created_at)
@@ -40,7 +38,6 @@ taskController.postTask = (req, res, next) => {
 
   db.query(sqlQuery, values) //insert into returning all rows, I want to see a console log on the server
   .then(response => {
-    console.log(response.rows[response.rows.length-1]);
     res.locals.oneTask = response.rows[response.rows.length-1]//this will be our entry we posted, just to check things
     next();
     })
