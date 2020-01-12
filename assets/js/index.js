@@ -43,7 +43,7 @@ $(document).ready(function(){
     let tasks = [];
     taskList.getTasks()
         .then(data => {
-        
+        if ( $('li').length )
       for (const el of data) {
         const task = new Task(el._id, el.item);
         console.log(typeof task.element);
