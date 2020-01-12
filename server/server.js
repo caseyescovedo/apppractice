@@ -69,6 +69,11 @@ app.post('/createTask', taskController.createTask, (req, res) => {
   res.json(res.locals.data);
 })
 
+// // delete task item
+// app.delete('/deleteTask', taskController.deleteTask, (req, res) => {
+//   res.json(res.locals.data);
+// })
+
 // catch-all route
 app.use('*', (req, res) => {
   res.sendStatus(404);

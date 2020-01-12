@@ -1,8 +1,10 @@
 const db = require('../models/TaskModel');
 const taskController = {};
 
+// get tasks
 taskController.getTasks = (req, res, next) => {
   console.log('in getTasks');
+  console.log('req.body ', req.body);
   let { task } = req.body;
   let item = task;
   console.log('item/task', item, task);
@@ -22,6 +24,8 @@ taskController.getTasks = (req, res, next) => {
   .catch(err => next(err));
 }
 
+
+// create task
 taskController.createTask = (req, res, next) => {
   console.log('in createTask');
   let { task } = req.body;
@@ -43,7 +47,28 @@ taskController.createTask = (req, res, next) => {
   })
   .catch(err => next(err));
 }
-module.exports = {
 
+//delete tasks
+// taskController.deleteTasks = (req, res, next) => {
+//   console.log('in getTasks');
+//   console.log('req.body ', req.body);
+//   let { task } = req.body;
+//   let item = task;
+//   console.log('item/task', item, task);
+//   values = [item];
+//   sqlString = `select *
+//                 from tasks
+//                 where item like *
+//                 ;`;
+//
+//   db.query(sqlString, values)
+//   .then(data => {
+//     console.log('res.locals.rows: ',data.rows);
+//     res.locals.data = data.rows;
+//
+//     next();
+//   })
+//   .catch(err => next(err));
+// }
 
-};
+module.exports = taskController;

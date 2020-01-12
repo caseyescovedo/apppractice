@@ -28,6 +28,7 @@
     "cookie-parser": "^1.4.4",
     "cookieparser": "^0.1.0",
     "express": "^4.17.1",
+    "node-fetch": "^2.6.0",
     "pg": "^7.17.1"
   }
 }
