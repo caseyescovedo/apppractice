@@ -1,8 +1,48 @@
 window.onload = function() {
+  const addTaskToListOnDOM = (task, id) => {
+    const listElement = document.createElement('li');
+
+    // create the textNode that would have the todo string in it
+    const textNode = document.createTextNode(task);
+    listElement.appendChild(textNode);
+    taskList.appendChild(listElement);
+  
+    // create the delete button that would appear on the right of the todo item and give it an id that matches the json task id
+    const deleteBtn = document.createElement('button');
+    deleteBtn.textContent = 'X';
+    deleteBtn.className = 'remove';
+    deleteBtn.id = id;
+    listElement.appendChild(deleteBtn);
+
+    // delete functionality
+    deleteBtn.addEventListener('click', e => {
+      const idOfTaskToDelete = deleteBtn.id;
+      console.log('idOfTaskToDelete: ', idOfTaskToDelete);
+
+      // delete from database
+      fetch('/todo', {
+        method: 'DELETE',
+        headers: {
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({ id: idOfTaskToDelete })
+      })
+      .then(res => res.json())
+      .then(data => {
+        console.log(data);
+      })
+      .catch(err => console.log(`Error from deleteBtn: `, err));
+
+      // delete from DOM
+      const listToRemove = deleteBtn.parentNode;
+      listToRemove.parentNode.removeChild(listToRemove);
+    });
+  }
+
   const taskList = document.getElementById('task-list');  
   const getTasksBtn = document.getElementById('retrieve');
   const addTaskBtn = document.getElementById('task-button');
-  const input = document.getElementById("task");
+  const input = document.getElementById('task');
 
   getTasksBtn.addEventListener('click', e => {
     if (taskList.childNodes.length === 0) {
@@ -36,21 +76,9 @@ window.onload = function() {
     .catch(err => console.log(`Error from addTaskBtn: `, err));
   });
 
-  const addTaskToListOnDOM = (task, id) => {
-    const listElement = document.createElement('li');
-    console.log('task from addTaskToListOnDOM: ', task);
-    // create the textNode that would have the todo string in it
-    const textNode = document.createTextNode(task);
-    listElement.appendChild(textNode);
-    taskList.appendChild(listElement);
-  
-    // create the delete button that would appear on the right of the todo item and give it an id that matches the json task id
-    const deleteBtn = document.createElement('button');
-    deleteBtn.textContent = 'X';
-    deleteBtn.className = 'remove';
-    deleteBtn.id = id;
-    listElement.appendChild(deleteBtn);
-  }
+
+
+
 }
 
 // documentation used:
