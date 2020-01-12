@@ -11,7 +11,7 @@ taskController.getTasks = (req, res, next) => {
   values = [item];
   sqlString = `select *
                 from tasks
-                where item like *
+                returning *
                 ;`;
 
   db.query(sqlString, values)
