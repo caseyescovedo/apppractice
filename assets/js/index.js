@@ -7,15 +7,34 @@ class TaskList {
     this.getterbutton = $('#retrieve');
   }
   deleteTask() {
-  
+    console.log('delete task worked');
   }
-  async addTask({id, item}) {
-    const task = new Task(task.id, task.item);
-    this.tasks.push(task);
-    this.length += 1;
-    return task.element;
+  async addTask(item) {
+    console.log('add task worked');
+    fetch('/secret', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      body: {
+        item: item
+      }
+    })
+    .then(data => {
+      if(data) {
+        const task = new Task(id, item);
+        this.tasks.push(task);
+        this.length += 1;
+        $(`#task-list`).append(task.element);
+      }
+    })
+    .catch(e => console.log(e));
+    
   }
   async getTasks() {
+    
+    try{
+    console.log('get tasks worked');
     const raw = await fetch('/secret/all', {
       method: 'GET',
       headers: {
@@ -24,6 +43,10 @@ class TaskList {
     });
     const data = await raw.json();
     return [...data];
+    }
+    catch ( e ) {
+      console.log(e);
+    }
   }
 }
 
@@ -35,20 +58,24 @@ class Task  {
   }
 }
 
-const taskList = new TaskList();
+
 $(document).ready(function(){
-  console.log('welcometo secret');
-  
+  const taskList = new TaskList();
+  let item = '';
+  $('#task').on('keydown', e => {
+    console.log(e.key)
+    item = item.concat(e.key);
+    console.log(item);
+  });
   $('#retrieve').on('click',  (e) => {
-    let tasks = [];
+    console.log(e);
     taskList.getTasks()
         .then(data => {
-        if ( $('li').length )
       for (const el of data) {
-        const task = new Task(el._id, el.item);
-        console.log(typeof task.element);
-        $(`#task-list`).append(task.element);
+        if ( taskList.tasks.map(e => e.id).includes(el._id) ) continue;
+          taskList.addTask(el._id, el.item);
       }
+      console.log(taskList.tasks);
         });
   });
   $('#task-list').on('click', e => {
@@ -64,6 +91,10 @@ $(document).ready(function(){
     })
     .then(res => {console.log(res)});
     console.log(e.target.id);
+  })
+  $('#task-button').on('click', e => {
+    console.log(e);
+    // taskList.addTask()
   })
   
 });

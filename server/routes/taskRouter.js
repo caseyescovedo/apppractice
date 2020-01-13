@@ -5,6 +5,7 @@ const path = require('path');
 
 
 router.get('/',  (req, res) => {
+    res.cookie('verification Cookie',{token: 'admin'});
     return res.status(200).sendFile(path.join(__dirname,'../../views/secret.html'));
 });
 router.get('/all', taskController.getAll, (req ,res) => {

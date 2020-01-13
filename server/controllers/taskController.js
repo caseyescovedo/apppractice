@@ -1,6 +1,5 @@
 const Task = require('../models/TaskModel');
 
-
 const taskController = {};
 
 taskController.getAll = (req, res, next) => {

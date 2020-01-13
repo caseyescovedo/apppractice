@@ -22,7 +22,7 @@ app.get('/',(req, res) => {
 app.post('/', (req, res, next) => {
   const {user, pass} = req.body;
   if ( user === 'codesmith' && pass === 'ilovetesting') {
-    return res.redicret(taskRouter);
+    return res.redirect('/secret');
   } else {
     res.redirect('/');
   }
