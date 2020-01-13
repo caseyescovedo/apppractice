@@ -20,16 +20,16 @@ function deleteTask(e) {
 
 // Function that creates a task and appends it to the DOM
 function createTask(data){
-  let listNode = document.createElement("li");   
+  let listNode = document.createElement('li');   
   listNode.id = data._id;            
   let text = document.createTextNode(data.item +' '+data.created_at);       
   listNode.appendChild(text); 
   // Creating element button and appending it to the list 
   let deleteButton = document.createElement('button');
-  text = document.createTextNode('Delete');
   deleteButton.value = data._id;
   deleteButton.classList.add = 'remove';
   deleteButton.addEventListener('click',deleteTask, false);
+  text = document.createTextNode('Delete');
   deleteButton.appendChild(text);
   listNode.appendChild(deleteButton); 
   // Appending list to the DOM                        
@@ -63,13 +63,13 @@ document.getElementById('task-button').addEventListener("click", function(){
   });
 });
 
-// Adding Event Listener to Add Task button
+// Adding Event Listener to Get Task button
 document.getElementById('retrieve').addEventListener("click", function(){
   // Cleaning the dom before appending --- Not working ???
-//   document.getElementById('task-list').remove;
-//   let ulElement = document.createElement('ul');
-//   ulElement.id = 'task-list';
-//   document.getElementById('body').appendChild(ulElement);
+  document.getElementById('task-list').remove();
+  let ulElement = document.createElement('ul');
+  ulElement.id = 'task-list';
+  document.getElementById('create').appendChild(ulElement);
   fetch('/task')
   .then((response) => response.json())
   .then((data) => {

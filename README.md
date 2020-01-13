@@ -52,9 +52,9 @@ In the `server/models/taskController.js` file, add the following functionality t
 ## Client-side JavaScript/DOM Manipulation
 You are serving `index.js` to the client for use on the `secret` page, but there is not much existing functionality. Add code to achieve the following:
 
-- [#] When the button is clicked to get tasks, all tasks from the database should be displayed as list items in the `#task-list` element. These list items should display the task item followed by a `button` (inside the list item) with a class of `remove` and display an `X`. As an example, one list item might look like
+- [X] When the button is clicked to get tasks, all tasks from the database should be displayed as list items in the `#task-list` element. These list items should display the task item followed by a `button` (inside the list item) with a class of `remove` and display an `X`. As an example, one list item might look like
 `<li>Go shopping <button class="remove">X</button></li`
-- [ ] Multiple clicks of the button to get tasks should not display the list items multiple times
+- [X] Multiple clicks of the button to get tasks should not display the list items multiple times
 - [X] Clicking on the button to add a task should take the text from the input field and create a new task in the database. This task should be seen by clicking the button to get tasks after it has been added. (Optionally, you can display the new task immediately after adding.)
 - [X] Clicking on any list item's `X` button should remove the item from the list (immediately) and delete the task from the database
 
@@ -63,13 +63,13 @@ You are serving `index.js` to the client for use on the `secret` page, but there
 ## Server Routing
 By now, your server should serve the static assets, the login page, and the secret page. Add additional routes to achieve the following
 functionality:
-- [ ] If you have not already done so in conjunction with the tasks above, create the routes to tie the client-side JavaScript events to the appropriate database functions
-- [ ] When the sign in form is submitted, it should redirect to the secret page route. This should **not** be done with AJAX. (This route will be authenticated in a later step.)
+- [X] If you have not already done so in conjunction with the tasks above, create the routes to tie the client-side JavaScript events to the appropriate database functions
+- [X] When the sign in form is submitted, it should redirect to the secret page route. This should **not** be done with AJAX. (This route will be authenticated in a later step.)
 
 
 
 ## Authentication
 Modify your code to enforce the following authentication measures. (Use the `server/controllers/authController.js` file to add any middleware functions):
-- [ ] The only successful login credentials should be to have a user of `codesmith` and a pass of `ilovetesting`. Providing these credentials will redirect to the secret page route as before. Any other credentials (or none at all) will send the string `unsuccessful login attempt`
-- [ ] Providing the correct login credentials should set a cookie on the client with a key of `token` and a value of `admin`
-- [ ] Visiting the `http://localhost:3333/secret` route directly should now check for the valid cookie before sending the secret page. If the cookie is not valid (or does not exist), send back the string `You must be signed in to view this page`
+- [X] The only successful login credentials should be to have a user of `codesmith` and a pass of `ilovetesting`. Providing these credentials will redirect to the secret page route as before. Any other credentials (or none at all) will send the string `unsuccessful login attempt`
+- [X] Providing the correct login credentials should set a cookie on the client with a key of `token` and a value of `admin`
+- [X] Visiting the `http://localhost:3333/secret` route directly should now check for the valid cookie before sending the secret page. If the cookie is not valid (or does not exist), send back the string `You must be signed in to view this page`

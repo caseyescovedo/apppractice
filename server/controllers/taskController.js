@@ -2,13 +2,13 @@ const Task = require('../models/TaskModel.js')
 
 // Adding a task to the db
 const postTask = (req, res,next) => {
-  console.log('postTask');
+  // console.log('postTask');
   const data = req.body;
   data['created_at'] = new Date();
   Task.create(data, (err, response) => {
     if (err) {
       console.log(err);
-      return next();
+      res.sendStatus(400);
     }
     res.locals.data =  response;
     next();
@@ -17,11 +17,11 @@ const postTask = (req, res,next) => {
 
 // Getting all task from the db
 const getTask = (req, res, next) => {
-  console.log('getTask');
+  // console.log('getTask');
   Task.find({}, (err, response) => {
     if (err) {
       console.log(err);
-      return next();
+      res.sendStatus(400);
     }
     res.locals.data = response;
     next();
@@ -30,12 +30,12 @@ const getTask = (req, res, next) => {
 
 // Deleting a task from the db
 const deleteTask = (req, res, next) => {
-  console.log('deleteTask');
+  // console.log('deleteTask');
   const data = req.body;
   Task.deleteOne(data, function (err) {
     if (err) {
       console.log(err);
-      return next();
+      res.sendStatus(400);
     }
     next();
   });
