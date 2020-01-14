@@ -5,6 +5,14 @@
   <link rel="stylesheet" href="./css/style.css">
 </head>
 <body>
+  <form id="signup" action="/signup" method="POST">
+    <input id="newuser" name="user" placeholder="user" type="text"></input>
+    <br>
+    <input id="newpass" name="pass" placeholder="pass" type="text"></input>
+    <br>
+    <button id="newsubmit" type="submit">Sign Up</button>
+  </form>
+
   <form id="signin" action="/signin" method="POST">
     <input id="user" name="user" placeholder="user" type="text"></input>
     <br>
@@ -12,5 +20,6 @@
     <br>
     <button id="submit" type="submit">Sign In</button>
   </form>
+  
 </body>
 </html>
