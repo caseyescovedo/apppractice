@@ -1,5 +1,6 @@
 body {
   font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+  background-image: url('clouds.jpg');
 }
 
 .title {
@@ -52,3 +53,5 @@ input {
   border: 1px solid black;
   text-align: center;
 }
+
+
