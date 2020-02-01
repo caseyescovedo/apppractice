@@ -1,5 +1,4 @@
 document.addEventListener('DOMContentLoaded', () => {
-  // Event listeners
   document.getElementById('retrieve').addEventListener('click', () => {
     getTaskData();
   });
@@ -11,12 +10,8 @@ document.addEventListener('DOMContentLoaded', () => {
 
 function removeButton(idParam) {
   fetch(`/deleteTask?id=${idParam}`, { method: 'DELETE' })
-    .then(data => {
-      getTaskData();
-    })
-    .catch(err => console.log('Data Error', err));
-
-  console.log('removeeee');
+    .then(data => getTaskData())
+    .catch(err => console.log('We are sorry, please try again later!'));
 }
 
 function getTaskData() {
@@ -30,15 +25,13 @@ function getTaskData() {
         taskContainer.innerHTML += `<li>${element.item}<button class="remove" onclick="removeButton(${element.id})">REMOVE</button></li>`;
       });
     })
-    .catch(err => console.log('Data Error', err));
+    .catch(err => console.log('We are sorry, please try again later!'));
 }
 
 function addTaskData() {
   let taskFieldValue = document.getElementById('task').value;
 
   fetch(`/postTask?task=${taskFieldValue}`, { method: 'POST' })
-    .then(data => {
-      getTaskData();
-    })
-    .catch(err => console.log('Data Error', err));
+    .then(data => getTaskData())
+    .catch(err => console.log('We are sorry, please try again later!'));
 }
