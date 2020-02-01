@@ -23,6 +23,7 @@ app.get('/secret', (req, res) => {
   res.sendFile(path.join(__dirname, '../views/secret.html'));
 });
 
+// Saw no need to create another route folder for such a simple app.
 app.get('/tasks/getTasks', taskController.getTask, (req, res) => {
   res.status(200).json(res.locals.tasks);
 });
@@ -35,9 +36,9 @@ app.delete('/tasks/deleteTask', taskController.deleteTask, taskController.getTas
   res.status(200).json(res.locals.tasks);
 });
 
-app.use((err, req, res, next) => {
-  console.error(err.stack);
-  res.status(500).send('Something broke!')
+app.use((err, req, res, next) => {  // not quite the robust middleware error handler you taught us
+  console.error(err.stack);         // but does the job today
+  res.status(500).send('Something broke!');
 })
 
 app.listen(PORT, () => console.log(`To-Do list app listening to port ${PORT}`));
