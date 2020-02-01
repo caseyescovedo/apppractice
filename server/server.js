@@ -8,9 +8,13 @@ const PORT = 3333;
 const bodyParser = require('body-parser');
 const path = require('path');
 const taskController = require('./controllers/taskController');
+const authController = require('./controllers/authController');
+const cookieParser = require('cookie-parser');
 
 // parse that body baby
 app.use(bodyParser());
+//get them cookies in baby
+app.use(cookieParser());
 // FLOW TEST
 app.use((req, res, next) => {
   console.log(`********* KELVIN FLOW TEST***********
@@ -33,9 +37,12 @@ app.get('/', (req, res) => {
 });
 
 // get the secret page to render when hitting this endpoint
-app.get('/secret', (req, res) => {
+app.get('/secret', authController.validateCookie, (req, res) => {
   res.sendFile(path.resolve(__dirname, '../views/secret.html'))
 });
+
+// route after hitting the sign in button
+app.post('/signin', authController.validateUser);
 
 
 // basic test route to getTasks
