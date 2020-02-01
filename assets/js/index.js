@@ -10,6 +10,7 @@ function createListItems(items) {
     task.innerHTML = `${elem.item} <br> created at: ${elem.created_at}`;
     // set id to id
     task.id = elem._id;
+    task.class = 'task';
     button.class = 'remove';
     button.innerHTML = 'X';
     button.id = elem._id;
