@@ -11,11 +11,11 @@ const taskController = require('./controllers/taskController');
 const authController = require('./controllers/authController');
 // middleware to parse incoming json body
 app.use(express.json());
-app.use(bodyParser.urlencoded({extended: true}));
+app.use(bodyParser.urlencoded({ extended: true }));
 // middleware to parse cookies
 app.use(cookieParser());
 
-// flow test to see all incoming requests 
+// flow test to see all incoming requests
 app.use('/', (req, res, next) => {
   console.log(`**** FLOW TEST ****
     Method: ${req.method}
@@ -27,14 +27,12 @@ app.use('/', (req, res, next) => {
 app.get('/', (req, res) => res.sendFile(path.resolve(__dirname, '../views/index.html')));
 
 // route for post requests to /signin
-app.post('/signin', authController.verifyUser, authController.setCookie, (req, res) => {
-    return res.redirect('/secret');
-})
+app.post('/signin', authController.verifyUser, authController.setCookie, (req, res) => res.redirect('/secret'));
 
 // serve secret file when get requests are made to secret
 app.get('/secret', authController.verifyCookie, (req, res) => res.sendFile(path.resolve(__dirname, '../views/secret.html')));
 
-// statically serve files in the assests folder 
+// statically serve files in the assests folder
 app.use(express.static(path.resolve(__dirname, '../assets')));
 
 // route for get requests to tasks
@@ -43,7 +41,6 @@ app.get('/tasks', taskController.getTasks, (req, res) => res.json([...res.locals
 app.post('/tasks', taskController.postTask, (req, res) => res.json(res.locals.task));
 // route for deleting a task
 app.delete('/tasks', taskController.deleteTask, (req, res) => res.sendStatus(200));
-
 
 
 app.listen(PORT, () => console.log(`server listening on port ${PORT}`));
