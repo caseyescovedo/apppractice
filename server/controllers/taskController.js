@@ -3,10 +3,14 @@ const db = require('../models/TaskModel');
 const taskController = {};
 
 taskController.postTask = (req, res, next) => {
-  const queryString = '';
+  const queryString = 'INSERT INTO Tasks (item) VALUES ($1);';
+  const { task } = req.body;
+  const queryArr = [task];
 
-  db.query()
-    .next()
+  db.query(queryString, queryArr)
+    .then(() => {
+      next();
+    })
     .catch((error) => {
       console.log('Error in postTask Middleware: ', error);
       next(error);
