@@ -1,9 +1,12 @@
 const express = require('express');
 const path = require('path');
 const taskController = require('./controllers/taskController');
+const authController = require('./controllers/authController');
+const cookieParser = require('cookie-parser');
 const PORT = 3333;
 const app = express();
 
+app.use(cookieParser());
 // takes place of body parser
 app.use(express.json());
 
@@ -15,18 +18,27 @@ app.get('/', (req, res) => {
   res.sendFile(path.resolve(__dirname, '../views/index.html'));
 })
 
-// serves up secret page
-app.post('/signin', (req, res) => {
+// serves up secret page after sign-in
+app.get('/signin', authController.setCookie, (req, res) => {
   res.sendFile(path.resolve(__dirname, '../views/secret.html'));
 })
 
-app.post('/newTask', taskController.postTask, taskController.getTasks, (req, res) => {
+app.get('/secret', authController.checkCookie, (req, res) => {
+  res.sendFile(path.resolve(__dirname, '../views/secret.html'));
+})
+
+app.post('/newTask', taskController.postTask, (req, res) => {
   res.status(200).json('created a new task');
 });
 
 app.get('/getTasks', taskController.getTasks, (req, res) => {
   res.status(200).json(res.locals.allTasks);
 })
+
+app.delete('/delete', taskController.deleteTask, (req, res) => {
+  res.sendStatus(200);
+})
+
 
 // catch-all error handler
 app.use((req, res) => {
