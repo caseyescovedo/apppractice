@@ -19,7 +19,7 @@ allTasksButton.addEventListener('click', async () => {
     if (tasksDisplayed) return;
     tasksDisplayed = true;
     try {
-        const res = await fetch('/tasks');
+        const res = await fetch('/task');
         const tasks = await res.json();
         tasks.forEach(task => {
             createLiTask(task);
