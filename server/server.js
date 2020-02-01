@@ -40,15 +40,21 @@ app.get('/secret', (req, res) => {
 
 // basic test route to getTasks
 app.get('/getTasks', taskController.getTasks, (req, res) => {
-  res.json(res.locals.tasks);
-})
+  console.log('LOOK AT ALL THESE TASKS', res.locals.tasks);
+  res.sendStatus(200);
+});
 
 // basic test route to postTasks
 app.post('/postTask', taskController.postTask, (req, res) => {
-  res.json(res.locals.taskAdded);
+  console.log('SUCCESSFUL POST WOOHOO', res.locals.taskAdded);
+  res.sendStatus(200);
+});
+
+// basic test route to delete a task
+app.delete('/deleteTask', taskController.deleteTasks, (req, res) => {
+  console.log('DELETE THAT SHIT BABY');
+  res.sendStatus(200);
 })
-
-
 
 // handle wildcard requests to nonexistent endpoints
 app.use('*', (req, res) => {

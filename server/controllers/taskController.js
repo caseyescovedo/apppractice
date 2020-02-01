@@ -66,6 +66,29 @@ taskController.getTasks = (req, res, next) => {
 // method to DELETE a task in psql
 taskController.deleteTasks = (req, res, next) => {
 
+  // want to be able to delete a task based on the primary key 
+  // that I imagine will be sent to the client and added to the specific
+  // task item
+
+  // client will hit the x
+  // send a delete request
+  // sends a body with an id number
+  // have to delete the task that has that id number associated with it 
+
+  const { id } = req.body;
+
+  const deleteTaskQueryString = 'DELETE FROM tasks WHERE __id=$1';
+  const deleteTaskValue = [id];
+
+  db.query(deleteTaskQueryString, deleteTaskValue)
+    .then(queryResponse => {
+      console.log('DELETE TASK QUERY RESPONSE', queryResponse.rows);
+      return next();
+    })
+    .catch(err => {
+      return next(err);
+    })
+
 }
 
 
