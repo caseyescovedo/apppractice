@@ -1,5 +1,6 @@
 const express = require('express');
-const bodyParser = require('body-parser')
+const bodyParser = require('body-parser');
+const path = require('path');
 
 const app = express();
 
@@ -8,8 +9,10 @@ const PORT = 3333;
 app.use(bodyParser.urlencoded({ extended: false }))
 app.use(bodyParser.json())
 
+app.use('/assets', express.static(path.join(__dirname, '../assets')));
+
 app.get('/', (req, res) => {
-  res.send('Hello World!');
+  res.sendFile(path.join(__dirname, '../views/index.html'));
 });
 
 app.post('/', (req, res) => {
