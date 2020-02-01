@@ -8,10 +8,12 @@ const postTask = (req, res, next) => {
 
   pool
     .query(query, values)
-    .then(data => console.log(data.rows))
-    .catch(err => next('Database error'));
+    .then(data => {
+      console.log(data.rows);
 
-  return next();
+      return next();
+    })
+    .catch(err => next('Database error'));
 };
 
 const getTasks = (req, res, next) => {
@@ -21,16 +23,24 @@ const getTasks = (req, res, next) => {
 
   pool
     .query(query, null)
-    .then(data => res.json(data.rows))
+    .then(data => {
+      res.json(data.rows);
+    })
     .catch(err => next('Database error'));
-
-  return next();
 };
 
 const deleteTask = (req, res, next) => {
   //  Function deleteTask should find items in the database based on an ID number and delete that item if it exists
 
-  return next();
+  let query = 'DELETE FROM Task WHERE id = $1 RETURNING *';
+  let values = [8];
+
+  pool
+    .query(query, values)
+    .then(data => {
+      res.json(data.rows);
+    })
+    .catch(err => next('Database error'));
 };
 
 module.exports = {

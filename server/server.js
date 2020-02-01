@@ -9,7 +9,7 @@ const taskController = require('./controllers/taskController');
 
 //taskController.postTask | taskController.getTasks | taskController.deleteTask
 
-app.get('/', taskController.getTasks, (req, res) => {
+app.get('/', taskController.deleteTask, (req, res) => {
   res.sendFile(path.resolve(__dirname, '../', 'views', 'index.html'));
 });
 
