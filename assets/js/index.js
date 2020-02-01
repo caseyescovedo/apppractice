@@ -74,7 +74,7 @@ const addTask = (taskMessage) => {
     .catch((error) => {
       console.log('Error posting Task from client. Error: ', error);
     });
-}
+};
 
 
 getTasks.addEventListener('click', fetchTasks);
