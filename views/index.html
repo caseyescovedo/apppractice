@@ -5,12 +5,28 @@
   <link rel="stylesheet" href="./css/style.css">
 </head>
 <body>
-  <form id="signin" action="/signin" method="POST">
+  <!-- <form id="signin" action="/signin" method="POST">
+
     <input id="user" name="user" placeholder="user" type="text"></input>
     <br>
     <input id="pass" name="pass" placeholder="pass" type="text"></input>
     <br>
     <button id="submit" type="submit">Sign In</button>
-  </form>
+  </form> -->
+
+<!-- I know we are not supposed to touch the hard coded HTML so I have commented out the way I would 
+have went about making the post request by listening for an on click event on the submit button. I couldn't 
+quite figure out how to send the request body with the form. Even when doing it the way I listed above
+I am unable to get the page to redirect on the browser. However when I make the same request via Postman
+I am able to redirect to the secret HTML page and the functionality works how I imagined it would. I 
+would definitely like to get some clarification on this! -->
+
+    <input id="user" name="user" placeholder="user" type="text"></input>
+    <br>
+    <input id="pass" name="pass" placeholder="pass" type="text"></input>
+    <br>
+    <button id="submit">Sign In</button>
+
+  <script src="./js/index.js"></script>
 </body>
 </html>
