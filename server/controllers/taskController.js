@@ -21,7 +21,7 @@ const getTasks = (req, res, next) => {
 
   pool
     .query(query, null)
-    .then(data => console.log(data.rows))
+    .then(data => res.json(data.rows))
     .catch(err => next('Database error'));
 
   return next();

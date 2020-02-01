@@ -7,7 +7,9 @@ const taskController = require('./controllers/taskController');
 // Testing PG pool
 // const pool = require('./models/TaskModel');
 
-app.get('/', taskController.postTask, (req, res) => {
+//taskController.postTask | taskController.getTasks | taskController.deleteTask
+
+app.get('/', taskController.getTasks, (req, res) => {
   res.sendFile(path.resolve(__dirname, '../', 'views', 'index.html'));
 });
 
