@@ -11,7 +11,7 @@ const URI = process.env.PG_URI || myURI;
 
 const pool = new Pool({
   connectionString: URI,
-})
+});
 
 module.exports = {
   query: (text, params, callback) => {
