@@ -1,10 +1,9 @@
-console.log('testtt');
-
-const getTasks = document.getElementById('retrieve');
 
 const taskList = document.getElementById('task-list');
 
-const create = document.getElementById('create');
+const getTasks = document.getElementById('retrieve');
+const submitTask = document.getElementById('task-button');
+const task = document.getElementById('task');
 
 const populateLi = (response) => {
   response.forEach((resp) => {
@@ -27,17 +26,11 @@ const queryList = () => {
 
 const deleteTask = (targetId) => {
   fetch('/tasks/deleteTask', {
-    method: 'DELETE', // *GET, POST, PUT, DELETE, etc.
-    // mode: 'cors', // no-cors, *cors, same-origin
-    // cache: 'no-cache', // *default, no-cache, reload, force-cache, only-if-cached
-    // credentials: 'same-origin', // include, *same-origin, omit
+    method: 'DELETE',
     headers: {
       'Content-Type': 'application/json',
-      // 'Content-Type': 'application/x-www-form-urlencoded',
     },
-    // redirect: 'follow', // manual, *follow, error
-    referrerPolicy: 'no-referrer', // no-referrer, *client
-    body: JSON.stringify(targetId), // body data type must match "Content-Type" header
+    body: JSON.stringify(targetId),
   }).then((response) => response.json())
     .then((response) => {
       taskList.innerHTML = '';
@@ -46,7 +39,7 @@ const deleteTask = (targetId) => {
       queryList();
     })
     .catch((error) => {
-      console.log('Error fetching Tasks from client. Error: ', error);
+      console.log('Error deleting Tasks from client. Error: ', error);
     });
 };
 
@@ -64,5 +57,31 @@ const fetchTasks = () => {
     });
 };
 
+const addTask = (taskMessage) => {
+  fetch('/tasks/postTask', {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json',
+    },
+    body: JSON.stringify(taskMessage),
+  }).then((response) => response.json())
+    .then((response) => {
+      taskList.innerHTML = '';
+
+      populateLi(response);
+      queryList();
+    })
+    .catch((error) => {
+      console.log('Error posting Task from client. Error: ', error);
+    });
+}
+
 
 getTasks.addEventListener('click', fetchTasks);
+submitTask.addEventListener('click', () => {
+  const submissionObj = { task: task.value };
+
+  task.value = '';
+
+  addTask(submissionObj);
+});
