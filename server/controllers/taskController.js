@@ -34,8 +34,10 @@ const getTasks = (req, res, next) => {
 const deleteTask = (req, res, next) => {
   //  Function deleteTask should find items in the database based on an ID number and delete that item if it exists
 
+  let requestQuery = req.query.id;
+
   let query = 'DELETE FROM Task WHERE id = $1 RETURNING *';
-  let values = [8];
+  let values = [requestQuery];
 
   pool
     .query(query, values)

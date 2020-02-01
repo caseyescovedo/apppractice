@@ -17,6 +17,10 @@ app.post('/postTask', taskController.postTask, (req, res) => {
   res.status(200).send();
 });
 
+app.delete('/deleteTask', taskController.deleteTask, (req, res) => {
+  console.log('error in deleteTasks');
+});
+
 app.get('/secret', (req, res) => {
   res.sendFile(path.resolve(__dirname, '../', 'views', 'secret.html'));
 });
