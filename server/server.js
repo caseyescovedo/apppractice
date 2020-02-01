@@ -19,7 +19,7 @@ app.get('/', (req, res) => {
 })
 
 // serves up secret page after sign-in
-app.get('/signin', authController.setCookie, (req, res) => {
+app.get('/signin', authController.setCookie, authController.checkCookie, (req, res) => {
   res.sendFile(path.resolve(__dirname, '../views/secret.html'));
 })
 

@@ -1,7 +1,6 @@
 const authController = {};
 
 authController.setCookie = (req, res, next) => {
-  console.log(req)
   if (req.query.user === 'codesmith' && req.query.pass === 'ilovetesting'){
     // add a cookie to the browser to authenticate
     res.cookie('token', 'admin');
