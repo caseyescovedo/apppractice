@@ -10,7 +10,29 @@
     <br>
     <input id="pass" name="pass" placeholder="pass" type="text"></input>
     <br>
-    <button id="submit" type="submit">Sign In</button>
+    <button id="submit" type="submit" onclick="sendInfo()">Sign In</button>
   </form>
+
+  <script>
+    // added a function to properly send data, because the form action wasn't
+    function sendInfo() {
+      const username = document.getElementById("user").value;
+      const password = document.getElementById("pass").value;
+      console.log(username, password);
+      fetch('/newSignIn', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({
+          username: username,
+          password: password
+        })
+      })
+      .then(data => data.json())
+      .then(data => console.log(data));
+    }
+  </script>
+
 </body>
 </html>
