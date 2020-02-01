@@ -10,11 +10,22 @@ const deleteClick = (e) => {
   const id = e.target.getAttribute('id').replace('id_', '');
   console.log('DELETE: ', id);
 
-  const deletedEl = document.querySelector(`.id_${id}`);
+  console.log(`li_${id}`);
+  const deletedEl = document.getElementById(`li_${id}`);
+  console.log(deletedEl);
   deletedEl.parentNode.removeChild(deletedEl);
 
   fetch(`/tasks/?taskId=${id}`, {
     method: 'DELETE',
+  });
+};
+
+const addClick = (e) => {
+  console.log('add');
+  fetch('/tasks', {
+    method: 'POST',
+    // did not parameterize
+    body: JSON.stringify({ task: 'hi' }),
   });
 };
 

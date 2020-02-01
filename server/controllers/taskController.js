@@ -3,7 +3,7 @@ const taskTable = require('../models/TaskModel');
 
 module.exports = {
   postTask: (req, res, next) => {
-    console.log('GET TASKS FIRED');
+    console.log('POST TASK FIRED');
 
     const text = `
       INSERT into Task (item)
