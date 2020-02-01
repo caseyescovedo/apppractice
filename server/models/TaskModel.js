@@ -15,6 +15,7 @@ const pool = new Pool({
 
 module.exports = {
   query: (text, params, callback) => {
+    console.log('Task Model Text: ', text);
     return pool.query(text, params, callback);
-  }
+  },
 }; // <-- export your model
