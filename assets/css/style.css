@@ -1,5 +1,7 @@
 body {
   font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+  background-color: lavenderblush;
+  color: grey;
 }
 
 .title {
@@ -20,9 +22,10 @@ body {
   margin: auto;
   width: 25%;
   padding-top:5%;
+  padding-bottom:5%;
   text-align: center;
-  background-color: #d3d3d3;
-  border: 1px solid black;
+  background-color: white;
+  border: .5px grey;
 }
 
 #submit-button {
