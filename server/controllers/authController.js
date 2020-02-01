@@ -1,5 +1,6 @@
 const authController = {};
 
+//If the password and username match, attach the cookie to the user
 authController.signIn = function(req, res, next) {
   const { user, pass } = req.body;
   if (user === "codesmith" && pass === "ilovetesting") {

@@ -6,7 +6,7 @@ window.onload = function() {
   const password = document.getElementById("pass");
   const btn = document.getElementById("submit");
 
-  //Add event listener on the button to prevent form default and redirect to the home screen.
+  //Add event listener on the button to prevent form default and redirect to the home screen if the backend verifies the username and password is correct
   btn.addEventListener("click", e => {
     e.preventDefault();
     fetch("/signin", {

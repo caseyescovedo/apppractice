@@ -1,6 +1,6 @@
 const pool = require("../models/TaskModel.js");
 const taskController = {};
-
+//middleware for posting new item to the database
 taskController.postTask = function(req, res, next) {
   const { item } = req.body;
   const values = [item];
@@ -17,6 +17,7 @@ taskController.postTask = function(req, res, next) {
     }
   });
 };
+//middleware to return to the user all the information in the database
 taskController.getTasks = function(req, res, next) {
   const text = "SELECT id,item FROM task";
   const getQuery = {
@@ -31,6 +32,7 @@ taskController.getTasks = function(req, res, next) {
     }
   });
 };
+//middleware for deleting an item from the database
 taskController.deleteTasks = function(req, res, next) {
   const { id } = req.body;
   const values = [Number(id)]; //the id should be coming back as a number       instead of a string anyways but this is just in case

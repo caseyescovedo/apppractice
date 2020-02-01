@@ -7,10 +7,11 @@ const { Pool, Client } = require("pg");
 
 // UNCOMMENT THE LINE BELOW IF USING POSTGRESQL
 const URI = process.env.PG_URI || myURI;
-
+//Connecting to the database
 const pool = new Pool({
   connectionString: myURI
 });
+//Create the table if it hasnt been created already
 const createTable =
   "CREATE TABLE IF NOT EXISTS task(id SERIAL PRIMARY KEY,item varchar NOT NULL,created_at TIMESTAMP WITH TIME ZONE DEFAULT CURRENT_TIMESTAMP);";
 console.log("Creating a table");
