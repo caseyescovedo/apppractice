@@ -76,7 +76,6 @@ const addTask = (taskMessage) => {
     });
 };
 
-
 getTasks.addEventListener('click', fetchTasks);
 submitTask.addEventListener('click', () => {
   const submissionObj = { task: task.value };

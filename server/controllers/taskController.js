@@ -20,7 +20,7 @@ taskController.postTask = (req, res, next) => {
 taskController.getTask = (req, res, next) => {
   const queryString = 'SELECT * FROM Tasks';
 
-    db.query(queryString)
+  db.query(queryString)
     .then((response) => {
       res.locals.tasks = response.rows;
       next();

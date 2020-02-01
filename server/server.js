@@ -33,7 +33,7 @@ app.post('/tasks/postTask', taskController.postTask, taskController.getTask, (re
   res.status(200).json(res.locals.tasks);
 });
 
-app.post('/signin', (req, res) => {
+app.post('/signin', authController.authenticate, (req, res) => {
   res.status(200).redirect('/secret');
 });
 
