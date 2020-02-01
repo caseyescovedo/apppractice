@@ -1,5 +1,6 @@
 const express = require('express');
 const path = require('path');
+const taskController = require('./controllers/taskController');
 const PORT = 3333;
 const app = express();
 
@@ -14,6 +15,18 @@ app.get('/', (req, res) => {
   res.sendFile(path.resolve(__dirname, '../views/index.html'));
 })
 
+// serves up secret page
+app.post('/signin', (req, res) => {
+  res.sendFile(path.resolve(__dirname, '../views/secret.html'));
+})
+
+app.post('/newTask', taskController.postTask, taskController.getTasks, (req, res) => {
+  res.status(200).json('created a new task');
+});
+
+app.get('/getTasks', taskController.getTasks, (req, res) => {
+  res.status(200).json(res.locals.allTasks);
+})
 
 // catch-all error handler
 app.use((req, res) => {
