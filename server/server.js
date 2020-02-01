@@ -3,6 +3,7 @@ const express = require('express');
 const path = require('path');
 const cookieParser = require('cookie-parser');
 const flowTest = require('./utils/flowTest');
+const taskController = require('./controllers/taskController');
 
 const PORT = 3333;
 
@@ -28,16 +29,35 @@ app.get('/',
   (req, res) => res.sendFile(path.resolve(__dirname, '../views/index.html')));
 
 
-// serve index.html as home page
+// serve secret.html
 app.get('/secret',
   (req, res) => res.sendFile(path.resolve(__dirname, '../views/secret.html')));
 
+app.get('/tasks',
+  taskController.getTasks,
+  (req, res) => {
+    // console.log(res.locals.tasks);
+    res.status(200).json({ tasks: res.locals.tasks });
+  });
+
+app.post('/tasks',
+  taskController.postTask,
+  taskController.getTasks,
+  (req, res) => res.status(200).json(res.locals.tasks));
+
+app.delete('/tasks',
+  taskController.deleteTask,
+  taskController.getTasks,
+  (req, res) => res.status(200).json(res.locals.tasks));
 
 // global error handler
 app.use((err, req, res) => {
-  console.log('Something broke:\n', err);
+  // message to server
+  console.log('Error :( \n');
+  console.log(err.serverErr);
   res.status(500);
-  return res.render('Error: ', { error: err });
+  // message to client
+  return res.render('Error: ', err.clientErr);
 });
 
 
