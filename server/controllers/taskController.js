@@ -32,10 +32,12 @@ taskController.getTask = (req, res, next) => {
 };
 
 taskController.deleteTask = (req, res, next) => {
-  const queryString = '';
+  const queryString = 'DELETE FROM Tasks WHERE message_id = ($1)';
+  const { id } = req.body;
+  const queryArr = [id];
 
-  db.query()
-    .then((response) => {
+  db.query(queryString, queryArr)
+    .then(() => {
       next();
     })
     .catch((error) => {
