@@ -6,27 +6,31 @@ const app = express();
 const PORT = 3333;
 
 const taskController = require('./controllers/taskController');
-
+// middleware to parse incoming json body
 app.use(express.json());
 
-// serve index file upon get requests to /
-app.get('/', (req, res) => {
-   return res.sendFile(path.resolve(__dirname, '../views/index.html'));
+
+app.use('/', (req, res, next) => {
+  console.log(`**** FLOW TEST ****
+    Method: ${req.method}
+    url: ${req.url}
+    body: ${JSON.stringify(req.body)}`);
+  next();
 });
+// serve index file upon get requests to /
+app.get('/', (req, res) => res.sendFile(path.resolve(__dirname, '../views/index.html')));
 
-app.get('/secret', (req, res) => {
-    return res.sendFile(path.resolve(__dirname, '../views/secret.html'));
-})
+// serve secret file when get requests are made to secret
+app.get('/secret', (req, res) => res.sendFile(path.resolve(__dirname, '../views/secret.html')));
 
+// statically serve files in the assests folder 
 app.use(express.static(path.resolve(__dirname, '../assets')));
 
-app.post('/test', taskController.postTask, (req, res) => res.send('hi'))
-
-
-app.get('/test', taskController.getTasks, (req, res) => res.send('hey'));
-
-
-
-
+// route for get requests to tasks
+app.get('/tasks', taskController.getTasks, (req, res) => res.json([...res.locals.tasks]));
+// route for post requests to tasks
+app.post('/tasks', taskController.postTask, (req, res) => res.json(res.locals.task));
+// route for deleting a task
+app.delete('/tasks', taskController.deleteTask, (req, res) => res.sendStatus(200));
 
 app.listen(PORT, () => console.log(`server listening on port ${PORT}`));
