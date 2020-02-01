@@ -6,28 +6,17 @@ const cookieParser = require('cookie-parser');
 const taskController = require('./controllers/taskController');
 const authController = require('./controllers/authController');
 
-// Testing PG pool
-// const pool = require('./models/TaskModel');
-
-//taskController.postTask | taskController.getTasks | taskController.deleteTask
-
 app.use(express.urlencoded());
 app.use(express.json());
 app.use(cookieParser());
 
 app.post('/signin', authController.login);
 
-app.get('/getTasks', taskController.getTasks, (req, res) => {
-  console.log('error in getTasks');
-});
+app.get('/getTasks', taskController.getTasks);
 
-app.post('/postTask', taskController.postTask, (req, res) => {
-  res.status(200).send();
-});
+app.post('/postTask', taskController.postTask);
 
-app.delete('/deleteTask', taskController.deleteTask, (req, res) => {
-  console.log('error in deleteTasks');
-});
+app.delete('/deleteTask', taskController.deleteTask);
 
 app.get('/secret', authController.authCheck, (req, res) => {
   res.sendFile(path.resolve(__dirname, '../', 'views', 'secret.html'));
@@ -38,5 +27,9 @@ app.get('/', (req, res) => {
 });
 
 app.use(express.static(path.resolve(__dirname, '../', 'assets')));
+
+app.use((err, req, res, next) => {
+  res.status(500).send('We are sorry, please try again later!');
+});
 
 app.listen(3333);

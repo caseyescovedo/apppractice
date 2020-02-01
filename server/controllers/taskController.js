@@ -11,9 +11,7 @@ const postTask = (req, res, next) => {
   pool
     .query(query, values)
     .then(data => {
-      console.log('Post Success', data.rows);
-
-      return next();
+      res.status(200).send();
     })
     .catch(err => next('Database error'));
 };
