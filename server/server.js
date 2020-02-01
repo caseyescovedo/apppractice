@@ -5,6 +5,7 @@ const path = require('path');
 const app = express();
 
 const taskController = require('./controllers/taskController');
+const authController = require('./controllers/authController');
 
 const PORT = 3333;
 
@@ -30,6 +31,10 @@ app.get('/tasks/getTasks', taskController.getTask, (req, res) => {
 
 app.post('/tasks/postTask', taskController.postTask, taskController.getTask, (req, res) => {
   res.status(200).json(res.locals.tasks);
+});
+
+app.post('/signin', (req, res) => {
+  res.status(200).redirect('/secret');
 });
 
 app.delete('/tasks/deleteTask', taskController.deleteTask, taskController.getTask, (req, res) => {
