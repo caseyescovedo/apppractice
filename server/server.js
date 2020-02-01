@@ -13,6 +13,10 @@ app.get('/getTasks', taskController.getTasks, (req, res) => {
   console.log('error in getTasks');
 });
 
+app.post('/postTask', taskController.postTask, (req, res) => {
+  res.status(200).send();
+});
+
 app.get('/secret', (req, res) => {
   res.sendFile(path.resolve(__dirname, '../', 'views', 'secret.html'));
 });

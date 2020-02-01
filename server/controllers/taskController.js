@@ -3,13 +3,15 @@ const pool = require('../models/TaskModel');
 const postTask = (req, res, next) => {
   //Function postTask should create a new item in the database
 
+  let requestQuery = req.query.task;
+
   let query = 'INSERT INTO Task(item) VALUES($1) RETURNING *';
-  let values = ['So Cool'];
+  let values = [requestQuery];
 
   pool
     .query(query, values)
     .then(data => {
-      console.log(data.rows);
+      console.log('Post Success', data.rows);
 
       return next();
     })
