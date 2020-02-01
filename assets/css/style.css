@@ -45,6 +45,10 @@ body {
   border-radius: 3px;
 }
 
+#user, #pass {
+  margin-bottom: 2%;
+}
+
 #task {
   margin-bottom: 10px;
 }
