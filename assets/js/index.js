@@ -1,4 +1,3 @@
-// **** HELPER FUNCTIONS ****
 // helper function for appending list item nodes to the dom
 function createListItems(items) {
   // find parent node
@@ -8,7 +7,7 @@ function createListItems(items) {
     const task = document.createElement('li');
     const button = document.createElement('button');
     // set inner html to item
-    task.innerHTML = elem.item;
+    task.innerHTML = `${elem.item} <br> created at: ${elem.created_at}`;
     // set id to id
     task.id = elem._id;
     button.class = 'remove';
@@ -37,6 +36,7 @@ document.addEventListener('DOMContentLoaded', (event) => {
           createListItems(tasks);
         })
         .catch((err) => console.log('there was an error fetching tasks', err));
+      // change state of variable so that button won't render items multple times
       reteriveButtonEnabled = false;
     }
 
@@ -51,18 +51,21 @@ document.addEventListener('DOMContentLoaded', (event) => {
         body: JSON.stringify({ item: input }),
       }).then((res) => res.json())
         .then((res) => {
+          // create list item so it automatically shows
           createListItems([res]);
         })
         .catch((err) => console.log('there was an error posting task', err));
     }
 
     if (event.target.class === 'remove') {
-        const _id = event.target.id;
-        fetch('/tasks', {
+      const _id = event.target.id;
+      // make a delete request to backend
+      fetch('/tasks', {
         method: 'DELETE',
         headers: { 'Content-Type': 'application/json ' },
         body: JSON.stringify({ _id }),
       }).catch((err) => console.log('there was an error deleting tasks', err));
+      // remove item from the DOM
       const item = document.getElementById(_id);
       item.remove();
     }
