@@ -4,6 +4,8 @@ const path = require('path');
 
 const app = express();
 
+const cookieParser = require('cookie-parser')
+
 const taskController = require('./controllers/taskController');
 const authController = require('./controllers/authController');
 
@@ -11,6 +13,8 @@ const PORT = 3333;
 
 app.use(bodyParser.urlencoded({ extended: false }))
 app.use(bodyParser.json())
+
+app.use(cookieParser());
 
 app.use('/assets', express.static(path.join(__dirname, '../assets')));
 
@@ -20,7 +24,7 @@ app.get('/', (req, res) => {
   res.sendFile(path.join(__dirname, '../views/index.html'));
 });
 
-app.get('/secret', (req, res) => {
+app.get('/secret', authController.checkCookie, (req, res) => {
   res.sendFile(path.join(__dirname, '../views/secret.html'));
 });
 
