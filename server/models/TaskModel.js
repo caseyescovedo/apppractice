@@ -1,13 +1,28 @@
+const { Pool } = require('pg');
 // v-- REPLACE THE EMPTY STRING WITH YOUR LOCAL/MLAB/ELEPHANTSQL URI
-const myURI = '';
+const myURI = 'postgres://iakzjxqb:cqft7q-BtNou-rVvd5Us032WTgl-UG5o@rajje.db.elephantsql.com:5432/iakzjxqb';
 
 // UNCOMMENT THE LINE BELOW IF USING MONGO
 // const URI = process.env.MONGO_URI || myURI;
 
 // UNCOMMENT THE LINE BELOW IF USING POSTGRESQL
-// const URI = process.env.PG_URI || myURI;
+const URI = process.env.PG_URI || myURI;
 
+const pool = new Pool({
+    connectionString: URI
+})
 
+const queryString = 'CREATE TABLE IF NOT EXISTS Task (id SERIAL PRIMARY KEY, item VARCHAR NOT NULL, created_at VARCHAR NOT NULL)';
 
+pool.query(queryString, (err, reponse) => {
+    if (err) {
+        console.log('Error in Create Table query', err)
+    }
+})
 
-module.exports = null; // <-- export your model
+module.exports = {
+    query: (text, params, callback) => {
+        console.log('Executed query is: ', text);
+        return pool.query(text, params, callback);
+    }
+}; // <-- export your model
