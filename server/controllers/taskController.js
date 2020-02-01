@@ -83,6 +83,7 @@ taskController.deleteTasks = (req, res, next) => {
   db.query(deleteTaskQueryString, deleteTaskValue)
     .then(queryResponse => {
       console.log('DELETE TASK QUERY RESPONSE', queryResponse.rows);
+      res.locals.deleted = queryResponse.rows;
       return next();
     })
     .catch(err => {
