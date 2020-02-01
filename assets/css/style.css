@@ -9,39 +9,58 @@ body {
   padding-bottom: 10px;
 }
 
-.remove {
-  display: inline-block;
-  float: right;
-  width: 15px;
-  height: 15px;
+#loginBody {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background: lightblue;
+}
+
+#secretBody {
+  background: #ABEBC6;
 }
 
 #signin {
-  margin: auto;
+  /* margin: auto; */
   width: 25%;
-  padding-top:5%;
+  padding: 3% 0;
   text-align: center;
   background-color: #d3d3d3;
+  opacity: 0.7;
   border: 1px solid black;
 }
 
-#submit-button {
+#submit, #task-button, #retrieve {
   margin-bottom: 10px;
+  height: 25px;
+  background: white;
+  border-radius: 3px;
+  border: 1px solid black;
 }
 
-input {
+
+#user, #pass, #task {
+  padding: 5px 10px;
+  border: 1px solid black;
+  border-radius: 3px;
+}
+
+#user, #pass {
+  margin-bottom: 2%;
+}
+
+#task {
   margin-bottom: 10px;
 }
 
 #create{
-  margin: 0 auto;
+  margin: 3% auto;
   width: 50%;
   text-align: center;
-  margin-top: 3%;
 }
 
 #task-list {
-  width: 50%;
+  width: 40%;
   margin: 0 auto;
   text-align: center;
 }
@@ -51,4 +70,17 @@ input {
   min-width: 150px;
   border: 1px solid black;
   text-align: center;
+}
+
+li {
+  list-style-type: none;
+  margin-bottom: 5px;
+  display: flex;
+  justify-content: space-between;
+}
+
+.remove {
+  padding: 5px 10px;
+  border: 1px solid black;
+  border-radius: 3px;
 }
