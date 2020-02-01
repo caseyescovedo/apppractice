@@ -1,7 +1,7 @@
 const { Pool } = require('pg');
 
 // v-- REPLACE THE EMPTY STRING WITH YOUR LOCAL/MLAB/ELEPHANTSQL URI
-const myURI = 'postgres://qtrjnoyf:StzWFjt63gCOCPgHD8S4hgKJBGL3gE4Z@rajje.db.elephantsql.com:5432/qtrjnoyf';
+const myURI = '';
 
 // UNCOMMENT THE LINE BELOW IF USING MONGO
 // const URI = process.env.MONGO_URI || myURI;
