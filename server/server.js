@@ -27,6 +27,7 @@ app.use('/assets/', express.static(path.resolve(__dirname, '../assets')));
 app.get('/secret', (req, res) => {
   // check for cookie before rendering
   console.log('req.cookies ', req.cookies)
+  // not working ran out of time
   res.status(200).sendFile(path.join(__dirname, '../views/secret.html'));
 });
 
