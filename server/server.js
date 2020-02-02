@@ -2,10 +2,12 @@ const express = require('express');
 const mongoose = require('mongoose');
 const path = require('path');
 const bodyParser = require('body-parser');
-const Task = require('./models/TaskModel.js');
+const cookieParser = require('cookie-parser')
 
+const Task = require('./models/TaskModel.js');
 const TaskController = require('./controllers/taskController.js');
 const app = express();
+app.use(cookieParser());
 const PORT = 3333;
 
 const db = mongoose.connect('mongodb+srv://nabramow:gradmongo!@cluster0-ufsoo.mongodb.net/test?retryWrites=true&w=majority', { useNewUrlParser: true }, (err, database) => {
@@ -19,6 +21,10 @@ const db = mongoose.connect('mongodb+srv://nabramow:gradmongo!@cluster0-ufsoo.mo
  */
 
 app.use(bodyParser.urlencoded({ extended: true }));
+/* need to add this second line to prevent post req.body from being a nested obj
+ * then associated POST request from form can have content-type application/json
+ */
+app.use(bodyParser.json());
 
 // serve static files from assets folder
 app.use('/assets/', express.static(path.resolve(__dirname, '../assets')));
@@ -27,19 +33,22 @@ app.use('/assets/', express.static(path.resolve(__dirname, '../assets')));
 app.get('/secret', (req, res) => {
   // check for cookie before rendering
   console.log('req.cookies ', req.cookies)
-  // not working ran out of time
-  res.status(200).sendFile(path.join(__dirname, '../views/secret.html'));
+  // checks if user has a token 'admin' in their cookies before rendering /secret page
+  if (req.cookies.token === 'admin') {
+    res.status(200).sendFile(path.join(__dirname, '../views/secret.html'));
+  } else {
+    res.status(403).send('You must be signed in to view this page');
+  }
 });
 
 // route to taskController.postTask middleware in taskController file
 app.post('/tasks/add', (req, res) => {
-  console.log('made it to app.post!');
-  console.log('post req.body.item ', req.body);
+  console.log('post req.body', req.body);
   // got a nested object need to get one level deeper
-  Task.create({ item: req.body.item, created_at: req.body.created_at }, (err, results) => {
+  Task.create(req.body, (err, results) => {
     console.log('results within Task.create ', results);
     if (err) console.log(err);
-    res.redirect('/');
+    // res.redirect('/secret');
   });
 });
 
@@ -69,8 +78,9 @@ app.post('/signin', (req, res) => {
     res.redirect('/secret');
   } else {
     // find way to display "incorrect login info" on screen
+    res.status(403).send('unsuccessful login attempt');
   }
-})
+});
 
 app.get('/', (req, res) => {
   res.status(200).sendFile(path.join(__dirname, '../views/index.html'));

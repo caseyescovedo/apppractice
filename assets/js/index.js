@@ -1,8 +1,11 @@
-console.log('made it to index.js!');
+/* Setting event listener for the entire body rather than many for each button.
+ * Items will be differentiated in if clauses using ids and classes
+ */
 
 document.body.addEventListener('click', (e) => {
   const { target } = e;
 
+  /* For /secret page, listens for click on 'Get Tasks' button */
   if (target.id === 'retrieve') {
     fetch('/tasks', {
       method: 'GET',
@@ -13,16 +16,15 @@ document.body.addEventListener('click', (e) => {
       .then((response) => response.json())
       .then((data) => {
         const taskListArea = document.querySelector('#task-list');
-        const {item} = data;
-        const {created} = data;
 
         for (let i = 0; i < data.length; i += 1) {
           const itemId = data[i]._id;
+          const item = `${data[i].item  } `;
           const node = document.createElement('li');
           const textNode = document.createTextNode(item);
           const deleteBtn = document.createElement('button');
           deleteBtn.innerHTML = 'X';
-          deleteBtn.classList.add(itemId);
+          deleteBtn.setAttribute('id', itemId);
           node.appendChild(textNode);
           node.appendChild(deleteBtn);
           taskListArea.appendChild(node);
@@ -32,44 +34,37 @@ document.body.addEventListener('click', (e) => {
         console.error('Error:', error);
       });
   }
-
+  /* For /secret page, listens for click on 'X' button to delete a task */
   if (target.innerHTML === 'X') {
-    const itemId = target.className;
-    fetch(`/tasks/${itemId}`, {
+    fetch(`/tasks/${target.id}`, {
       method: 'DELETE',
       headers: {
         'Content-Type': 'application/json',
       },
     })
-      .then((response) => response.json())
-      .then((data) => {
-        console.log('date from delete req in index.js ', data);
-      // functionality to remove list item here
-      // find parentNode (the <li> element) and then to .remove() to get rid of it
-      });
+      .then((response) => response.json());
   }
-
+  /* For /secret page, listens for click on 'Add Task' button and sends input value
+   * via POST request to server, then clears the field after response
+   */
   if (target.id === 'task-button') {
-    const parentInput = document.querySelector('#task').value;
+    let parentInput = document.querySelector('#task').value;
     const dataObj = {
       item: parentInput,
       created_at: new Date(),
     };
-    console.log('parentInput ', parentInput.value);
     fetch('/tasks/add', {
       method: 'POST',
       headers: {
-        'Content-Type': 'application/x-www-form-urlencoded',
+        'Content-Type': 'application/json',
       },
       body: JSON.stringify(dataObj),
     })
       .then((response) => response.json())
-      .then((data) => {
-      // use the data to add task to page
-        console.log('data from post req in index.js ', data);
-      })
       .catch((error) => {
         console.error('Error:', error);
       });
+    // reset add task input field to blank after adding task
+    document.querySelector('#task').value=null;
   }
 });
