@@ -16,6 +16,8 @@ document.body.addEventListener('click', (e) => {
       .then((response) => response.json())
       .then((data) => {
         const taskListArea = document.querySelector('#task-list');
+        // setting innerHTML to blank slate each time Get Tasks button is clicked
+        taskListArea.innerHTML = '';
 
         for (let i = 0; i < data.length; i += 1) {
           const itemId = data[i]._id;
