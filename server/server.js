@@ -15,7 +15,7 @@ app.use(cookieParser());
 
 app.use('/assets', express.static(path.resolve(__dirname, '../assets')));
 
-app.post('/signin', (req, res) => {
+app.get('/signin', (req, res, next) => {
   res.status(200).redirect('/secret');
 });
 
