@@ -14,11 +14,16 @@ app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 //statically serves the CSS and JS files that are required from the HTML files
 app.use('/assets', express.static(path.join(__dirname, '../assets')));
-//serve the index.html file
+//serves the index.html file
 app.get('/', (req, res) => {
   res.sendFile(path.join(__dirname, '../views/index.html'));
 });
-//serve the secret.html file
+//serves the secret.html file
 app.get('/secret', (req, res) => {
   res.sendFile(path.join(__dirname, '../views/secret.html'));
+});
+
+//connects app to port
+app.listen(PORT, () => {
+  console.log(`App is listening on ${PORT}`);
 });
