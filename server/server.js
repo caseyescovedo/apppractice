@@ -23,6 +23,18 @@ app.get('/', (req, res) => {
 app.get('/secret', (req, res) => {
   res.sendFile(path.join(__dirname, '../views/secret.html'));
 });
+//post the tasks
+app.post('/post', taskController.postTask, (req, res) => {
+  res.status(200).send(res.locals.item);
+});
+//get the task
+app.get('/get', taskController.getTask, (req, res) => {
+  res.status(200).json(res.locals.item);
+});
+//deletes the task
+app.delete('/delete/:id', taskController.deleteTask, (req, res) => {
+  res.status(200);
+});
 
 //connects app to port
 app.listen(PORT, () => {

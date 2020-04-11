@@ -32,6 +32,7 @@ const schema = new mongoose.Schema({
   item: String,
   created_at: { type: Date, default: Date.now },
 });
+//builds new Task  models
 const Task = mongoose.model('Task', schema);
 
 module.exports = Task; // <-- export your model
