@@ -5,6 +5,9 @@ const path = require('path');
 
 app.use(express.json());
 
+//connect to databse information
+const taskMessageRoute = require('./controllers/taskController');
+
 //port number server will listen on
 const PORT = 3333;
 
@@ -23,11 +26,22 @@ app.get('/', (req, res) => {
 
 app.get('/secret', (req, res) => {
 	//set headers
-	//are not necessary according to Augustine
-	// res.set({ 'content-type': 'text/html; charset=utf-8' }),
 	//send HTML file as part of response
 	res.status(200).sendFile(path.resolve(__dirname, '../views/secret.html'));
 });
+
+//get all messages
+app.get('/secret/tasks', taskMessageRoute.getTasks, (req, res) => {
+	//send back to client list of messages in JSON
+	res.status(200).json(res.locals.tasks);
+});
+
+//post new message into database
+app.post('/secret/tasks', taskMessageRoute.postTasks, (req, res) => {
+	//send back to client list of messages in JSON
+	res.status(200).json(res.locals.postTask);
+});
+
 
 //unknown route handler
 app.use('*', (req, res) => {
