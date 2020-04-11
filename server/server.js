@@ -1,0 +1,24 @@
+//require dependencies
+const express = require('express');
+const path = require('path');
+const bodyParser = require('body-parser');
+
+//allows access to the app
+const app = express();
+
+const PORT = 3333;
+
+//parses through the request body that is sent from the client
+app.use(bodyParser.json());
+//parses through nested objects in the request body
+app.use(bodyParser.urlencoded({ extended: true }));
+//statically serves the CSS and JS files that are required from the HTML files
+app.use('/assets', express.static(path.join(__dirname, '../assets')));
+//serve the index.html file
+app.get('/', (req, res) => {
+  res.sendFile(path.join(__dirname, '../views/index.html'));
+});
+//serve the secret.html file
+app.get('/secret', (req, res) => {
+  res.sendFile(path.join(__dirname, '../views/secret.html'));
+});
