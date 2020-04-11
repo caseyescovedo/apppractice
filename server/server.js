@@ -2,6 +2,7 @@
 const express = require('express');
 const path = require('path');
 const bodyParser = require('body-parser');
+const taskController = require('../server/controllers/taskController');
 
 //allows access to the app
 const app = express();
@@ -25,5 +26,5 @@ app.get('/secret', (req, res) => {
 
 //connects app to port
 app.listen(PORT, () => {
-  console.log(`App is listening on ${PORT}`);
+  console.log(`App is listening on port ${PORT}`);
 });
