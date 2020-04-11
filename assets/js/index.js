@@ -3,6 +3,9 @@ const logIn = document.getElementById('submit');
 const getTasksButton = document.getElementById('retrieve');
 getTasksButton.addEventListener('click', () => getTasks());
 
+const addTasks = document.getElementById('task');
+getTasksButton.addEventListener('click', () => addItem());
+
 // displaying tasks
 function getTasks() {
   fetch('/tasks')

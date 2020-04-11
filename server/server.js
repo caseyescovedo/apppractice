@@ -38,7 +38,7 @@ app.get('/tasks', taskController.getItems, (req, res, next) => {
 //posting Messages route
 app.post(
   '/tasks',
-  authController.setCookie,
+  //   authController.setCookie,
   taskController.postItem,
   (req, res, next) => {
     console.log('SUCCESSFULLY FINISHED POST ROUTE');
