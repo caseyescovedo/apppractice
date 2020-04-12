@@ -1,15 +1,18 @@
 const list = document.getElementById("task-list");
-const remove = document.createElement("button");
 const get = document.getElementById("retrieve");
 const taskInput = document.getElementById("task");
 const post = document.getElementById("task-button");
-const li = document.createElement("li");
+const pass = document.getElementById("pass");
+const user = document.getElementById("user");
 
 function getTasks() {
-  fetch("/items", { headers: { "Content-Type": "application/json" } })
-    .then((resp) => resp.json())
+  fetch("/items")
+    .then((response) => response.json())
     .then((items) => {
+      console.log(items);
       items.forEach((item) => {
+        const li = document.createElement("li");
+        const remove = document.createElement("button");
         remove.classList.add("remove");
         remove.setAttribute("id", item._id);
         remove.innerText = "X";
@@ -19,7 +22,7 @@ function getTasks() {
 
         //Delete functionality//
         remove.addEventListener("click", (e) => {
-          fetch("item", {
+          fetch("/items", {
             method: "DELETE",
             headers: { "Content-Type": "application/json" },
             body: JSON.stringify({ _id: item._id }),
@@ -27,9 +30,7 @@ function getTasks() {
             .then((resp) => resp.json())
             .then((success) => {
               if (success.success === true) {
-                document
-                  .getElementById("task-list")
-                  .removeChild(e.target.parentElement);
+                list.removeChild(e.target.parentElement);
               }
             })
             .catch((err) => {
@@ -39,7 +40,7 @@ function getTasks() {
       });
     })
     .catch((err) => {
-      console.log(`Error in getTask controller: ${err}`);
+      console.log(`Error in getTask: ${err}`);
     });
 }
 
@@ -47,15 +48,17 @@ function postTask() {
   fetch("/items", {
     method: "POST",
     headers: {
-      "Content-Type": "Application/JSON",
+      "Content-Type": "application/json",
     },
     body: JSON.stringify({
       item: taskInput.value,
     }),
   })
-    .then((res) => res.json())
+    .then((response) => response.json())
     .then((newItem) => {
       taskInput.value = "";
+      const li = document.createElement("li");
+      const remove = document.createElement("button");
       remove.classList.add("remove");
       remove.setAttribute("id", newItem._id);
       remove.innerText = "X";
@@ -64,9 +67,7 @@ function postTask() {
       li.appendChild(remove);
       //Delete functionality//
       remove.addEventListener("click", (e) => {
-        document
-          .getElementById("task-list")
-          .removeChild(e.target.parentElement);
+        list.removeChild(e.target.parentElement);
         fetch(`/items`, {
           method: "DELETE",
           headers: { "Content-Type": "application/json" },

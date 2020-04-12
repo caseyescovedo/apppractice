@@ -18,30 +18,34 @@ app.use(bodyParser.urlencoded({ extended: true }));
 app.use("/assets", express.static(path.join(__dirname, "../assets")));
 
 //serve login page
-app.get("/", (req, res) => {
-  res.status(200).sendFile(path.join(__dirname, "../views/index.html"));
-});
+app.get(
+  "/",
+  (req, res) => {
+    res.status(200).sendFile(path.join(__dirname, "../views/index.html"));
+  },
+  authController.setCookie,
+  authController.verifyUser
+);
 
 //serve to-do application
-app.get("/secret", (req, res) => {
+app.get("/secret", authController.verifyUser, (req, res) => {
   res.sendFile(path.join(__dirname, "../views/secret.html"));
 });
 
 app.get("/items", taskController.getTasks, (req, res) => {
-  res.status(200).send(res.locals.items);
+  res.status(200).send(res.locals.item);
 });
 
-app.post(
-  "/items",
-  taskController.postTask,
-  authController.setCookie,
-  (req, res) => {
-    res.status(200).send(res.locals.items);
-  }
-);
+app.post("/items", taskController.postTask, (req, res) => {
+  res.status(200).send(res.locals.item);
+});
 
 app.delete("/items", taskController.deleteTask, (req, res) => {
   res.status(200).send(res.locals.success);
+});
+
+app.post("/signin", authController.setCookie, (req, res) => {
+  res.redirect("/secret");
 });
 
 //catch all error handling
