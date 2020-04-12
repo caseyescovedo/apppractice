@@ -42,6 +42,12 @@ app.post('/secret/tasks', taskMessageRoute.postTasks, (req, res) => {
 	res.status(200).json(res.locals.postTask);
 });
 
+app.delete('/secret/tasks:id', taskMessageRoute.deleteTask, (req, res) => {
+	//send back to client list of messages in JSON
+    //res.status(200).json(res.locals.postTask);
+    res.status(200);
+});
+
 
 //unknown route handler
 app.use('*', (req, res) => {

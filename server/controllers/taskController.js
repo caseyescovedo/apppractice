@@ -41,5 +41,21 @@ taskController.postTasks = (req, res, next) => {
       });
 }
 
+//delete task from list (still working on)
+taskController.deleteTask = (req, res, next) => {
+    console.log(req.body)
+    const deleteTask = 'DELETE FROM tasks WHERE id = ?';
+    db.query(deleteTask)
+    .then((response) => {
+
+    })
+    .catch(err => {
+        console.log("Error: ", err);
+        return next(err);
+      });
+    //send status code saying that it worked
+    // req.params.id
+}
+
 
 module.exports = taskController;
