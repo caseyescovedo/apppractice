@@ -29,7 +29,7 @@ mongoose
 //All items in the database must have a property item which is a string
 //all items should be stored with the time they were created_at. This should default to the current time
 const schema = new mongoose.Schema({
-  item: String,
+  item: { type: String, required: true },
   created_at: { type: Date, default: Date.now },
 });
 //builds new Task  models

@@ -35,9 +35,9 @@ taskController.getTask = (req, res, next) => {
 taskController.deleteTask = (req, res, next) => {
   // console.log('in the deleteTask', req.body);
   const { _id } = req.body;
-  Task.deleteOne(_id, (err, data) => {
+  Task.deleteOne({ _id: _id }, (err, data) => {
     if (err) {
-      return next(err);
+      return next(`Inside delete task controller:${err}`);
     } else {
       return next();
     }
