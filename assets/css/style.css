@@ -1,5 +1,39 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: Arial, sans-serif;
+}
+
 body {
-  font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+  background: url('https://www.itl.cat/pngfile/big/28-283383_black-and-white-wallpaper-cool-simple-white-backgrounds.jpg')
+    no-repeat center center;
+  background-size: cover;
+}
+
+body > h1 {
+  text-align: center;
+  position: relative;
+  font-family: sans-serif;
+  text-transform: uppercase;
+  font-size: 2em;
+  letter-spacing: 4px;
+  overflow: hidden;
+  background: linear-gradient(90deg, #000, #fff, #000);
+  background-repeat: no-repeat;
+  background-size: 80%;
+  animation: animate 3s linear infinite;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: rgba(255, 255, 255, 0);
+}
+
+@keyframes animate {
+  0% {
+    background-position: -500%;
+  }
+  100% {
+    background-position: 500%;
+  }
 }
 
 .title {
@@ -19,7 +53,7 @@ body {
 #signin {
   margin: auto;
   width: 25%;
-  padding-top:5%;
+  padding-top: 5%;
   text-align: center;
   background-color: #d3d3d3;
   border: 1px solid black;
@@ -33,7 +67,7 @@ input {
   margin-bottom: 10px;
 }
 
-#create{
+#create {
   margin: 0 auto;
   width: 50%;
   text-align: center;
