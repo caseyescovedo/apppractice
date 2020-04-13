@@ -11,7 +11,7 @@ body {
 
 .remove {
   display: inline-block;
-  float: right;
+  /* float: right; */
   width: 15px;
   height: 15px;
 }
