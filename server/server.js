@@ -5,9 +5,10 @@ const path = require('path');
 const PORT = 3333;
 
 // Require routes
+const taskRouter = require('./routes/taskRouter.js');
 
 // Body parser
-app.use(express.json);
+// app.use(express.json);
 
 // Serve static files
 app.use('/', express.static(path.resolve(__dirname, '../assets')));
@@ -23,6 +24,7 @@ app.get('/secret', (req, res) => {
 });
 
 // Handle routes
+app.use('/task', taskRouter);
 
 // Handle bad routes
 app.use((req, res) => {
