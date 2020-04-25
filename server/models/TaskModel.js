@@ -3,7 +3,7 @@ const Schema = mongoose.Schema;
 
 
 // v-- REPLACE THE EMPTY STRING WITH YOUR LOCAL/MLAB/ELEPHANTSQL URI
-const myURI = 'mongodb+srv://stevefrend:_--wC2-!TqUtsTJx@solo-vue4b.mongodb.net/test?retryWrites=true&w=majority ';
+const myURI = ''; // deleted URI before submitting
 
 
 // UNCOMMENT THE LINE BELOW IF USING MONGO
