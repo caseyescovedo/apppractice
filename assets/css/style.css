@@ -44,6 +44,7 @@ input {
   width: 50%;
   margin: 0 auto;
   text-align: center;
+  list-style-type: none;
 }
 
 .task {
