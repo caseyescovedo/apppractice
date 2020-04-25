@@ -2,7 +2,6 @@ const express = require('express');
 const app = express();
 const path = require('path');
 const bodyParser = require('body-parser')
-const router = express.Router();
 
 const PORT = 3333;
 
@@ -26,18 +25,21 @@ app.delete('/delete/:id', taskController.deleteTask, (req, res)=>{
   res.status(200);
 })
 
-app.post('/signin', authController.verifyUser, authController.setCookie, (req, res) => {
-    res.redirect(302, '/secret')
-});
+// app.get('/secret', authController.checkCookie, (req, res)=>{
+//   res.redirect(302, '/secret')
+// })
 
-app.get('/secret', authController.checkCookie, (req, res)=>{
+app.post('/signin', authController.verifyUser, authController.setCookie, (req, res) => {
   res.redirect(302, '/secret')
-})
+});
 
 // handle requests for static files
 app.use('/css', express.static('assets/css'));
 app.use('/js', express.static('assets/js'));
-app.use('/secret', express.static(path.join(__dirname, '../views/secret.html')));
+
+app.get('/secret', authController.checkCookie, (req, res)=>{
+  res.sendFile(path.join(__dirname, '../views/secret.html'))};
+
 app.get('/', (req, res)=>{
   res.sendFile(path.join(__dirname, '../views/index.html'))
 })

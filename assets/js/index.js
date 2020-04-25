@@ -26,8 +26,8 @@ fetch('/get')
       .then(resp =>{
         return resp.json();
       })
-      .then(task =>{
-        newLi.innerHTML ="";
+      .then(data=>{
+        getTasks();
       })
     })
     
@@ -57,6 +57,7 @@ document.getElementById('task-button').addEventListener('click', (e)=>{
     body: JSON.stringify(body)
   })
   .then(resp=>{
-    return resp.json();
+    console.log("successful post!")
   })
+  .catch(err=> console.log('unsuccessful post!'))
 })
