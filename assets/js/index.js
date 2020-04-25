@@ -1,5 +1,6 @@
 /* -------------------------- DOM -------------------------- */
 
+
 // ADD TASKS
 const addTasks = (tasks) => {
   const taskList = document.getElementById('task-list');
@@ -7,6 +8,8 @@ const addTasks = (tasks) => {
     const listItem = document.createElement('li');
     const text = document.createElement('span');
     const remove = document.createElement('button');
+
+    listItem.id = task._id;
     text.innerText = task.item;
     remove.innerText = 'X';
     remove.className = 'remove';
@@ -23,6 +26,9 @@ const clearTasks = () => {
 }
 
 // REMOVE TASK
+const removeTask = (id) => {
+  document.getElementById(id).remove();
+}
 
 // (STRETCH) COMPLETE TASK
 
@@ -46,6 +52,7 @@ const postReq = () => {
     addTasks(data);
     textField.value = '';
   })
+  .catch(err => console.log(err));
 }
 
 // GET
@@ -62,6 +69,18 @@ const getReq = () => {
 }
 
 // DELETE
+const delReq = (e) => {
+  const id = e.target.parent.id;
+  console.log('id', id)
+  fetch(`/task/?id=${id}`, {
+    method: 'DELETE',
+  })
+    .then(response => response.json())
+    .then(data => {
+      removeTask(data._id);
+    })
+    .catch(err => console.log(err));
+}
 
 /* ------------------------ EVENTS ------------------------ */
 
@@ -76,3 +95,9 @@ document.getElementById('retrieve').addEventListener('click',
 );
 
 // DELETE TASK
+const buttons = Array.from(document.getElementsByClassName('remove'));
+for (let i = 0; i < buttons.length; i++) {
+  buttons[i].addEventListener('click',
+    delReq
+  )
+}
