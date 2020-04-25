@@ -14,21 +14,28 @@ This assessment will combine much of what you have encountered during the units 
 ## Important Notes for Us to Test Your Application
 You are not given any code to test your application, but we will run tests on your Pull Request. In order for these tests to run properly, please adhere to the following:
 
-- While you are free to add any additional files you want, **do not edit the file structure or delete existing files**
-- Likewise you can add additional HTML elements, IDs, and classes, but **do not remove existing hardcoded HTML elements/attributes**
+- While you are free to add any additional files you want, 
+**do not edit the file structure or delete existing files**
+
+- Likewise you can add additional HTML elements, IDs, and classes, but 
+**do not remove existing hardcoded HTML elements/attributes**
+
 - If you are told to send or display a certain string or to name a file or function a certain name, copy-paste the string **exactly** as it is shown. Alternate text or differing capitalization will fail the tests
 - Run your server and test out your application before submitting! Even if things are not working 100% correctly, you should be able to catch and remove any syntax or reference errors just by running your application
-- Testing your database work requires somewhat odd syntax. **Pay careful attention to the notes regarding this below!**
+
+- Testing your database work requires somewhat odd syntax. 
+**Pay careful attention to the notes regarding this below!**
+
 - You are free to edit the stylesheet as you please!
 
 
 
 ## Serving the files
 For this part you will be editing the `server/server.js` file.
-- [ ] Create a Node.js HTTP server that listens on port 3333. (You may use Express if you'd like, but it is not necessary.)
-- [ ] When you visit `http://localhost:3333/` in the browser, it should serve the `index.html` file from the `views` folder. This is the login page for the application.
-- [ ] When you visit `http://localhost:3333/secret` in the browser, you should render the `secret.html` file from the `views` folder. This is the To-Do application
-- [ ] You should also serve the CSS and JS that the html files are requesting. These are located in the `assets` folder. Make sure the `Content-Type` header is getting properly set in the HTTP response. (Some methods from some frameworks infer the content type from the file extension and set the header automatically.)
+- [X] Create a Node.js HTTP server that listens on port 3333. (You may use Express if you'd like, but it is not necessary.)
+- [X] When you visit `http://localhost:3333/` in the browser, it should serve the `index.html` file from the `views` folder. This is the login page for the application.
+- [X] When you visit `http://localhost:3333/secret` in the browser, you should render the `secret.html` file from the `views` folder. This is the To-Do application
+- [X] You should also serve the CSS and JS that the html files are requesting. These are located in the `assets` folder. Make sure the `Content-Type` header is getting properly set in the HTTP response. (Some methods from some frameworks infer the content type from the file extension and set the header automatically.)
 
 
 
@@ -37,25 +44,25 @@ Your To-Do application would be useless without a database to hold onto the task
 
 #### Task Model
 In the `server/models/TaskModel.js` file, implement a database in either MongoDB or PostgresQL (Mongoose/Sequelize optional) as described below:
-- [ ] We want to store our data in a collection/table called `Task`. (Remember, this may be created as the plural `Tasks` - that is fine.)
-- [ ] All items in the database must have a property `item` which is a string
-- [ ] Additionally, all items should be stored with the time they were `created_at`. This should default to the current time
+- [X] We want to store our data in a collection/table called `Task`. (Remember, this may be created as the plural `Tasks` - that is fine.)
+- [X] All items in the database must have a property `item` which is a string
+- [X] Additionally, all items should be stored with the time they were `created_at`. This should default to the current time
 
 #### Task controllers
 In the `server/models/taskController.js` file, add the following functionality to the exported controller. (These will be server middleware/final handler functions, so they should take the appropriate parameters and perform the necessary callback operations.):
-- [ ] Function `postTask` should create a new item in the database
-- [ ] Function `getTasks` should retrieve all items from the database and send it back to the client as JSON
-- [ ] Function `deleteTask` should find items in the database based on an ID number and delete that item if it exists
+- [X] Function `postTask` should create a new item in the database
+- [X] Function `getTasks` should retrieve all items from the database and send it back to the client as JSON
+- [X] Function `deleteTask` should find items in the database based on an ID number and delete that item if it exists
 
 
 
 ## Client-side JavaScript/DOM Manipulation
 You are serving `index.js` to the client for use on the `secret` page, but there is not much existing functionality. Add code to achieve the following:
 
-- [ ] When the button is clicked to get tasks, all tasks from the database should be displayed as list items in the `#task-list` element. These list items should display the task item followed by a `button` (inside the list item) with a class of `remove` and display an `X`. As an example, one list item might look like
+- [X] When the button is clicked to get tasks, all tasks from the database should be displayed as list items in the `#task-list` element. These list items should display the task item followed by a `button` (inside the list item) with a class of `remove` and display an `X`. As an example, one list item might look like
 `<li>Go shopping <button class="remove">X</button></li`
-- [ ] Multiple clicks of the button to get tasks should not display the list items multiple times
-- [ ] Clicking on the button to add a task should take the text from the input field and create a new task in the database. This task should be seen by clicking the button to get tasks after it has been added. (Optionally, you can display the new task immediately after adding.)
+- [X] Multiple clicks of the button to get tasks should not display the list items multiple times
+- [X] Clicking on the button to add a task should take the text from the input field and create a new task in the database. This task should be seen by clicking the button to get tasks after it has been added. (Optionally, you can display the new task immediately after adding.)
 - [ ] Clicking on any list item's `X` button should remove the item from the list (immediately) and delete the task from the database
 
 
