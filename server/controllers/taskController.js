@@ -12,7 +12,7 @@ module.exports = {
     const values = [req.body.item];
     db.query(query, values)
       .then(data => {
-        res.locals.item = data.rows[0];
+        res.locals.item = data.rows;
         next();
       })
       .catch(err => {

@@ -29,6 +29,24 @@ const clearTasks = () => {
 /* ----------------------- REQUESTS ----------------------- */
 
 // POST
+const postReq = () => {
+  const textField = document.getElementById('task');
+  const item = textField.value;
+  console.log(item)
+  fetch('/task', {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json',
+    },
+    body: JSON.stringify({ item }),
+  })
+  .then(response => response.json())
+  .then(data => {
+    console.log(data)
+    addTasks(data);
+    textField.value = '';
+  })
+}
 
 // GET
 const getReq = () => {
@@ -48,6 +66,9 @@ const getReq = () => {
 /* ------------------------ EVENTS ------------------------ */
 
 // SUBMIT TASK
+document.getElementById('task-button').addEventListener('click',
+  postReq
+);
 
 // GET TASKS
 document.getElementById('retrieve').addEventListener('click',
