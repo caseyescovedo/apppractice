@@ -19,11 +19,19 @@ app.post('/post', taskController.postTask, (req, res)=>{
 })
 
 app.get('/get', taskController.getTasks, (req, res)=>{
-  res.status(400).json(res.locals.allTasks);
+  res.status(200).json(res.locals.allTasks);
 })
 
 app.delete('/delete/:id', taskController.deleteTask, (req, res)=>{
-  res.sendStatus(200);
+  res.status(200);
+})
+
+app.post('/signin', authController.verifyUser, authController.setCookie, (req, res) => {
+    res.redirect(302, '/secret')
+});
+
+app.get('/secret', authController.checkCookie, (req, res)=>{
+  res.redirect(302, '/secret')
 })
 
 // handle requests for static files
