@@ -16,7 +16,6 @@ const taskController = {
             res.locals.tasks = tasks;
             next();
         }
-        
     },
 
     deleteTask (req, res, next) {
