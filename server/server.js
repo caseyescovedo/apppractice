@@ -6,6 +6,9 @@ const PORT = 3333;
 
 // Require routes
 
+// Body parser
+app.use(express.json);
+
 // Serve static files
 app.use('/', express.static(path.resolve(__dirname, '../assets')));
 
@@ -22,10 +25,19 @@ app.get('/secret', (req, res) => {
 // Handle routes
 
 // Handle bad routes
+app.use((req, res) => {
+  res.sendStatus(404);
+});
 
 // Global error handler
+app.use((err, req, res, next) => {
+  console.log(err);
+  res.status(500).json(err);
+});
 
 
 app.listen(PORT, () => {
   console.log(`Server listening on port: ${PORT}...`);
 });
+
+module.exports = app;
