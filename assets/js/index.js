@@ -1,3 +1,4 @@
+///////// SECRETE PAGE functionalities //////////
 const ul = document.querySelector('#task-list');
 
 const addTaskBtn = document.querySelector('#task-button');
@@ -43,7 +44,7 @@ const getTasksFromDB = () => {
   .then(array => {
     // First, clear <li>s inside <ul>.
     ul.innerHTML = '';
-    
+
     // Iterate over the array of tasks and create a <li> elem for each.
       // Display all <li> inside #task-list.
     array.forEach((task) => {

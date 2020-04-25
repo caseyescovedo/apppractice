@@ -2,13 +2,14 @@ const express = require('express');
 const app = express();
 const path = require('path');
 const PORT = 3333;
-
+const cookieParser = require('cookie-parser');
 const taskController = require('./controllers/taskController.js');
+const authController = require('./controllers/authController.js');
 
 // The middleware that parses incoming requests with JSON payloads 
 app.use(express.json());
-
 app.use(express.urlencoded({extended: true}));
+app.use(cookieParser());
 
 // Serving the login html page:
 app.get('/', (req, res) => {
@@ -21,9 +22,18 @@ app.get('/', (req, res) => {
 app.use('/css', express.static(path.resolve(__dirname, '../assets/css')));
 app.use('/js', express.static(path.resolve(__dirname, '../assets/js')));
 
+// Routing /signin endpoint to secret page.
+app.post('/signin', 
+  authController.verifyUser,
+  (req, res) => res.redirect('/secret')
+);
+
 // Rendering secret html page:
-app.get('/secret', (req, res) => {
-  res.status(200).sendFile(path.resolve(__dirname, '../views/secret.html'))
+  // Should verify cookies before rendering.
+app.get('/secret',
+  authController.verifyCookies,
+  (req, res) => {
+    res.status(200).sendFile(path.resolve(__dirname, '../views/secret.html'))
 });
 
 // Routing the POST req:
