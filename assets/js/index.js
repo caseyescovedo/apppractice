@@ -18,6 +18,9 @@ const addTasks = (tasks) => {
 }
 
 // CLEAR ALL TASKS
+const clearTasks = () => {
+  document.getElementById('task-list').innerHTML = '';
+}
 
 // REMOVE TASK
 
@@ -34,6 +37,7 @@ const getReq = () => {
       return response.json();
     })
     .then(data => {
+      clearTasks();
       addTasks(data);
     })
     .catch(err => console.log(err));
@@ -47,7 +51,7 @@ const getReq = () => {
 
 // GET TASKS
 document.getElementById('retrieve').addEventListener('click',
-  getReq()
+  getReq
 );
 
 // DELETE TASK
