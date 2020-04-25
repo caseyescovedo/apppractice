@@ -1,13 +1,25 @@
+const mongoose = require('mongoose');
+const Schema = mongoose.Schema;
+
+
 // v-- REPLACE THE EMPTY STRING WITH YOUR LOCAL/MLAB/ELEPHANTSQL URI
-const myURI = '';
+const myURI = 'mongodb+srv://stevefrend:_--wC2-!TqUtsTJx@solo-vue4b.mongodb.net/test?retryWrites=true&w=majority ';
+
 
 // UNCOMMENT THE LINE BELOW IF USING MONGO
-// const URI = process.env.MONGO_URI || myURI;
+const URI = process.env.MONGO_URI || myURI;
+mongoose.connect(URI, { useNewUrlParser: true, useCreateIndex: true, useUnifiedTopology: true });
+connection = mongoose.connection;
+connection.once('open', () => {
+  console.log("MongoDB connection established successfully")
+});
 
-// UNCOMMENT THE LINE BELOW IF USING POSTGRESQL
-// const URI = process.env.PG_URI || myURI;
+
+const Task = new Schema({
+  item: {type: String, required: true},
+  created_at: {type: Date, default: Date.now}
+});
 
 
 
-
-module.exports = null; // <-- export your model
+module.exports = mongoose.model('Task', Task); // <-- export your model
