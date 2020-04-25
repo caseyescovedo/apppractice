@@ -16,8 +16,9 @@ addTask.addEventListener('click', () => {
     },
     body: JSON.stringify(body),
   })
-    .then((resp) => {
-      console.log(resp);
+    .then(resp => resp.json())
+    .then(data => {
+
       const list = document.getElementById('task-list');
       const newLi = document.createElement('li');
       newLi.innerHTML = task;
@@ -58,3 +59,7 @@ remove.addEventListener('click', () => {
   })
 
 });
+
+const createTask = () => {
+
+}
