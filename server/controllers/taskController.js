@@ -36,6 +36,19 @@ module.exports = {
     },
 
   deleteTask: function (req, res, next) {
-    next();
+    const query = `
+      DELETE FROM tasks
+      WHERE _id = $1
+      RETURNING *
+    `;
+    values = [req.query.id];
+    db.query(query, values)
+      .then(data => {
+        res.locals.item = data.rows[0]; 
+        next();
+      })
+      .catch(err => {
+        next(err);
+      });
   },
 };

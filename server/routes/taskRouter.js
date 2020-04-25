@@ -19,7 +19,7 @@ router.get('/',
 router.delete('/',
   taskController.deleteTask,
   (req, res) => {
-    res.sendStatus(200);
+    res.status(200).json(res.locals.item);
   }
 );
 
