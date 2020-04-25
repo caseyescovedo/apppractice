@@ -3,8 +3,8 @@ const Tasks = require('../models/TaskModel.js');
 const taskController = {};
 
 taskController.postTask = (req, res, next) => {
-  const { task } = req.body;
-    Tasks.create({ task })
+  const { item } = req.body;
+    Tasks.create({ item })
     .then(taskDoc => {
       res.locals.data = taskDoc;
       next();
