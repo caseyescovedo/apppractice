@@ -21,8 +21,19 @@ module.exports = {
   },
 
   getTasks: function (req, res, next) {
-    next();
-  },
+    const query = `
+      SELECT *
+      FROM tasks
+    `;
+    db.query(query)
+      .then(data => {
+        res.locals.items = data.rows;
+        next();
+      })
+      .catch(err => {
+        next(err);
+      });
+    },
 
   deleteTask: function (req, res, next) {
     next();

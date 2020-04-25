@@ -5,21 +5,21 @@ const router = express.Router();
 router.post('/',
   taskController.postTask,
   (req, res) => {
-    res.status(200).send(res.locals.item);
+    res.status(200).json(res.locals.item);
   }
 );
 
 router.get('/',
   taskController.getTasks,
   (req, res) => {
-    res.sendStatus(418)
+    res.status(200).json(res.locals.items);
   }
 );
 
 router.delete('/',
   taskController.deleteTask,
   (req, res) => {
-    res.sendStatus(418)
+    res.sendStatus(200);
   }
 );
 
