@@ -1,4 +1,5 @@
 const express = require('express');
+const bodyParser = require('body-parser');
 const app = express();
 const path = require('path');
 
@@ -8,7 +9,7 @@ const PORT = 3333;
 const taskRouter = require('./routes/taskRouter.js');
 
 // Body parser
-// app.use(express.json);
+app.use(bodyParser.json());
 
 // Serve static files
 app.use('/', express.static(path.resolve(__dirname, '../assets')));

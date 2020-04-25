@@ -5,7 +5,7 @@ const router = express.Router();
 router.post('/',
   taskController.postTask,
   (req, res) => {
-    res.sendStatus(418)
+    res.status(200).send(res.locals.item);
   }
 );
 
