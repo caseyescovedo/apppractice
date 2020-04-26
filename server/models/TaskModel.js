@@ -1,13 +1,22 @@
-// v-- REPLACE THE EMPTY STRING WITH YOUR LOCAL/MLAB/ELEPHANTSQL URI
-const myURI = '';
+const mongoose = require('mongoose');
 
-// UNCOMMENT THE LINE BELOW IF USING MONGO
-// const URI = process.env.MONGO_URI || myURI;
+const myURI = 'mongodb+srv://helloworld:helloworld@cluster0-qnbgm.mongodb.net/test?retryWrites=true&w=majority';
+const URI = process.env.MONGO_URI || myURI;
+mongoose.connect(URI, { useNewUrlParser: true, useUnifiedTopology: true })
+.then(() => console.log('Connected to MongoDB'))
+.catch(err => console.log('Error while connecting to Mongo', err))
 
-// UNCOMMENT THE LINE BELOW IF USING POSTGRESQL
-// const URI = process.env.PG_URI || myURI;
+const taskSchema = new mongoose.Schema({
+  item: { 
+    type: String, 
+    required: true 
+  },
+  created_at: {
+    type: Date,
+    default: Date.now
+  }
+});
 
+const Task = mongoose.model('Task', taskSchema);
 
-
-
-module.exports = null; // <-- export your model
+module.exports = Task;
