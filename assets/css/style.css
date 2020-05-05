@@ -12,8 +12,11 @@ body {
 .remove {
   display: inline-block;
   float: right;
-  width: 15px;
-  height: 15px;
+  width: 25px;
+  height: 25px;
+  background-color: rgb(58, 58, 148);
+  color: white;
+  font-weight: 700
 }
 
 #signin {
@@ -52,3 +55,9 @@ input {
   border: 1px solid black;
   text-align: center;
 }
+
+#task-list {
+  list-style-type: none;
+  text-align: left;
+}
+
