@@ -3,7 +3,7 @@ const db = require("../models/TaskModel.js");
 module.exports = {
   getTodo: async (req, res, next) => {
     const query = {
-      text: "SELECT * FROM todo",
+      text: "SELECT * FROM Task",
     };
     try {
       const results = await db.query(query);
@@ -15,10 +15,10 @@ module.exports = {
 
   addItem: async (req, res, next) => {
     console.log("REQ.BODY: ", req.body);
-    const { item } = req.body;
+    const { task } = req.body;
     const query = {
-      text: "INSERT INTO Task (item values ($1) returning *",
-      values: [item],
+      text: "INSERT INTO Task(item) values ($1) returning *",
+      values: [task],
     };
     try {
       const newItem = await db.query(query);
