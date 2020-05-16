@@ -45,7 +45,7 @@ function handleRetrieve() {
   };
 }
 
-function handleAdd(e) {
+function handleAdd() {
   // do something
 
   const item = document.getElementById('task').value;
@@ -58,6 +58,13 @@ function handleAdd(e) {
     body: JSON.stringify({ item }),
   });
 }
+
+function handleRemove(e) {
+  // do something here to remove task
+  e.preventDefault();
+  console.log(e.target);
+}
+
 // get retrieve element from DOM
 const retrieve = document.getElementById('retrieve');
 if (retrieve) {
@@ -69,5 +76,12 @@ if (retrieve) {
 const taskButton = document.getElementById('task-button');
 if (taskButton) {
   console.log('task button');
-  taskButton.addEventListener('click', (e) => handleAdd(e));
+  taskButton.addEventListener('click', handleAdd);
+}
+
+// get delete-button element from DOM
+const deleteButton = document.getElementsByClassName('remove');
+if (deleteButton) {
+  console.log('delete button');
+  deleteButton.addEventListener('click', (e) => handleRemove(e));
 }
