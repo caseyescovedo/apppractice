@@ -6,17 +6,21 @@ and perform the necessary callback operations.):
 */
 module.exports = {
     postTask: function(req, res, next){
-        //console.log(req.query);
+        res.locals.pool.query('INSERT INTO Tasks (item) VALUES ($1) RETURNING id, item', [req.body.item])
+            .then( (result) => {res.status(200); res.json(result.rows[0])})
+            .catch( (err) => {console.log(err);next(err)});
     },
     getTasks: function(req, res, next){
         res.locals.pool.query('SELECT * FROM Tasks;')
             .then(tasks => {
-                console.log(tasks);
+                //console.log(tasks);
                 res.json(tasks.rows);
             })
             .catch(err => next(err));
     },
     deleteTask: function(req,res, next){
-
+        res.locals.pool.query('DELETE FROM Tasks WHERE id=$1;',[req.body.id])
+            .then(() => res.sendStatus(200))
+            .catch(err => next(err));
     }
 };
