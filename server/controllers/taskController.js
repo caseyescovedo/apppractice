@@ -31,6 +31,7 @@ taskController.deleteTask = (req, res, next) => {
   const query = `DELETE FROM tasks WHERE _id = '${id}'`;
   db.query(query, (err, data) => {
     if (err) return next(err);
+    res.locals.deletedTask = data;
     return next();
   });
 };
