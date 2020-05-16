@@ -1,4 +1,5 @@
 // v-- REPLACE THE EMPTY STRING WITH YOUR LOCAL/MLAB/ELEPHANTSQL URI
+const { Pool } = require('pg');
 const myURI = 'postgres://brvcmuch:8fltCw5yexgum1WBxnsIEJFZROkU0vvP@isilo.db.elephantsql.com:5432/brvcmuch';
 
 // UNCOMMENT THE LINE BELOW IF USING MONGO
@@ -15,5 +16,18 @@ const URI = process.env.PG_URI || myURI;
     pool
 */
 
+const pool = new Pool({connectionString: URI});
 
-module.exports = null; // <-- export your model
+class TaskModel {
+    static getAll(){
+        return pool.query('SELECT * FROM Tasks;');
+    }
+    static createItem(name){
+        return pool.query('INSERT INTO Tasks (item) VALUES ($1) RETURNING id, item', [name]);
+    }
+    static delete(id){
+        return pool.query('DELETE FROM Tasks WHERE id=$1;',[id]);
+    }
+}
+
+module.exports = TaskModel; // <-- export your model

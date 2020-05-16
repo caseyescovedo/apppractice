@@ -19,9 +19,6 @@ app.use(express.urlencoded());
 /* server our asset files, framework automatically includes file extension types in the http headers */
 app.use(express.static('assets'));
 
-/* letting out middle functions have access to the database pool */
-app.use((req, res, next) => {res.locals.pool = pool; next()});
-
 /* sending index html path on root path */
 app.get('/', (req, res, next) => {
     res.sendFile(path.join(__dirname, '../views/index.html'));
