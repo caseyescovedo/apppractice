@@ -45,15 +45,15 @@ In the `server/models/TaskModel.js` file, implement a database in either MongoDB
 
 In the `server/models/taskController.js` file, add the following functionality to the exported controller. (These will be server middleware/final handler functions, so they should take the appropriate parameters and perform the necessary callback operations.):
 
-- [ ] Function `postTask` should create a new item in the database
-- [ ] Function `getTasks` should retrieve all items from the database and send it back to the client as JSON
-- [ ] Function `deleteTask` should find items in the database based on an ID number and delete that item if it exists
+- [x] Function `postTask` should create a new item in the database
+- [x] Function `getTasks` should retrieve all items from the database and send it back to the client as JSON
+- [x] Function `deleteTask` should find items in the database based on an ID number and delete that item if it exists
 
 ## Client-side JavaScript/DOM Manipulation
 
 You are serving `index.js` to the client for use on the `secret` page, but there is not much existing functionality. Add code to achieve the following:
 
-- [ ] When the button is clicked to get tasks, all tasks from the database should be displayed as list items in the `#task-list` element. These list items should display the task item followed by a `button` (inside the list item) with a class of `remove` and display an `X`. As an example, one list item might look like
+- [x] When the button is clicked to get tasks, all tasks from the database should be displayed as list items in the `#task-list` element. These list items should display the task item followed by a `button` (inside the list item) with a class of `remove` and display an `X`. As an example, one list item might look like
       `<li>Go shopping <button class="remove">X</button></li`
 - [ ] Multiple clicks of the button to get tasks should not display the list items multiple times
 - [ ] Clicking on the button to add a task should take the text from the input field and create a new task in the database. This task should be seen by clicking the button to get tasks after it has been added. (Optionally, you can display the new task immediately after adding.)
@@ -64,8 +64,8 @@ You are serving `index.js` to the client for use on the `secret` page, but there
 By now, your server should serve the static assets, the login page, and the secret page. Add additional routes to achieve the following
 functionality:
 
-- [ ] If you have not already done so in conjunction with the tasks above, create the routes to tie the client-side JavaScript events to the appropriate database functions
-- [ ] When the sign in form is submitted, it should redirect to the secret page route. This should **not** be done with AJAX. (This route will be authenticated in a later step.)
+- [x] If you have not already done so in conjunction with the tasks above, create the routes to tie the client-side JavaScript events to the appropriate database functions
+- [x] When the sign in form is submitted, it should redirect to the secret page route. This should **not** be done with AJAX. (This route will be authenticated in a later step.)
 
 ## Authentication
 
