@@ -5,9 +5,10 @@ document.addEventListener("DOMContentLoaded", function(event) {
 
 const ul = document.querySelector('#task-list');
 const retrieve = document.querySelector('#retrieve');
-const newTask = document.querySelector('#task');
+const addBtn = document.querySelector('#task-button');
+const taskName = document.querySelector('#task');
 
-
+/* Get Tasks */ 
 function getTasks() {
   fetch('http://localhost:3333/api/secret', {
     method: 'GET'
@@ -18,10 +19,6 @@ function getTasks() {
     })
     .catch(err => console.log('Error getting tasks:', err))
 }
-
-// These list items should display the task item followed by a `button` (inside the list item) with a class of `remove` and display an `X`. As an example, one list item might look like
-// `<li>Go shopping <button class="remove" >X</button></li`
-
 
 function renderItems(data) {
   let tasks = data
@@ -34,19 +31,57 @@ function renderItems(data) {
     btn.innerText = 'X';
     li.appendChild(btn);
     ul.appendChild(li);
-  }
+  });
+}
 
-  )
-    
+/* Add Task */
 
-  console.log('data is ', data)
-  // assign innertext to li and create id of objectId
-    // attach remove button to parent li
-  // append li to ul 
+function checkInput() {
+  if (taskName.value.length > 0 ) {
+    addToDatabase();
+  };
+}
+
+function addToDatabase() {
+  const taskInfo = {};
+  taskInfo.task = taskName.value;
+  console.log(taskInfo);
+  fetch('http://localhost:3333/api/secret', {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json',
+    },
+    body: JSON.stringify(taskInfo)
+  })
+    .then(res => res.json())
+    .then(data => {
+      return addNewItem(data);
+    })
+    .catch(err => console.log('Error adding tasks:', err))
+}
+
+function addNewItem(data) {
+  let li = document.createElement('li');
+  li.id = data._id;
+  li.innerText = data.item;
+  let btn = document.createElement('button');
+  btn.className = 'remove';
+  btn.innerText = 'X';
+  li.appendChild(btn);
+  ul.appendChild(li);
+}
+
+/* Delete Task */
+function deleteItem() {
+  // store id of parentNode (li element) in variable
+  const id = this.parentNode.id
+  // remove element from dom
+  // delete request using id of <li> element
 }
 
 
 retrieve.addEventListener('click', getTasks, {once: true})
-
+addBtn.addEventListener('click', checkInput)
+// removeBtn.addEventListener('click', deleteItem)
 
 });

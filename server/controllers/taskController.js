@@ -1,3 +1,5 @@
+/* eslint-disable */
+
 const Task = require('../models/TaskModel');
 
 const taskController = {};
@@ -12,8 +14,6 @@ taskController.postTask = (req, res, next) => {
         message: {err:'Error creating task'}
       })
     } else {
-      console.log('something is being created')
-      console.log(result)
       res.locals.item = result;
       return next();
       }
@@ -24,7 +24,6 @@ taskController.postTask = (req, res, next) => {
 // Function `getTasks` should retrieve all items from the database and send it back to the client as JSON
 
 taskController.getTasks = (req, res, next) => {
-  console.log('in getTasks')
   Task.find({}, (err, result) => {
     if (err) {
       return next({
@@ -32,8 +31,6 @@ taskController.getTasks = (req, res, next) => {
         message: {err:'Error getting tasks'}
       })
     } else {
-      console.log('tasks being fetched')
-      console.log(result)
       res.locals.tasks = result;
       return next();
       }

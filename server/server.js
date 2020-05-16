@@ -19,7 +19,7 @@ res.status(200).sendFile(path.resolve(__dirname, '../views/index.html'))
 );
 
 app.post('/api/secret', taskController.postTask, (req, res) => 
-res.status(200).send(console.log('Task has been added'))
+res.status(200).json(res.locals.item)
 );
 
 app.get('/api/secret', taskController.getTasks, (req, res) => 
@@ -42,3 +42,5 @@ app.use((err, req, res, next) => {
 })
 
 app.listen(PORT, () => console.log(`Server listening on port ${PORT}`));
+
+module.exports = app;
