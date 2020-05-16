@@ -83,5 +83,7 @@ if (taskButton) {
 const deleteButton = document.getElementsByClassName('remove');
 if (deleteButton) {
   console.log('delete button');
-  deleteButton.addEventListener('click', (e) => handleRemove(e));
+  deleteButton.forEach((btn) => {
+    btn.addEventListener('click', handleRemove);
+  });
 }
