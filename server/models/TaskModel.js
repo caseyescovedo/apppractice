@@ -1,13 +1,28 @@
-// v-- REPLACE THE EMPTY STRING WITH YOUR LOCAL/MLAB/ELEPHANTSQL URI
-const myURI = '';
+const { Sequelize, DataTypes } = require('sequelize');
+const { dbURI } = require('../../env.js');
 
-// UNCOMMENT THE LINE BELOW IF USING MONGO
-// const URI = process.env.MONGO_URI || myURI;
+// DB URI
+const myURI = dbURI;
 
-// UNCOMMENT THE LINE BELOW IF USING POSTGRESQL
-// const URI = process.env.PG_URI || myURI;
+// Codesmith environment selector
+const URI = process.env.PG_URI || myURI;
 
+// Create instance of Sequelize, connecting the DB
+const sequelize = new Sequelize(URI);
 
+// Create Task model
+const Task = sequelize.define('task', {
+  item: {
+    type: DataTypes.STRING,
+    allowNull: false,
+  },
+}, {
+  createdAt: 'created_at',
+});
 
+// Sync the DB to the models (Use {force: true} to recreate DB or
+// {alter: true} to update the tables)
+// sequelize.sync({force: true})
+//   .then(() => console.log("DB synced"));
 
-module.exports = null; // <-- export your model
+module.exports = Task; // <-- export your model
