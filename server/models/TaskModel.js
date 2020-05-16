@@ -1,6 +1,7 @@
 // v-- REPLACE THE EMPTY STRING WITH YOUR LOCAL/MLAB/ELEPHANTSQL URI
 const myURI =
-  "mongodb+srv://lindaeverswick:9srTQJzd2rUyonpb@cluster0-k8tka.mongodb.net/test?retryWrites=true&w=majority";
+'mongodb://lindaeverswick:9srTQJzd2rUyonpb@cluster0-k8tka.mongodb.net/test?retryWrites=true&w=majority';
+
 // UNCOMMENT THE LINE BELOW IF USING MONGO
 const URI = process.env.MONGO_URI || myURI;
 
@@ -9,15 +10,22 @@ const URI = process.env.MONGO_URI || myURI;
 
 const mongoose = require("mongoose");
 const Schema = mongoose.Schema;
+const db = mongoose.connection;
+mongoose.connect(URI, {useNewUrlParser: true});
+
 const taskSchema = new Schema({
   item: {type: String, required: true},
   created_at: {type: String, required: true},
 })
+
 const Task = mongoose.model('Task', taskSchema);
 
-mongoose
-  .connect(URI)
-  .then(() => console.log("connected to db"))
-  .catch((err) => console.log("error connecting to db", err));
 
+
+db.on('error', console.error.bind(console, 'connection error:'));
+db.once('open', function() {
+  console.log('connected to db')
+});
+
+console.log('hello')
 module.exports = { Task }; // <-- export your model
