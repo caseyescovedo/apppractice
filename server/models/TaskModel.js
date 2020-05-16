@@ -11,9 +11,7 @@ const URI = process.env.PG_URI || myURI;
 /* 
     oh dip, i totally forgot to move my queries into task model 
     if I have time after I comment the code I'll try to create a 
-    TaskModel class that will query the database. And I could
-    probably pass in the task model into res.locals instead of the
-    pool
+    TaskModel class that will query the database. 
 */
 
 const pool = new Pool({connectionString: URI});
