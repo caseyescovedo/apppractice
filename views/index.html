@@ -3,6 +3,7 @@
   <meta charset="UTF-8">
   <title>Sign In</title>
   <link rel="stylesheet" href="./css/style.css">
+  <script type="text/javascript"src="../assets/js/index.js"></script>
 </head>
 <body>
   <form id="signin" action="/signin" method="POST">
@@ -10,7 +11,23 @@
     <br>
     <input id="pass" name="pass" placeholder="pass" type="text"></input>
     <br>
-    <button id="submit" type="submit">Sign In</button>
+    <button id="submit" type="submit" onclick="checkLogin()">Sign In</button>
   </form>
+   <!-- originally these scripts were in index.js but i coudlnt get them to connect without putting them in the same file 
+  i tried changing the paths to relative and absolute but it was a no go-->
+  <script>
+    const checkLogin = () => {
+  let user = document.getElementById("user").value;
+  let pass = document.getElementById("pass").value;
+
+  fetch("/api/signin", {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json"
+    },
+    body: JSON.stringify({ user: user, pass: pass })
+  })
+}
+  </script>
 </body>
 </html>
