@@ -8,7 +8,7 @@ async function create(){
     
     await pool.query(`CREATE TABLE Tasks (
         id SERIAL PRIMARY KEY,
-        item varchar,
+        item varchar NOT NULL,
         created_at TIMESTAMP DEFAULT NOW()
     );`);
 
