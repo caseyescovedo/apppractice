@@ -12,7 +12,7 @@ const sequelize = new Sequelize(URI);
 
 // Create Task model. item is STRING and required. 
 // Rename autocreated createdAt timestamp to created_at as per readme
-const Task = sequelize.define('task', {
+const Task = sequelize.define('Task', {
   item: {
     type: DataTypes.STRING,
     allowNull: false,
