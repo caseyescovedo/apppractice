@@ -10,7 +10,8 @@ const URI = process.env.PG_URI || myURI;
 // Create instance of Sequelize, connecting the DB
 const sequelize = new Sequelize(URI);
 
-// Create Task model
+// Create Task model. item is STRING and required. 
+// Rename autocreated createdAt timestamp to created_at as per readme
 const Task = sequelize.define('task', {
   item: {
     type: DataTypes.STRING,

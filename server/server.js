@@ -4,10 +4,11 @@ const path = require('path');
 const bodyParser = require('body-parser');
 const cookieParser = require('cookie-parser');
 
-const User = require('./models/TaskModel');
+// import controllers
 const { getTasks, postTask, deleteTask} = require('./controllers/taskController');
 const { authenticate, authorize } = require('./controllers/authController');
 
+// set port
 const PORT = 3333;
 
 // Serve the static assets
