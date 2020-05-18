@@ -1,5 +1,6 @@
 body {
-  font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+  font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+  background-color: whitesmoke;
 }
 
 .title {
@@ -19,7 +20,7 @@ body {
 #signin {
   margin: auto;
   width: 25%;
-  padding-top:5%;
+  padding-top: 5%;
   text-align: center;
   background-color: #d3d3d3;
   border: 1px solid black;
@@ -33,7 +34,7 @@ input {
   margin-bottom: 10px;
 }
 
-#create{
+#create {
   margin: 0 auto;
   width: 50%;
   text-align: center;
@@ -44,6 +45,21 @@ input {
   width: 50%;
   margin: 0 auto;
   text-align: center;
+  background: gray;
+  opacity: 0.6;
+  border-radius: 10px;
+  box-shadow: 5px 5px 5px rgb(117, 117, 172);
+}
+
+#task-list > li {
+  margin: 10px 0;
+  list-style: none;
+  border: black;
+}
+
+.remove {
+  margin-right: 30px;
+  color: red;
 }
 
 .task {
