@@ -9,18 +9,38 @@
     "update-package": "node test/update-package.js",
     "merge": "node test/merge.js",
     "lint": "node test/lint.js server/server.js assets/js/index.js",
-    "start": "node server/server.js",
+    "start": "nodemon server/server.js",
     "start-dev": "nodemon server/server"
   },
-  "author": "Brandon Mizuno",
+  "author": "Lia Pham",
   "license": "ISC",
   "devDependencies": {
     "babel-preset-es2015": "^6.24.1",
     "babel-register": "^6.24.1",
+    "body-parser": "^1.19.0",
+    "cookie-parser": "^1.4.5",
+    "cookies": "^0.8.0",
     "expect": "^1.20.2",
+    "express": "^4.17.1",
+    "mongoose": "^5.9.14",
+    "node-fetch": "^2.6.0",
     "nodemon": "^1.11.0",
     "request": "^2.81.0",
     "supertest": "^3.0.0",
     "zombie": "^5.0.7"
+  },
+  "directories": {
+    "test": "test"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/lpham598/app-assessment-mod-0.git"
+  },
+  "bugs": {
+    "url": "https://github.com/lpham598/app-assessment-mod-0/issues"
+  },
+  "homepage": "https://github.com/lpham598/app-assessment-mod-0#readme",
+  "dependencies": {
+    "path": "^0.12.7"
   }
 }
