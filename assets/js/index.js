@@ -8,7 +8,9 @@ $(function () {
           $(`<li id="${task._id}">${task.item}</li>`).append(
             $('<button>X</button>').click('click', () => {
               $(`#${task._id}`).remove();
-              $.post(`/tasks/${task._id}`);
+              $.ajax(`/tasks/${task._id}`, {
+                type: 'DELETE',
+              });
             })
           )
         );
