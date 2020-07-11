@@ -25,4 +25,16 @@ app.get('/', (req, res) => {
   res.status(200).sendFile(path.resolve(__dirname, '../views/index.html'));
 });
 
+app.post('/api/secret', taskController.postTask, (req, res) => {
+  res.status(200).json({ success: true, task: res.locals.task });
+});
+
+app.get('/api/secret', taskController.getTasks, (req, res) => {
+  res.status(200).json({ success: true, tasks: res.locals.tasks });
+});
+
+app.delete('/api/secret', taskController.deleteTask, (req, res) => {
+  res.status(200).json({ success: true, message: 'Task has been deleted' });
+});
+
 app.listen(PORT, () => console.log(`Server listening on port ${PORT}`.yellow.bold));

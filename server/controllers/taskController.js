@@ -5,7 +5,8 @@ const taskController = {};
 taskController.postTask = async (req, res, next) => {
   const { item } = req.body;
   try {
-    await Task.create({ item });
+    const task = await Task.create({ item });
+    res.locals.task = task;
     return next();
   } catch (err) {
     return next(err);
@@ -14,7 +15,8 @@ taskController.postTask = async (req, res, next) => {
 
 taskController.getTasks = async (req, res, next) => {
   try {
-    await Task.find({});
+    const tasks = await Task.find({});
+    res.locals.tasks = tasks;
     return next();
   } catch (err) {
     return next(err);
