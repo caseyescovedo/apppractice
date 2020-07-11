@@ -24,15 +24,15 @@ taskController.getTasks = (req, res, next) => {
     next();
   });
 
-  taskController.deleteTask = (req, res, next) => {
-    console.log("deleting where id is ", req.body.id);
-    const text = `DELETE FROM "Task" WHERE id = '${req.body.id}'`;
-    pool.query(text, (err, response) => {
-      if (err) {
-        return next(err);
-      }
-      next();
-    });
-  };
+  // taskController.deleteTask = (req, res, next) => {
+  //   console.log("deleting where id is ", req.body.id);
+  //   const text = `DELETE FROM "Task" WHERE id = '${req.body.id}'`;
+  //   pool.query(text, (err, response) => {
+  //     if (err) {
+  //       return next(err);
+  //     }
+  //     next();
+  //   });
+  // };
 };
 module.exports = taskController;

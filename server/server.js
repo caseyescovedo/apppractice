@@ -17,9 +17,9 @@ app.post("/tasks", taskController.postTask, (req, res) => {
   res.status(200).json(res.locals);
 });
 
-app.post("/delete", taskController.deleteTask, (req, res) => {
-  res.status(200);
-});
+// app.post("/delete", taskController.deleteTask, (req, res) => {
+//   res.status(200);
+// });
 
 app.get("/tasks", taskController.getTasks, (req, res) => {
   res.status(200).json(res.locals);
