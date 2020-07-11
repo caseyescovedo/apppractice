@@ -18,7 +18,6 @@ app.get('/', (req, res) => {
   res.status(200).sendFile(path.join(__dirname, '../views/index.html'));
 });
 app.get('/secret', (req, res) => {
-  console.log('req.cookies', req.cookies);
   if (req.cookies.token === 'admin') {
     res.status(200).sendFile(path.join(__dirname, '../views/secret.html'));
   } else {
