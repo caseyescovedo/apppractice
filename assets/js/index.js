@@ -1,17 +1,3 @@
-function deflateCookies(cookieName, setValue = '', timeline = -1) {
-  let deadline;
-  if (timeline) {
-    // will be in hours
-    const currentDate = new Date().setTime(
-      timeline.getTime() + timeline * 60 * 60 * 1000
-    );
-    deadline = '; expires=' + currentDate.toGMTString();
-  } else {
-    deadline = '';
-  }
-  document.cookie = cookieName + '=' + setValue + deadline + '; path=/';
-}
-
 function returnCookie(cookieName) {
   const ths = cookieName + '=';
   const allThs = document.cookie.split(';');
@@ -22,28 +8,25 @@ function returnCookie(cookieName) {
   return null;
 }
 
-function validateCookie() {
-  // console.log('Please validate this cookie');
-  const cookie = returnCookie('token');
-  if (!cookie || cookie !== 'admin') {
-    // console.log('Should reset back to the homepage');
-    window.location.href = '/';
-  } else {
-    let postTasks = document.getElementById('task-button');
-    let fetchTasks = document.getElementById('retrieve');
+function validatePage() {
+  let postTasks = document.getElementById('task-button');
+  let fetchTasks = document.getElementById('retrieve');
 
-    postTasks.addEventListener('click', async function (evt) {
-      evt.preventDefault();
-      const taskDescription = document.getElementById('task').value;
-      // console.log('Go Create a Task :: ', taskDescription);
-      await addTasks(taskDescription);
-    });
+  postTasks.addEventListener('click', async function (evt) {
+    evt.preventDefault();
+    const taskDescription = document.getElementById('task').value;
+    // console.log('Go Create a Task :: ', taskDescription);
+    await addTasks(taskDescription);
+  });
 
-    fetchTasks.addEventListener('click', async function (evt) {
-      evt.preventDefault();
-      await apiFetchTasks();
-    });
-  }
+  fetchTasks.addEventListener('click', async function (evt) {
+    evt.preventDefault();
+    await apiFetchTasks();
+  });
+
+  (async function () {
+    await apiFetchTasks();
+  })();
 }
 
 async function removeTaskEvent(taskId) {
