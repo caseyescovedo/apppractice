@@ -18,4 +18,5 @@ const startDb = () => {
     .catch((e) => console.log('Failed to connect to DB: ', e));
 };
 
-module.exports = startDb;
+module.exports.start = startDb;
+module.exports.uri = mongoUri;

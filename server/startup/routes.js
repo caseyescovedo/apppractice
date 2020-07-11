@@ -6,9 +6,13 @@ to links on the express app passed as argument
 const express = require('express');
 const path = require('path');
 
+const tasks = require('../routers/tasks');
 const globalErrorHandler = require('../middleware/globalErrorHanlder');
 
 const routes = (app) => {
+  // routes
+  app.use('/tasks', tasks);
+
   //Delivers Static Pages
   app.use('/', express.static(path.join(__dirname, '..', '..', 'views')));
   app.use(

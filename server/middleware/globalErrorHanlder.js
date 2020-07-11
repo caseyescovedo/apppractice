@@ -10,10 +10,10 @@ const globalErrorHandler = (err, req, res, next) => {
 
   const clientErrObj = Object.assign(defaultErr, err);
 
-  const { message, status, serverMessage, severLog } = clientErrorObj;
+  const { message, status, serverMessage, serverLog } = clientErrObj;
 
   console.log('Server Side Message:', serverMessage);
-  if (stackTrace) console.log('Error Trace:', serverErr);
+  if (stackTrace) console.log('Error Trace:', serverLog);
 
   return res.status(status).json(message);
 };
