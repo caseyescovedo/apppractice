@@ -3,6 +3,8 @@ const path = require('path');
 const morgan = require('morgan');
 const colors = require('colors');
 
+const taskController = require('./controllers/taskController');
+
 const app = express();
 
 const PORT = 3333;
