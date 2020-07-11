@@ -10,18 +10,6 @@ async function allTasks() {
 }
 
 module.exports = {
-  addTaskTest: async () => {
-    try {
-      const tasks = await new Tasks({
-        item: 'Completing graduation assessment',
-      }).save();
-      console.log('Created Tasks :: ', tasks);
-      return next();
-    } catch (err) {
-      console.log('Error creating tasks :: ', err);
-      return next({ error: err });
-    }
-  },
   postTask: async (req, res, next) => {
     const { item } = req.body;
     if (!item) {
