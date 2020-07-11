@@ -1,20 +1,28 @@
 const express = require('express');
 const path = require('path');
 const bodyParser = require('body-parser');
+const cookieParser = require('cookie-parser');
 const taskController = require('./controllers/taskController');
+const authController = require('./controllers/authController');
 
 const app = express();
 const PORT = process.env.PORT || 3333;
 
-app.use(bodyParser());
+app.use(bodyParser.json());
+app.use(bodyParser.urlencoded({
+  extended: true,
+}));
+app.use(cookieParser());
 app.use(express.static(path.join(__dirname, '../assets')));
 
-app.post('/login', (req, res) => {
-  res.redirect('/secret');
+app.post('/signin', authController.authenticateUser, (req, res) => {
+  if (res.locals.authenticated) res.redirect('/secret');
+  else res.send('unsuccessful login attempt');
 });
 
-app.get('/secret', (req, res) => {
-  res.sendFile(path.join(__dirname, '../views/secret.html'));
+app.get('/secret', authController.checkCookie, (req, res) => {
+  if (res.locals.session) res.sendFile(path.join(__dirname, '../views/secret.html'));
+  else res.redirect('/');
 });
 
 app.post('/posttask', taskController.postTask, (req, res) => {
@@ -29,10 +37,8 @@ app.get('/gettasks', taskController.getTasks, (req, res) => {
 });
 
 app.delete('/deletetask', taskController.deleteTask, (req, res) => {
-  if (res.locals.deletedId === undefined) {
-    res.status(500).send({ taskDeleted: false });
-  }
-  res.status(200).send({ taskDeleted: true, deletedId: res.locals.deletedId })
+  if (res.locals.deletedId === undefined) res.status(500).send({ taskDeleted: false });
+  else res.status(200).send({ taskDeleted: true, deletedId: res.locals.deletedId });
 });
 
 app.get('/', (req, res) => {
@@ -44,7 +50,7 @@ app.get('*', (req, res) => {
 });
 
 app.use((err, req, res, next) => {
-  console.log(err)
+  console.log(err);
   const defaultErr = {
     log: 'Express error handler caught unknown middleware error',
     status: 400,
