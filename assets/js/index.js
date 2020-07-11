@@ -54,7 +54,8 @@ const fetchTasks = () => {
 };
 
 const addTask = () => {
-  const taskItemValue = document.getElementById('task').value;
+  const taskInput = document.getElementById('task');
+  const taskItemValue = taskInput.value;
   if (!taskItemValue) {
     alert('Silly, silly person, nothing is not a task. Please give me data');
     return;
@@ -75,6 +76,7 @@ const addTask = () => {
       const deleteButton = createDeleteButton();
       taskListItem.appendChild(deleteButton);
       nodeToAttachTo.appendChild(taskListItem);
+      taskInput.value = '';
     })
     .catch((e) => {
       alert('EVERYTHING FAILED...WHHHHHYYYYyyyyy?');

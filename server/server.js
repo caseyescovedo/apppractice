@@ -2,10 +2,8 @@ const express = require('express');
 const app = express();
 require('dotenv').config();
 
-app.use(express.json());
-app.use(express.urlencoded({ extended: true }));
-
 require('./startup/logging')();
+require('./startup/requestParse')(app);
 require('./startup/routes')(app);
 require('./startup/db').start();
 
