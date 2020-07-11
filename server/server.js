@@ -17,12 +17,12 @@ app.use(express.static(path.join(__dirname, '../assets')));
 
 app.post('/signin', authController.authenticateUser, (req, res) => {
   if (res.locals.authenticated) res.redirect('/secret');
-  else res.send('unsuccessful login attempt');
+  else res.status(401).send('unsuccessful login attempt');
 });
 
 app.get('/secret', authController.checkCookie, (req, res) => {
   if (res.locals.session) res.sendFile(path.join(__dirname, '../views/secret.html'));
-  else res.redirect('/');
+  else res.status(401).send('You must be signed in to view this page');
 });
 
 app.post('/posttask', taskController.postTask, (req, res) => {
