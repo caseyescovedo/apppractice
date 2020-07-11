@@ -4,6 +4,7 @@ const taskController = {};
 
 taskController.createTask = async (req, res, next) => {
   const taskObj = req.body;
+  console.log('taskObj', taskObj);
   //Insert Validation logic here if time
 
   const dbTask = new Task(taskObj);
