@@ -20,7 +20,7 @@ app.use(require('cookie-parser')());
 app.get('/', (req, res) => {
   res.sendFile(path.resolve('./views', 'index.html'));
 });
-app.get('/secret', (req, res) => {
+app.get('/secret', auth.authenticateAnnonymous, (req, res) => {
   res.sendFile(path.resolve('./views', 'secret.html'));
 });
 
@@ -33,7 +33,7 @@ app.use(function (err, req, res, next) {
   if (err && err.log) {
     return res.status(500).json({ ...err, status: false });
   }
-  res.status(500).json({ err: 'Error occured', message: err });
+  res.status(500).send(err);
 });
 
 app.listen(port, () => {
