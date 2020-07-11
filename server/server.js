@@ -15,4 +15,12 @@ app.use(morgan('dev'));
 
 app.use(express.static(path.resolve(__dirname, '../assets')));
 
+app.get('/secret', (req, res) => {
+  res.status(200).sendFile(path.resolve(__dirname, '../views/secret.html'));
+});
+
+app.get('/', (req, res) => {
+  res.status(200).sendFile(path.resolve(__dirname, '../views/index.html'));
+});
+
 app.listen(PORT, () => console.log(`Server listening on port ${PORT}`.yellow.bold));
