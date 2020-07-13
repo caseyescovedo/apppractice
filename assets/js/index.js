@@ -21,8 +21,6 @@ window.onload = () => {
       })
         .then(res => res.json())
         .then(data => {
-          console.log("data", data);
-
           // loop thru tasks and print to DOM
           data.forEach(el => {
             // create list element
@@ -40,13 +38,14 @@ window.onload = () => {
             deleteBtn.className = "remove";
             deleteBtn.setAttribute("data-mongoId", item_id);
 
+            // add button to list item and item item to task list
+            listItem.append(deleteBtn);
             taskList.append(listItem);
-            taskList.append(deleteBtn);
           });
 
-          console.log("buttons", document.querySelectorAll(".remove"));
           const deleteButtons = document.querySelectorAll(".remove");
 
+          // Create Delete Button event lisenters for each button/list item
           deleteButtons.forEach(btn => {
             btn.addEventListener("click", event => {
               //handle click
@@ -61,12 +60,10 @@ window.onload = () => {
                 },
                 body: JSON.stringify({ id: id })
               })
-                .then(res => res.json())
                 .then(data => {
-                  console.log("data", data);
-                  const string = `li[data-mongoid='${id}']`;
+                  //find list item to remove and remove it
+                  const string = `[data-_id='${id}']`;
                   const currentLi = document.querySelector(string);
-                  console.log(currentLi);
                   currentLi.remove();
                 })
                 .catch(err => {
@@ -86,12 +83,7 @@ window.onload = () => {
   //Add a Task
   addTaskBtn.addEventListener("click", e => {
     console.log("addTasks clicked");
-    console.log("e.target", e.target);
     const newTask = document.getElementById("task").value;
-
-    // const body = {
-    //   item: newTask
-    // };
 
     const url = "/postTask";
     fetch(url, {
@@ -103,18 +95,10 @@ window.onload = () => {
     })
       .then(res => res.json())
       .then(data => {
-        console.log("data", data);
+        // nothing for now
       })
       .catch(err => {
         console.log(err);
       });
-
-    // const taskList = document.getElementById("task-list");
   });
-
-  // const removeBtn = document.getElementsByClassName("remove");
-  // removeBtn.addEventListener("click", e => {
-  //   console.log("clicked a remove button");
-  //   console.log(e.target);
-  // });
 };

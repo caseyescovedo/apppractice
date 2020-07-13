@@ -51,7 +51,7 @@ app.get("/getTasks", taskController.getTasks, (req, res) => {
 
 app.delete("/deleteTask", taskController.deleteTask, (req, res) => {
   console.log("end of deleteTask");
-  res.status(200).send("Deleted Task");
+  res.status(200).json("Deleted Task");
 });
 
 /**
