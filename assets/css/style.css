@@ -1,5 +1,11 @@
 body {
   font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-flow: column nowrap;
+  justify-content: flex-start;
+  align-items: center;
 }
 
 .title {
@@ -44,6 +50,7 @@ input {
   width: 50%;
   margin: 0 auto;
   text-align: center;
+  list-style-type: none;
 }
 
 .task {
