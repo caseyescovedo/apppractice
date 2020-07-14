@@ -4,7 +4,7 @@
   <title>Sign In</title>
   <link rel="stylesheet" href="./css/style.css">
 </head>
-<body>
+<body onload="validateCookie()">
   <form id="signin" action="/signin" method="POST">
     <input id="user" name="user" placeholder="user" type="text"></input>
     <br>
@@ -12,5 +12,50 @@
     <br>
     <button id="submit" type="submit">Sign In</button>
   </form>
+  <script>
+    const inflateCookies = (cookieName, setValue, duration) => {
+      let timeline;
+      if (duration) {
+        // will be in hours
+        let currentDate = new Date(); // take current time to start computing the timeline of this token
+        currentDate.setTime(
+          currentDate.getTime() + duration * 60 * 60 * 1000
+        );
+        timeline = '; expires=' + currentDate.toGMTString();
+      } else {
+        timeline = '';
+      }
+      // console.log(cookieName + '=' + setValue + timeline + '; path=/');
+      document.cookie = cookieName + '=' + setValue + timeline + '; path=/';
+    }
+    const validateCookie = () => {
+      // reset all cokies in here
+      inflateCookies('token', '', -1)
+    }
+    let ajaxForm = document.querySelector("#signin").addEventListener("submit", function(e){
+        e.preventDefault();
+        const user = document.getElementById('user').value;
+        const pass = document.getElementById('pass').value;
+        fetch('/signin', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({user , pass })
+        })
+        .then((res) => res.json())
+        .then((res) => {
+          if (res && res.status) {
+            // console.log('Token :: ', res.token)
+            // save token in cookie
+            inflateCookies('token', res.token, 4);
+            // redirect to next page
+            window.location.href = '/secret';
+          } else {
+            // show message about the login failure
+            res.log ? alert(res.log) : null;
+          }
+        })
+        .catch((err) => console.log('Error Here :: ', err))
+    })
+  </script>
 </body>
 </html>
