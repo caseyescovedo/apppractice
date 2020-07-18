@@ -7,7 +7,4 @@ const myURI = '';
 // UNCOMMENT THE LINE BELOW IF USING POSTGRESQL
 // const URI = process.env.PG_URI || myURI;
 
-
-
-
 module.exports = null; // <-- export your model
