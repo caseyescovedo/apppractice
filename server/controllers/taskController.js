@@ -10,15 +10,18 @@ const taskController = {};
  * @param {*} next
  */
 taskController.postTask = (req, res, next) => {
-  const { item } = req.body;
-  const queryString = `INSERT INTO Tasks (item) VALUES ('') RETURNING *;`;
+  const { item } = req.body; // need to fix req.body
+  console.log(item);
+  const queryString = `INSERT INTO Tasks (item) VALUES ($1) RETURNING *`;
+  const params = [item];
+
   try {
-    db.query(queryString, (err, response) => {
+    db.query(queryString, params, (err, response) => {
       res.locals.tasks = response.rows;
       return next();
     });
   } catch {
-    next(err);
+    (err) => next(err);
   }
 };
 
@@ -30,34 +33,40 @@ taskController.postTask = (req, res, next) => {
  * @param {*} next
  */
 taskController.getTasks = (req, res, next) => {
+  // get the list of all tasks from Tasks table
   const queryString = 'SELECT * from Tasks;';
+
+  // execute query using pg pool connection
   try {
     db.query(queryString, (err, response) => {
       res.locals.tasks = response.rows;
       return next();
     });
   } catch {
-    next(err);
+    (err) => next(err);
   }
 };
 
 /**
  * @function deleteTask
- * @description
+ * @description Deletes a to do item from Tasks table if an item with the matching id exists
  * @param {*} req
  * @param {*} res
  * @param {*} next
  */
 taskController.deleteTask = (req, res, next) => {
+  // get the task id we want to delete from req.body
   const { id } = req.body;
-  const queryString = `DELETE FROM Tasks WHERE id=${id} RETURNING *;`;
+  const queryString = `DELETE FROM Tasks WHERE id=$1 RETURNING *;`;
+  const params = [id];
+  // execute query using pg pool connection
   try {
-    db.query(queryString, (err, response) => {
+    db.query(queryString, params, (err, response) => {
       res.locals.tasks = response.rows;
       return next();
     });
   } catch {
-    next(err);
+    (err) => next(err);
   }
 };
 
