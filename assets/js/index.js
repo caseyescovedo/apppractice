@@ -66,7 +66,7 @@ const postTask = () => {
   const  newItem = { 
       item: task
   }
-  console.log(task);
+  console.log(newItem);
   //fetch post
     fetch('/api/postTasks', {
         method: "Post",
@@ -89,14 +89,25 @@ getTasks.addEventListener('click', fetchTasks);
 
 
 // set up redirect on submit 
-const redirect = ()=>{
-    const directSecret = () => {
-    console.log('hello')
+
+const postToBody = () => {
+console.log('click test submit!')
+const  formData = document.getElementById('signin')
+// const pass = document.getElementById('pass').value;
+
+const  login = { 
+    user: user,
+    pass: pass
+    }
+    console.log(formData)
+    fetch: 'post'
+    fetch('/signin', {
+        method: "Post",
+        headers: {
+            'Content-Type': 'application/json' 
+        },
+        body: JSON.stringify(login)
+    })
 }
 
-submit.addEventListener('click', directSecret )
-}
-
-
-
-
+submit.addEventListener('click', postToBody)

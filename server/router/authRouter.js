@@ -6,10 +6,15 @@ const authRouter = express.Router()
 
 
 
- // on submit redirect
- authRouter.post('/signin',authController.login,  (req,res) => {
+ // on correct submit redirect ton secret
+ authRouter.post('/signin', (req,res) => {
     res.redirect('/secret')
 })
+
+// //on incorrect submit redirect to start
+// authRouter.post('/signin',authController.login, (req,res) => {
+//     res.redirect('/')
+// })
 
 
 module.exports = authRouter;
