@@ -14,7 +14,7 @@ const getTasks = () => {
         button.innerHTML = 'X';
         button.id = task.id;
         button.className = 'remove';
-        button.onclick = () => deleteTask(button.id);
+        button.onclick = deleteTask(button.id);
 
         const newItem = document.createElement('li');
         newItem.innerText = task.item;
@@ -31,8 +31,14 @@ const getTasks = () => {
 
 const postTasks = () => {};
 
-const deleteTask = () => {
+const deleteTask = (id) => {
   // send a fetch with request type delete
+  fetch(`/tasks/${id}`, {
+    method: 'delete',
+  })
+    .then((response) => response.json())
+    .then((data) => console.log(data))
+    .catch((err) => console.log(err));
 };
 
 getTasks();
