@@ -41,4 +41,6 @@ const deleteTask = (id) => {
     .catch((err) => console.log(err));
 };
 
+document.getElementById('retrieve').addEventListener(click, getTasks);
+
 getTasks();
