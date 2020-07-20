@@ -1,4 +1,5 @@
 body {
+  background: #ffabaa;
   font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
 }
 
@@ -14,41 +15,60 @@ body {
   float: right;
   width: 15px;
   height: 15px;
+  padding: 0;
 }
 
-#signin {
+#image {
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+  width: 50%;
+}
+
+
+/* #signin {
   margin: auto;
   width: 25%;
   padding-top:5%;
   text-align: center;
   background-color: #d3d3d3;
   border: 1px solid black;
-}
+} */
 
-#submit-button {
+#submit, #task-button, #retrieve {
+  border-radius: 5px;
+  height: 5%;
   margin-bottom: 10px;
 }
 
 input {
+  border-radius: 5px;
+  height: 5%;
   margin-bottom: 10px;
+  width: 50%;
 }
 
-#create{
+#create, #signin {
+  background-color: gray;
+  padding: 3% 3% 0 3%;
   margin: 0 auto;
+  min-width: 350px;
   width: 50%;
   text-align: center;
-  margin-top: 3%;
 }
 
 #task-list {
+  background-color: white;
   width: 50%;
-  margin: 0 auto;
+  margin: auto;
   text-align: center;
 }
 
 .task {
+  background-color: white;
   list-style-type: none;
-  min-width: 150px;
-  border: 1px solid black;
-  text-align: center;
+  margin: auto;
+  width: 90%;
+  border-bottom: 1px solid black;
+  text-align: left;
 }
