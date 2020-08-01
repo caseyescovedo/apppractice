@@ -3,8 +3,7 @@
 
 
 const auth = (req, res, next) => {
-  console.log("hello")
-  if (req.body.user === "codesmith" && req.body.password === "ilovetesting"){ // checking the username and password
+  if (req.body.user === "" && req.body.password === ""){ // checking the username and password
     return next()
   } else {
     console.log("You must be signed in to view this page")
