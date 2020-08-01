@@ -11,7 +11,7 @@ const URI = process.env.MONGO_URI || myURI;
 
 mongoose.connect(URI, {useNewUrlParser: true, useUnifiedTopology: true })
   .then( () => console.log('connected to MongoDB'))
-  .catch( err => console.log('error in Mongo', err))
+  .catch( err => console.log('error in Mongo', err));
 
 const Schema = mongoose.Schema;
 
