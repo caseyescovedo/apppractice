@@ -29,6 +29,7 @@ app.use('/js', (req, res) =>
 );
 
 app.get('/secret', (req, res) => {
+  // Only send secret view if admin cookie is present
   if (req.cookies && req.cookies.token === 'admin') {
     res.status(200).sendFile(path.join(__dirname, '../views/secret.html'));
   } else {
@@ -38,10 +39,12 @@ app.get('/secret', (req, res) => {
 
 // ----- ROUTES -----
 app.use('/tasks', taskRouter);
-
 app.use('/signin', authRouter);
 
-// ----- GLOBAL ERROR HANDLE -----
+// ----- CATCH-ALL HANDLER
+app.use('*', (req, res) => res.sendStatus(404));
+
+// ----- GLOBAL ERROR HANDLER -----
 app.use((err, req, res, next) => {
   const defaultError = {
     log: 'Error handler caught unknown express middleware error',

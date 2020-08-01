@@ -16,7 +16,8 @@ taskController.getTasks = async (req, res, next) => {
 taskController.postTask = async (req, res, next) => {
   const { item } = req.body;
 
-  if (typeof item === 'string') {
+  // Allow only non-empty strings as task items
+  if (typeof item === 'string' && item !== '') {
     try {
       await Task.create({ item });
       return next();
@@ -32,8 +33,10 @@ taskController.postTask = async (req, res, next) => {
 taskController.deleteTask = async (req, res, next) => {
   const { id } = req.params;
 
+  // Ensure id was provided
   if (id) {
     try {
+      // No special handling for deleting ids not in database (ie, failing to delete nonexistant item)
       await Task.findByIdAndDelete(id);
       return next();
     } catch (err) {
