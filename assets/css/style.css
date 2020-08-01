@@ -1,5 +1,7 @@
 body {
   font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+  /* background-color: rgb(56, 14, 14); */
+  background: linear-gradient(#838383, #893b9c);
 }
 
 .title {
