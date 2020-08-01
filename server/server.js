@@ -15,13 +15,17 @@ app.use(express.urlencoded({extended: true}))
 
 
 // ! serve the html static assets 
-app.use('/assets', express.static(path.join(__dirname, '../assets/css/style.css')))
+app.use(express.static("assets"))
 
-
+// getting the login page
 app.get('/', (req, res) => {
   return res.status(200).sendFile(path.join(__dirname, '../views/index.html'))
 })
 
+// getting the secret page
+app.get('/secret', (req, res) => {
+  return res.status(200).sendFile(path.join(__dirname, '../views/secret.html'))
+})
 
 
 
