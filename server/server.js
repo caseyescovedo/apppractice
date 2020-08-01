@@ -2,11 +2,15 @@ const express = require('express');
 const bodyParser = require('body-parser');
 const cookieParser = require('cookie-parser');
 const path = require('path');
+const taskController = require('./controllers/taskController');
 
 const app = express();
 const PORT = 3333;
 
 app.use(express.static('assets'));
+app.use(bodyParser.json());
+app.use(bodyParser.urleconded({ extended: false }));
+app.use(cookieParrser());
 
 app.get('/', (req, res) => {
   res.sendFile(
@@ -34,14 +38,27 @@ app.get('/secret', (req, res) => {
   );
 });
 
-function getFiles(name) {
-  const options = {
-    root: path.join(__dirname, 'public'),
-    headers: {
-      'x-timestamp': Date.now(),
-      'x-sent': true,
-    },
-  };
-}
+app.post('', taskController.postTask, (req, res) => {
+  res.status(200).send(`Task saved!`);
+});
+
+app.get('', taskController.getTasks, (req, res) => {
+  res.status(200).send(res.locals.data);
+});
+
+app.delete('', taskController.deleteTask, (req, res) => {
+  res.status(200).send(`Task deleted!`);
+});
+
+//catch all route
+app.use('*', (req, res) => {
+  res.status(404).send('File Not Found');
+});
+
+//global error handler
+app.use((err, req, res, next) => {
+  console.log(err);
+  res.status(500).send(err);
+});
 
 app.listen(PORT, () => console.log(`listening on ${PORT}`));
