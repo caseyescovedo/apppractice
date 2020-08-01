@@ -23,7 +23,7 @@ const taskSchema = new mongoose.Schema({
   created_at: { type: Date, default: Date.now}
 })
 
-const Task = mongoose.model('item', taskSchema)
+const Task = mongoose.model('Task', taskSchema) // Task collection
 
 
 
