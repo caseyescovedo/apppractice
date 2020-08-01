@@ -1,10 +1,27 @@
 body {
   font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+  background-color: ghostwhite;
+}
+
+h1 {
+  color: rgb(165, 165, 165);
+}
+
+ul {
+  padding-inline-start: 0;
+}
+
+li {
+  margin-top: 50px;
+  font-size: 25px;
+  background-color: rgb(255, 173, 173);
+  color: white;
+  list-style-type: none;
 }
 
 .title {
   margin: 0 auto;
-  width: 50%;
+  width: 80%;
   text-align: center;
   padding-bottom: 10px;
 }
@@ -12,26 +29,43 @@ body {
 .remove {
   display: inline-block;
   float: right;
-  width: 15px;
-  height: 15px;
-  font-size: 10px;
+  width: 40px;
+  height: 30px;
+  font-size: 15px;
+  border-style: none;
+  background-color: rgb(168, 236, 236);
+  color: white;
+  font-weight: bold;
 }
 
 #signin {
   margin: auto;
-  width: 25%;
+  width: 60%;
   padding-top: 5%;
   text-align: center;
-  background-color: #d3d3d3;
-  border: 1px solid black;
+  background-color: rgb(255, 173, 173);
+  border: 1px solid gainsboro;
+  border-radius: 5px;
 }
 
 #submit-button {
   margin-bottom: 10px;
 }
 
+#submit {
+  width: 100%;
+  border-style: none;
+  height: 40px;
+  background-color: rgb(168, 236, 236);
+}
+
 input {
   margin-bottom: 10px;
+  width: 400px;
+  height: 50px;
+  border: solid 1px gainsboro;
+  border-radius: 5px;
+  font-size: 40px;
 }
 
 #create {
@@ -52,4 +86,12 @@ input {
   min-width: 150px;
   border: 1px solid black;
   text-align: center;
+}
+
+#create button {
+  padding: 10px;
+  width: 45%;
+  font-size: 30px;
+  border: 1px solid gainsboro;
+  border-radius: 5px;
 }
