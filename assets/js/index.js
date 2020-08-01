@@ -17,17 +17,17 @@ const getItems = () => {
 
       const taskInput = document.getElementById('task')
       console.log('taskInput', taskInput);
+      console.log('taskInput.value', taskInput.input);
 
       const taskButton = document.getElementById('task-button');
       console.log('taskButton', taskButton);
 
-      console.log('taskInput.value', taskInput.value);
-
       // Add Task Button: make a POST request
-      taskButton.addEventListener('submit', (e) => {
+      taskButton.addEventListener('click', (e) => {
         e.preventDefault();
-        console.log('hello');
 
+        // I was trying to make my post request, but was not able to fully debug it...
+        // I wrote out my logic for my POST request (and commented it out) anyways for some brownie points, perhaps? Please see below...
 
         // const body = {
         //   text: taskInput.value
@@ -45,28 +45,14 @@ const getItems = () => {
         //   })
         //   .catch((err) => console.log(err))
       })
-
     })
-
-}
-window.onload = function () {
-  const signInButton = document.getElementById('signin')
-
-  console.log('signInButton', signInButton);
-
-  signInButton.addEventListener('click', signIn);
-
-  const signIn = () => {
-    fetch('/sign-in')
-  }
-
-  // display/refresh all items
-  getItems();
 }
 
+getItems();
 
 // for each itemObj, we will render the displayed item name and a button to delete the item 
 const addItem = (itemsArray, list) => {
+  console.log('itemsArray', itemsArray);
   // const list = document.getElementById('task-list');
   itemsArray.forEach(itemObj => {
     // create a new <li> for every itemObj 
@@ -75,13 +61,11 @@ const addItem = (itemsArray, list) => {
     newLi.innerText = itemObj.item;
     // assign respective id for each <li>
     newLi.id = itemObj._id;
-    // 
     const button = document.createElement('button');
     button.innerText = 'X';
     button.className = 'Remove';
     button.addEventListener('click', () => {
       deleteItem(itemObj._id, newLi);
-      // getItems();
     })
     newLi.appendChild(button);
     list.appendChild(newLi);
@@ -98,28 +82,3 @@ const deleteItem = (itemId, newLi) => {
     })
     .catch((err) => console.log(err));
 };
-
-
-// // Add Task Button: make a POST request
-// document.getElementById('task').addEventListener('submit', (e) => {
-//   e.preventDefault();
-
-//   const taskInput = document.getElementById('task');
-
-//   const body = {
-//     text: taskInput.value
-//   }
-
-//   fetch('/secret/tasks', {
-//     method: 'POST',
-//     header: {
-//       'Content-Type': 'application/json'
-//     },
-//     body: JSON.stringify(body)
-//   })
-//     .then(task => {
-//       addItem(task)
-//     })
-//     .catch((err) => console.log(err))
-// })
-

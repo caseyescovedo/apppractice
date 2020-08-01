@@ -18,6 +18,7 @@ app.use(express.urlencoded({ extended: true }));
 
 // bundle and send static files (style.css and index.js)
 app.use('/secret', express.static(path.join(__dirname, '../assets')))
+
 app.use('/', express.static(path.join(__dirname, '../assets')))
 
 // serve log-in page
@@ -54,7 +55,7 @@ app.delete('/secret/tasks/:id', taskController.deleteTask, (req, res, next) => {
 // GET request to sign in
 app.get('/sign-in', authController.signIn, (req, res, next) => {
   console.log(`Received request to sign in.`);
-  res.status(200).sendFile(path.join(__dirname, '../views/secret.html'));
+  res.status(200)
 })
 
 // open the server
