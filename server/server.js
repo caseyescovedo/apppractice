@@ -50,8 +50,9 @@ app.delete('/tasks/:id', deleteTask, (req, res) => {
 
 
 // creating the authentication route
-app.post('/', auth, (req, res) => {
-  res.status(200).json(res.locals.data)
+app.post('/auth', auth, (req, res) => {
+  console.log("we back in the server")
+  res.redirect('/secret') // redirecting to the secret path
 })
 
 
