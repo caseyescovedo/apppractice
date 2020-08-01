@@ -10,7 +10,6 @@ const auth = (req, res, next) => {
     console.log("You must be signed in to view this page")
     return res.json("You must be signed in to view this page")
   }
-
 }
 
 
