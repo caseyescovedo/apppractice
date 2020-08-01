@@ -30,19 +30,22 @@ app.get('/secret', (req, res) => {
 
 
 // ! Creating the routes
-// post a task
+// post a task -- tested in postman
 app.post('/tasks', postTask, (req, res) => {
   res.status(200).json(res.locals.data)
 
 })
 
-// get all the tasks
+// get all the tasks -- tested in postman
 app.get('/tasks', getTasks, (req, res) => {
   res.status(200).json(res.locals.data)
 })
 
 
-// delete a task
+// delete a task -- tested in postman
+app.delete('/tasks/:id', deleteTask, (req, res) => {
+  res.status(200).json(res.locals.data)
+})
 
 
 
