@@ -9,8 +9,8 @@ const PORT = 3333;
 
 app.use(express.static('assets'));
 app.use(bodyParser.json());
-app.use(bodyParser.urleconded({ extended: false }));
-app.use(cookieParrser());
+app.use(bodyParser.urlencoded({ extended: false }));
+app.use(cookieParser());
 
 app.get('/', (req, res) => {
   res.sendFile(
