@@ -8,8 +8,8 @@ const auth = (req, res, next) => {
     res.cookie('token', 'admin') // sets the cookiei if the user is logged in
     return next()
   } else {
-    console.log("You must be signed in to view this page")
-    return res.json("You must be signed in to view this page")
+    console.log("unsuccessful login attempt")
+    return res.json("unsuccessful login attempt")
   }
 }
 

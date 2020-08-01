@@ -48,7 +48,6 @@ app.delete('/tasks/:id', deleteTask, (req, res) => {
 
 // creating the authentication route
 app.post('/signin', auth, (req, res) => {
-  console.log(req.body)
   res.redirect("/secret") // redirecting to the secret path which should serve the secret.html
 })
 
