@@ -26,7 +26,7 @@ taskController.postTask = (req, res, next) => {
     .catch((err) => next(err));
 };
 
-taskController.deleteTasks = (req, res, next) => {
+taskController.deleteTask = (req, res, next) => {
   const _id = req.params._id;
   if (!_id) return next('Failed to find item');
   const queryStr = `DELETE FROM tasks WHERE _id=${_id}`;
