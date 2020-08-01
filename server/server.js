@@ -17,7 +17,6 @@ app.use(express.urlencoded({extended: true}))
 // ! serve the html static assets 
 app.use(express.static("assets")) // bring in static assets in the asset folder
 
-
 // getting the login page
 app.get('/', (req, res) => {
   return res.status(200).sendFile(path.join(__dirname, '../views/index.html'))
@@ -49,10 +48,9 @@ app.delete('/tasks/:id', deleteTask, (req, res) => {
 
 // creating the authentication route
 app.post('/signin', auth, (req, res) => {
+  console.log(req.body)
   res.redirect("/secret") // redirecting to the secret path which should serve the secret.html
 })
-
-
 
 
 // ! Creating the global error handling
