@@ -9,6 +9,7 @@ const PORT = 3333;
 
 // Parse request body
 app.use(express.json());
+app.use(cookieParser());
 app.use(express.urlencoded({ extended: true }));
 
 // Serve static files
@@ -19,7 +20,7 @@ app.get('/', (req, res) =>
 );
 
 // Serve secret page
-app.get('/secret', (req, res) =>
+app.get('/secret', authController.checkCookie, (req, res) =>
   res.status(200).sendFile(path.resolve(__dirname, '../views/secret.html')),
 );
 
@@ -31,6 +32,7 @@ app.get('/retrieve', taskController.getTasks, (req, res) => res.status(200).json
 app.post('/delete', taskController.deleteTask, (req, res) =>
   res.status(200).json(res.locals.deleted),
 );
+// Sign in
 app.post('/signin', authController.authorizeUser, (req, res) => res.redirect('/secret'));
 // * need to modify global error hanlder
 // eslint-disable-next-line no-unused-vars

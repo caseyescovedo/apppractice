@@ -5,9 +5,10 @@ getButton.addEventListener('click', () => {
   fetch('/retrieve')
     .then((res) => res.json())
     .then((tasks) => {
-      console.log('tasks:', tasks);
-      const allTasks = tasks;
+      // Clear list to prevent duplicates
       list.innerHTML = '';
+      const allTasks = tasks;
+      // Create li for each tasl
       allTasks.forEach((task) => {
         const listItem = document.createElement('li');
         const removeButton = document.createElement('button');
@@ -17,6 +18,7 @@ getButton.addEventListener('click', () => {
         listItem.innerText = task.item;
         listItem.setAttribute('id', task._id);
         listItem.appendChild(removeButton);
+        // append to list
         list.appendChild(listItem);
       });
     });
@@ -26,7 +28,7 @@ getButton.addEventListener('click', () => {
 const addButton = document.getElementById('task-button');
 addButton.addEventListener('click', () => {
   const item = document.getElementById('task').value;
-  console.log('item', item);
+
   const body = { item };
   fetch('/add', {
     method: 'POST',
@@ -46,10 +48,12 @@ addButton.addEventListener('click', () => {
 
 // Remove item when button clicked
 list.addEventListener('click', (e) => {
-  console.log(e.target);
+
+  e.target.parentNode.remove();
+
   if (e.target.classList.contains('remove')) {
     const body = { _id: e.target.id };
-    console.log(e.target.id);
+
     fetch('/delete', {
       method: 'POST',
       headers: {
@@ -61,8 +65,6 @@ list.addEventListener('click', (e) => {
         res.json();
         console.log(res);
         // delete parent node
-        const parentNode = e.target.parentNode();
-        parentNode.delete();
       })
       .catch((err) => {
         console.log('Error in deleting task', err);
@@ -70,25 +72,3 @@ list.addEventListener('click', (e) => {
   }
 });
 
-// redirect to secret page on signin submit
-const signInForm = document.getElementById('signin');
-signInForm.addEventListener('submit', window.location('/secret'))
-
-
-signInForm.addEventListener('submit', () => {
-  const username = document.getElementById('user').value;
-  const password = document.getElementById('pass').value;
-  const body = { username, password }
-  fetch('/signin', {
-    method: 'POST',
-    headers: {
-      'Content-Type': 'application/json',
-    },
-    body: JSON.stringify(body),
-  })
-    .then((res) => res.json())
-    .then((tasks) => {})
-    .catch((err) => {
-      console.log('Error in signin post request');
-    });
-});
