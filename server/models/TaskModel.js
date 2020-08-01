@@ -15,7 +15,7 @@ mongoose.connect(URI, {useNewUrlParser: true, useUnifiedTopology: true}) // conn
 .catch((err) => console.log(err))
 
 
-// ! Creating the schema for each task -- must have item and time created at
+// ! Creating the scReid hema for each task -- must have item and time created at
 const taskSchema = new mongoose.Schema({
   item: {type: String, required: true},
   created_at: { type: Date, default: Date.now}
