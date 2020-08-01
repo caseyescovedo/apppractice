@@ -3,10 +3,13 @@ const Tasks = require('../models/TaskModel.js');
 const taskController = {};
 
 taskController.postTask = (req, res, next) => {
+  const { item } = req.body;
   Tasks.create({
-    item: req.body,
+    item,
   })
-    .then(() => next())
+    .then((data) => {
+      next();
+    })
     .catch((err) => next(err));
 };
 
@@ -22,6 +25,7 @@ taskController.getTasks = (req, res, next) => {
 
 taskController.deleteTask = (req, res, next) => {
   const { id } = req.params;
+  console.log('*** Task Controller **', id);
   Tasks.findByIdAndDelete(id)
     .exec()
     .then(() => {

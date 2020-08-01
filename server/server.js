@@ -38,15 +38,15 @@ app.get('/secret', (req, res) => {
   );
 });
 
-app.post('', taskController.postTask, (req, res) => {
+app.post('/tasks/', taskController.postTask, (req, res) => {
   res.status(200).send(`Task saved!`);
 });
 
-app.get('', taskController.getTasks, (req, res) => {
+app.get('/tasks/', taskController.getTasks, (req, res) => {
   res.status(200).send(res.locals.data);
 });
 
-app.delete('', taskController.deleteTask, (req, res) => {
+app.delete('/tasks/:id', taskController.deleteTask, (req, res) => {
   res.status(200).send(`Task deleted!`);
 });
 
