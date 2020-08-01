@@ -11,29 +11,45 @@ const getTasks = () => {
       // Creating the button
       const button = document.createElement('button')
       button.innerText = 'X'
-
-
+      // adding X button functionality on click will delete from the database and remove from the list immediately
+      button.addEventListener('click', () => {
+        console.log(data[i]._id)
+        fetch(`/tasks/${data[i]._id}`, {
+          method: 'Delete'
+        })
+        .then((resp) => resp.json())
+        .then(data => {
+          document.getElementById('task-list').removeChild(newTask)
+        })
+        .catch((err) => console.log(err))
+      })
       newTask.appendChild(button)
       listOfTasks.appendChild(newTask)
     }
   })
 }
 
-getTasks()
-
-
 // ! Configuring the get Tasks button
 document.getElementById("retrieve").addEventListener('click', getTasks)
 
 
 
+// ! Configuring the addTask button to call addTask and add to the list
+document.getElementById('task-button').addEventListener('click', () => {
+  const newTaskText = document.getElementById('task');
+  console.log(newTaskText.value)
+  const taskObject = {
+    item: newTaskText.value
+  }
+  fetch('/tasks', {
+    method: 'POST',
+    headers: {
+      'content-type' : 'application/json'
+    },
+    body: JSON.stringify(taskObject)
+  })
+})
 
 
 
-// ! Add element to the list
 
-
-
-
-
-// ! delete element from the lists
