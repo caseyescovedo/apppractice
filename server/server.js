@@ -24,8 +24,7 @@ app.get('/', (req, res) => {
 })
 
 // getting the secret page
-app.get('/secret', (req, res) => {
-  console.log("we are here")
+app.get('/secret', checkAuth, (req, res) => {
   res.status(200).sendFile(path.join(__dirname , '../views/secret.html'))
 })
 
@@ -49,15 +48,9 @@ app.delete('/tasks/:id', deleteTask, (req, res) => {
 })
 
 // creating the authentication route
-// app.post('/auth', auth, (req, res) => {
-//   res.redirect("/secret") // redirecting to the secret path which should serve the secret.html
-// })
-
-// creating the authentication route
 app.post('/signin', auth, (req, res) => {
   res.redirect("/secret") // redirecting to the secret path which should serve the secret.html
 })
-
 
 
 
@@ -71,8 +64,6 @@ app.use((err, req, res, next) => {
   console.log("global error handler " + err)
   return res.sendStatus(500);
 })
-
-
 
 
 
