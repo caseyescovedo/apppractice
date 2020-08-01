@@ -1,7 +1,7 @@
 // v-- REPLACE THE EMPTY STRING WITH YOUR LOCAL/MLAB/ELEPHANTSQL URI
 const mongoose = require('mongoose');
 
-const myURI = 'mongodb+srv://jmadrigal:kqrzij37@cluster0.0uxut.mongodb.net/assessment?retryWrites=true&w=majority';
+const myURI = '';
 
 // UNCOMMENT THE LINE BELOW IF USING MONGO
 const URI = process.env.MONGO_URI || myURI;
