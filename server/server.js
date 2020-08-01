@@ -8,11 +8,15 @@ const authController = require('./controllers/authController');
 const app = express();
 const PORT = 3333;
 
+//serve static files
 app.use(express.static('assets'));
+//parsing incoming data
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
+//parsing client cookies
 app.use(cookieParser());
 
+//views
 app.get('/', (req, res) => {
   res.sendFile(
     path.join(__dirname, '../views/index.html'),
@@ -37,6 +41,7 @@ app.get('/secret', authController.isLoggedIn, (req, res) => {
   );
 });
 
+//routes
 app.post('/signin', authController.validateCredentials, (req, res) => {
   res.redirect('/secret');
 });
@@ -64,4 +69,5 @@ app.use((err, req, res, next) => {
   res.status(500).send('Internal Server Error');
 });
 
+//start server
 app.listen(PORT, () => console.log(`listening on ${PORT}`));
