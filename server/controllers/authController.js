@@ -1,7 +1,3 @@
-
-
-
-
 const auth = (req, res, next) => {
   //if username and password match, will set cookie and go to next to redirect to secret page
   if (req.body.user === "codesmith" && req.body.pass === "ilovetesting"){ // checking the username and password

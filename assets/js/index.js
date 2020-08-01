@@ -6,7 +6,7 @@ const getTasks = () => {
     const listOfTasks = document.getElementById('task-list') // reset the list of Tasks
     listOfTasks.innerHTML = '' // resets innerHTML to empty string so each get request will not keep appending all in database
     for (let i = 0; i < data.length; i++){ // create a new element for each item in data
-      // Adding the to the elemtn
+      // Adding the to the element
       const newTask = document.createElement('li')
       newTask.innerText = data[i].item;
       // Creating the button
