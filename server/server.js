@@ -5,7 +5,7 @@ const path = require('path')
 const PORT = 3333;
 const cookieParser = require('cookie-parser')
 const {postTask, getTasks, deleteTask} = require('./controllers/taskController') // importing middleware functions
-const {auth} = require('./controllers/authController')
+const {auth, checkAuth} = require('./controllers/authController')
 
 
 // ! Bodyparser Middleware
@@ -16,7 +16,7 @@ app.use(express.urlencoded({extended: true}))
 
 // ! serve the html static assets 
 app.use(express.static("assets")) // bring in static assets in the asset folder
-app.use(express.static(__dirname + "../views"));
+
 
 // getting the login page
 app.get('/', (req, res) => {
@@ -25,7 +25,7 @@ app.get('/', (req, res) => {
 
 // getting the secret page
 app.get('/secret', (req, res) => {
-  console.log("redirected to secret") // the redirect is hitting here, but not actually going to file
+  console.log("we are here")
   res.status(200).sendFile(path.join(__dirname , '../views/secret.html'))
 })
 
@@ -49,9 +49,13 @@ app.delete('/tasks/:id', deleteTask, (req, res) => {
 })
 
 // creating the authentication route
-app.post('/auth', auth, (req, res) => {
-  res.sendFile(path.join(__dirname , '../views/secret.html'))
-  // res.redirect("/secret") // redirecting to the secret path which should serve the secret.html
+// app.post('/auth', auth, (req, res) => {
+//   res.redirect("/secret") // redirecting to the secret path which should serve the secret.html
+// })
+
+// creating the authentication route
+app.post('/signin', auth, (req, res) => {
+  res.redirect("/secret") // redirecting to the secret path which should serve the secret.html
 })
 
 
