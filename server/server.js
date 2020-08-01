@@ -20,7 +20,6 @@ app.get('/', (req, res) => {
     },
     (err) => {
       if (err) console.log(err);
-      else console.log(`file sent!`);
     }
   );
 });
@@ -33,17 +32,20 @@ app.get('/secret', (req, res) => {
     },
     (err) => {
       if (err) console.log(err);
-      else console.log(`file sent!`);
     }
   );
 });
 
+app.post('/signin', (req, res) => {
+  res.redirect('/secret');
+});
+
 app.post('/tasks/', taskController.postTask, (req, res) => {
-  res.status(200).send(`Task saved!`);
+  res.status(200).json('Task Added!');
 });
 
 app.get('/tasks/', taskController.getTasks, (req, res) => {
-  res.status(200).send(res.locals.data);
+  res.status(200).json(res.locals.data);
 });
 
 app.delete('/tasks/:id', taskController.deleteTask, (req, res) => {
