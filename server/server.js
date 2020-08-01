@@ -3,6 +3,7 @@ const bodyParser = require('body-parser');
 const cookieParser = require('cookie-parser');
 const path = require('path');
 const taskController = require('./controllers/taskController');
+const authController = require('./controllers/authController');
 
 const app = express();
 const PORT = 3333;
@@ -24,7 +25,7 @@ app.get('/', (req, res) => {
   );
 });
 
-app.get('/secret', (req, res) => {
+app.get('/secret', authController.isLoggedIn, (req, res) => {
   res.sendFile(
     path.join(__dirname, '../views/secret.html'),
     {
@@ -36,7 +37,7 @@ app.get('/secret', (req, res) => {
   );
 });
 
-app.post('/signin', (req, res) => {
+app.post('/signin', authController.validateCredentials, (req, res) => {
   res.redirect('/secret');
 });
 
@@ -60,7 +61,7 @@ app.use('*', (req, res) => {
 //global error handler
 app.use((err, req, res, next) => {
   console.log(err);
-  res.status(500).send(err);
+  res.status(500).send('Internal Server Error');
 });
 
 app.listen(PORT, () => console.log(`listening on ${PORT}`));

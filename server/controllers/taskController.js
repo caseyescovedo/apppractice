@@ -8,7 +8,7 @@ taskController.postTask = (req, res, next) => {
     item,
   })
     .then(({ item: addedItem }) => {
-      if (addedItem === item) next();
+      if (addedItem === item) return next();
     })
     .catch((err) => next(err));
 };
@@ -18,7 +18,7 @@ taskController.getTasks = (req, res, next) => {
     .exec()
     .then((data) => {
       res.locals.data = data;
-      next();
+      return next();
     })
     .catch((err) => next(err));
 };
@@ -27,7 +27,9 @@ taskController.deleteTask = (req, res, next) => {
   const { id } = req.params;
   Tasks.findByIdAndDelete(id)
     .exec()
-    .then(() => next())
+    .then(() => {
+      return next();
+    })
     .catch((err) => next(err));
 };
 

@@ -43,7 +43,11 @@ function addTask() {
     },
     body: JSON.stringify(text),
   })
-    .then(() => getTasks())
+    .then((res) => res.json())
+    .then((msg) => {
+      console.log(msg);
+      getTasks();
+    })
     .catch((err) => console.log(err));
 }
 
