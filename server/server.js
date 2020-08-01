@@ -15,7 +15,7 @@ app.use(express.urlencoded({extended: true}))
 
 
 // ! serve the html static assets 
-app.use(express.static("assets"))
+app.use(express.static("assets")) // bring in static assets in the asset folder
 
 // getting the login page
 app.get('/', (req, res) => {
@@ -26,13 +26,6 @@ app.get('/', (req, res) => {
 app.get('/secret', (req, res) => {
   return res.status(200).sendFile(path.join(__dirname, '../views/secret.html'))
 })
-
-
-
-
-
-
-
 
 
 
