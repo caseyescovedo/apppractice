@@ -5,6 +5,7 @@ const path = require('path')
 const PORT = 3333;
 const cookieParser = require('cookie-parser')
 const {postTask, getTasks, deleteTask} = require('./controllers/taskController') // importing middleware functions
+const {auth} = require('./controllers/authController')
 
 
 // ! Bodyparser Middleware
@@ -47,6 +48,11 @@ app.delete('/tasks/:id', deleteTask, (req, res) => {
   res.status(200).json(res.locals.data)
 })
 
+
+// creating the authentication route
+app.post('/', auth, (req, res) => {
+  res.status(200).json(res.locals.data)
+})
 
 
 
