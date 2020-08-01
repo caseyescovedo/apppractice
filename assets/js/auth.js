@@ -1,7 +1,7 @@
 
 
 
-
+// ! Handle the authentication of a user
 const authUser = () => {
   const user = document.getElementById('user')
   const password = document.getElementById('pass')
@@ -10,8 +10,6 @@ const authUser = () => {
     user: user.value,
     password: password.value
   }
-
-  console.log("this is username and password " + userInfo)
 
   // create the fetch request that will send to db'
   fetch('/auth', {
@@ -23,10 +21,6 @@ const authUser = () => {
   })
 
 }
-
-
-
-
 
 
 
