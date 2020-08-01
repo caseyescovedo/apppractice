@@ -15,10 +15,12 @@ mongoose.connect(URI, {useNewUrlParser: true, useUnifiedTopology: true}) // conn
 .catch((err) => console.log(err))
 
 
+
+
 // ! Creating the schema ofr each task -- must have item and time created at
 const taskSchema = new mongoose.Schema({
   item: {type: String, required: true},
-  created_at: { type: Data, default: Date.now}
+  created_at: { type: Date, default: Date.now}
 })
 
 const Task = mongoose.model('item', taskSchema)
