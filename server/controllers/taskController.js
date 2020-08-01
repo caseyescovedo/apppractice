@@ -3,7 +3,6 @@ const Task = require('../models/TaskModel')
 module.exports = {
   // Create new task
   postTask(req, res, next) {
-    console.log('inside postTask', req.body);
     const { item } = req.body;
     Task.create({ item }, (err, task) => {
       if (err) return next(err);
