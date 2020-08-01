@@ -22,7 +22,7 @@ module.exports = {
   // Delete task(s)
   deleteTask(req, res, next) {
     const { _id } = req.body;
-    Task.find({ _id }, (err, deleted) => {
+    Task.deleteOne({ _id }, (err, deleted) => {
       if (err) return next(err);
       res.locals.deleted = deleted;
       return next();

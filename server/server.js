@@ -2,6 +2,7 @@ const express = require('express');
 const path = require('path');
 const cookieParser = require('cookie-parser');
 const taskController = require('./controllers/taskController');
+const authController = require('./controllers/authController');
 
 const app = express();
 const PORT = 3333;
@@ -26,9 +27,11 @@ app.get('/secret', (req, res) =>
 app.post('/add', taskController.postTask, (req, res) => res.status(200).json(res.locals.task));
 // Retrieve tasks
 app.get('/retrieve', taskController.getTasks, (req, res) => res.status(200).json(res.locals.tasks));
-
-
-
+// Delete a task
+app.post('/delete', taskController.deleteTask, (req, res) =>
+  res.status(200).json(res.locals.deleted),
+);
+app.post('/signin', authController.authorizeUser, (req, res) => res.redirect('/secret'));
 // * need to modify global error hanlder
 // eslint-disable-next-line no-unused-vars
 app.use((err, req, res, next) => {
