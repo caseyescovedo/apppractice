@@ -3,6 +3,7 @@ const Task = require('../models/TaskModel');
 const taskController = {};
 
 taskController.addTask = (req, res, next) => {
+  console.log('hi im addTask')
   const { item } = req.body;
 
   Task.create({ item })
@@ -14,7 +15,7 @@ taskController.addTask = (req, res, next) => {
 }
 
 taskController.getTasks = (req, res, next) => {
-  Ｔask.find({}).exect()
+  Task.find({}).exec()
   .then((todo) => {
     res.locals.data = todo;
     return next();
@@ -25,7 +26,7 @@ taskController.getTasks = (req, res, next) => {
 taskController.deleteTask = (req, res, next) => {
   const { id } = req.params;
 
-  Ｔask.findByIdAndDelete(id).exec()
+  Task.findByIdAndDelete(id).exec()
   .then((todo) => {
     res.locals.data = todo;
     return next()
