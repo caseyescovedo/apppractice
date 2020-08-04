@@ -1,0 +1,9 @@
+-- Create items table
+CREATE TABLE Task (
+  "_id" serial NOT NULL,
+  "item" varchar NOT NULL,
+  "created_at" timestamp default NOW()
+);
+
+
+select setval('Task__id_seq', 1, false);
