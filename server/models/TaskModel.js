@@ -1,13 +1,20 @@
-// v-- REPLACE THE EMPTY STRING WITH YOUR LOCAL/MLAB/ELEPHANTSQL URI
-const myURI = '';
+const mongoose = require('mongoose');
 
-// UNCOMMENT THE LINE BELOW IF USING MONGO
-// const URI = process.env.MONGO_URI || myURI;
+// Use Codesmith URI or personal URI, depending on env-vars available
+const URI = process.env.MONGO_URI || process.env.MY_URI;
 
-// UNCOMMENT THE LINE BELOW IF USING POSTGRESQL
-// const URI = process.env.PG_URI || myURI;
+mongoose.connect(URI, { useNewUrlParser: true, useUnifiedTopology: true }, (err) =>
+  console.log(err || 'Connected to MongoDB'),
+);
 
+const { Schema } = mongoose;
 
+const taskSchema = new Schema({
+  item: { type: String },
+  // Date.now seems to default to GMT, with no locale offset
+  created_at: { type: Date, default: Date.now },
+});
 
+const Task = mongoose.model('task', taskSchema);
 
-module.exports = null; // <-- export your model
+module.exports = Task;
