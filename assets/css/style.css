@@ -1,5 +1,7 @@
 body {
   font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+  background-color: burlywood;
+  text-align: center;
 }
 
 .title {
@@ -43,7 +45,8 @@ input {
 #task-list {
   width: 50%;
   margin: 0 auto;
-  text-align: center;
+  text-align: left;
+  list-style-type: none;
 }
 
 .task {
@@ -51,4 +54,13 @@ input {
   min-width: 150px;
   border: 1px solid black;
   text-align: center;
+}
+
+li:before {
+  content: '\1F95E'; margin-left: -20px; margin-right: 10px;
+}
+
+.remove {
+  height: 20px;
+  width: 50px;
 }
