@@ -3,6 +3,7 @@ const app = express();
 const port = 3333;
 const path = require("path");
 const taskController = require("./controllers/taskController");
+const authController = require("./controllers/authController.js");
 
 app.use(express.json());
 app.use(express.static("assets"));
@@ -12,8 +13,8 @@ app.use(express.static("assets"));
 // );
 
 app.get("/tasks", taskController.getTasks);
-app.post("/tasks", taskController.postTasks);
-app.delete("/tasks", taskController.deleteTasks);
+app.post("/tasks", taskController.postTasks, authController.cookiePosting);
+app.delete("/tasks/:id", taskController.deleteTasks);
 
 app.use("/secret", (req, res) =>
   res.sendFile(path.join(__dirname, "../views", "secret.html"))
