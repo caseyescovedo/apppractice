@@ -38,7 +38,11 @@ function postTask(e) {
     method: 'POST',
     headers: { 'Content-Type': 'application/json' },
     body: JSON.stringify({ task }),
-  }).catch((err) => console.log('err at postTask:', err));
+  })
+    .then(() => {
+      retrieve();
+    })
+    .catch((err) => console.log('err at postTask:', err));
 }
 
 window.onload = (event) => {

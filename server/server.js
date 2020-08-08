@@ -6,12 +6,12 @@ const cookieParser = require('cookie-parser');
 const taskController = require('../server/controllers/taskController');
 const authController = require('../server/controllers/authController');
 
-// serve static files
-app.use(express.static('assets'));
 app.use(express.json());
 app.use(cookieParser());
-
 app.use(express.urlencoded({ extended: true }));
+
+// serve static files
+app.use(express.static('assets'));
 
 // login page
 app.get('/', (req, res) => {
@@ -36,7 +36,7 @@ app.use('/signin', authController.authUser, (req, res) => {
   }
 });
 
-app.use('/getAllTasks/', taskController.getTask, (req, res) => {
+app.use('/getAllTasks', taskController.getTask, (req, res) => {
   return res.status(200).json(res.data);
 });
 
