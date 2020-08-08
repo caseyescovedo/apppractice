@@ -45,7 +45,7 @@ In the `server/models/TaskModel.js` file, implement a database in either MongoDB
 In the `server/models/taskController.js` file, add the following functionality to the exported controller. (These will be server middleware/final handler functions, so they should take the appropriate parameters and perform the necessary callback operations.):
 - [x] Function `postTask` should create a new item in the database
 - [x] Function `getTasks` should retrieve all items from the database and send it back to the client as JSON
-- [ ] Function `deleteTask` should find items in the database based on an ID number and delete that item if it exists
+- [x] Function `deleteTask` should find items in the database based on an ID number and delete that item if it exists
 
 
 
