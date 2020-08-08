@@ -11,9 +11,11 @@ body {
 
 .remove {
   display: inline-block;
+  /* display: inline; */
   float: right;
-  width: 15px;
-  height: 15px;
+  width: 22px;
+  height: 22px;
+  cursor: pointer;
 }
 
 #signin {
@@ -21,7 +23,7 @@ body {
   width: 25%;
   padding-top:5%;
   text-align: center;
-  background-color: #d3d3d3;
+  background-color: steelblue;
   border: 1px solid black;
 }
 
