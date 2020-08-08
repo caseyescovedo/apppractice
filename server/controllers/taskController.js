@@ -3,7 +3,7 @@ const taskController = {};
 
 taskController.postTask = (req, res, next) =>{
     console.log('inside taskController.postTask')
-    const query = `INSERT INTO tasks (item, created_at) VALUES ('${req.body.taks}', ${req.body.created_at});`;
+    const query = `INSERT INTO tasks (item, created_at) VALUES ('${req.body.item}', ${req.body.created_at});`;
 
     db.query(query).then(data => {
         res.locals.task = data.rows

@@ -17,6 +17,7 @@ const getTasks = () => {
   fetch(url, {method: 'GET'})
   .then(res => res.json())
   .then(data => {
+      console.log('DATA', data)
       for (let i = 0; i < data.length; i++){
 
         let line = document.createElement('li')
@@ -25,6 +26,7 @@ const getTasks = () => {
         let removeButton = document.createElement('button')
         removeButton.innerText = 'X'
         removeButton.setAttribute('class', 'remove')
+        removeButton.setAttribute('id', `${data[i].id}`)
         removeButton.setAttribute('onClick', 'removeTask(`${this.id}`)')
 
         let lineText = data[i].item
@@ -39,7 +41,8 @@ const getTasks = () => {
   })
 }
 
-const removeTask = () => {
+const removeTask = (id) => {
+  console.log('ID!!!: ',id)
   fetch(`${url}/${id}`, {
       method: 'DELETE'
   })
