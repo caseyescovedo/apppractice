@@ -4,7 +4,6 @@ module.exports = {
   postTask: (req, res, next) => {
     // grab the task and add to db
     const { task } = req.body;
-    console.log('task', task);
     Task.create({ item: task })
       .then((data) => {
         console.log('successfully created task');

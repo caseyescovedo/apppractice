@@ -3,7 +3,6 @@ function retrieve() {
     .then((res) => res.json())
     .then((data) => {
       document.getElementById('task-list').innerHTML = '';
-      console.log('retrieve running!');
       data.forEach((el) => {
         const li = document.createElement('li');
         const task = document.createTextNode(el.item);
@@ -25,7 +24,6 @@ function retrieve() {
 
 function delTask(e) {
   const id = e.target.id;
-  console.log('deltask', id);
   const temp = document.getElementById(`${id}`);
   temp.parentNode.parentNode.removeChild(temp.parentNode);
   fetch(`/deleteTask/${id}`, {
@@ -36,7 +34,6 @@ function delTask(e) {
 
 function postTask(e) {
   const task = document.getElementById('task').value;
-  console.log('123', task);
   fetch('/postTask', {
     method: 'POST',
     headers: { 'Content-Type': 'application/json' },

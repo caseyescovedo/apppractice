@@ -49,10 +49,10 @@ app.use('/deleteTask/:id', taskController.deleteTask, (req, res) => {
 });
 
 // global handler
-// app.use(function (err, req, res, next) {
-//   console.error(err.err);
-//   res.status(500).send('Something broke!');
-// });
+app.use(function (err, req, res, next) {
+  console.error(err.err);
+  res.status(500).send('Something broke!');
+});
 
 app.listen(PORT, () => {
   console.log(`Server is listening on port ${PORT}`);
