@@ -1,6 +1,17 @@
 // const { delete } = require("request") <-- where did this come from?
-
 let url = 'http://localhost:3333/tasks'
+
+const signin = () => {
+  console.log('inside signin')
+  let user = document.getElementById('user').value;
+  let pass = document.getElementById('pass').value;
+  console.log('user: ', user, 'pass: ', pass)
+  fetch(`http://localhost:3333/signin`, {
+      method: 'POST',
+      headers: {'content-type': 'application/json'},
+      body: JSON.stringify({user: user, pass: pass}),
+  })
+}
 
 const addTask = () => {
   console.log('task added')
