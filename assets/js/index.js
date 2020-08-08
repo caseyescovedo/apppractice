@@ -3,7 +3,7 @@ function retrieve() {
     .then((res) => res.json())
     .then((data) => {
       document.getElementById('task-list').innerHTML = '';
-      console.log(data);
+      console.log('retrieve running!');
       data.forEach((el) => {
         const li = document.createElement('li');
         const task = document.createTextNode(el.item);
@@ -26,16 +26,12 @@ function retrieve() {
 function delTask(e) {
   const id = e.target.id;
   console.log('deltask', id);
+  const temp = document.getElementById(`${id}`);
+  temp.parentNode.parentNode.removeChild(temp.parentNode);
   fetch(`/deleteTask/${id}`, {
     method: 'DELETE',
     headers: { 'Content-Type': 'application/json' },
-  })
-    .then(() => {
-      setTimeout(() => {
-        document.getElementById('retrieve').click();
-      }, 0);
-    })
-    .catch((err) => console.log('err at delTask:', err));
+  }).catch((err) => console.log('err at delTask:', err));
 }
 
 function postTask(e) {
