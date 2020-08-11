@@ -3,18 +3,16 @@ const express = require("express");
 const path = require("path");
 const bodyParser = require("body-parser");
 const morgan = require("morgan");
-const cookieParser = require("cookie-parser");
 
 // Files
 const taskController = require("../server/controllers/taskController");
-const authController = require("../server/controllers/authController");
 
 const app = express();
+// const router = express.Router();
 
 /**
  * Middleware for all requests
  */
-app.use(cookieParser());
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(morgan("dev"));
@@ -23,6 +21,7 @@ app.use(morgan("dev"));
  * Handle Static Files
  */
 app.use(express.static("assets"));
+// app.use("/", router);
 
 /**
  * Serve Pages
@@ -32,17 +31,8 @@ app.get("/", (req, res) => {
 });
 
 app.get("/secret", (req, res) => {
-  if (req.cookies.token === "admin") {
-    res.status(200).sendFile(path.resolve(__dirname + "/../views/secret.html"));
-  } else {
-    res.send("You must be signed in to view this page");
-  }
+  res.status(200).sendFile(path.resolve(__dirname + "/../views/secret.html"));
 });
-
-/**
- * Sign In
- */
-app.post("/signin", authController.verifyUser);
 
 /**
  * CRUD Routes
@@ -61,7 +51,7 @@ app.get("/getTasks", taskController.getTasks, (req, res) => {
 
 app.delete("/deleteTask", taskController.deleteTask, (req, res) => {
   console.log("end of deleteTask");
-  res.status(200).json("Deleted Task");
+  res.status(200).send("Deleted Task");
 });
 
 /**
