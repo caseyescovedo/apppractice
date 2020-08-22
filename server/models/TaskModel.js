@@ -16,7 +16,7 @@ const pool = new Pool({
   connectionString: URI
 });
 
-// Create tables if they do not already exist
+// Create table if they do not already exist
 pool.connect((err, client, release) => {
   if (err) return console.error('Error acquiring client', err.stack);
   client.query(queries.createTable, (err, result) => {
