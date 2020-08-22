@@ -36,14 +36,16 @@ module.exports = {
   },
 
   deleteTask: function(req, res, next) {
+    const {id} = req.body;
+    const idString = id.toString();
     const query = `
-      SELECT * FROM "task"
+      DELETE FROM task
+      WHERE id = $1;
     `
-    db.query(query)
+    const value = [idString]
+    db.query(query, value)
       .then((data)=>{
-        console.log(data.rows);
-        res.locals.all = data.rows; 
-        res.status(200).json(res.locals.all)
+        res.status(200)
       })
       .catch((err)=>{
         console.log('Error with postTask', err)
