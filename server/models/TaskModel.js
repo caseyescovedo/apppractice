@@ -1,5 +1,5 @@
 // v-- REPLACE THE EMPTY STRING WITH YOUR LOCAL/MLAB/ELEPHANTSQL URI
-const myURI = 'postgres://kjfuwdud:wxBaI_MfUUnpG5SWjATjo0i06hFCHBwE@lallah.db.elephantsql.com:5432/kjfuwdud';
+const myURI = '';
 
 // UNCOMMENT THE LINE BELOW IF USING MONGO
 // const URI = process.env.MONGO_URI || myURI;
