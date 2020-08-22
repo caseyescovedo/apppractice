@@ -34,16 +34,30 @@ input {
 }
 
 #create{
-  margin: 0 auto;
+  margin: 40px auto;
   width: 50%;
   text-align: center;
-  margin-top: 3%;
+  margin-top: 10%;
+  margin-bottom: 10%;
+  padding-top: 3%;
+  height: 20vh;
+  background: #F2F2F2;
+  border-radius: 3px/6px;  
+  box-shadow: 1px 1px 2px #fff inset,
+              -1px -1px 2px #fff inset;
+  margin-bottom: 40px;
 }
-
+h1,h3{
+  text-align: center;
+}
 #task-list {
   width: 50%;
   margin: 0 auto;
   text-align: center;
+  background: #F2F2F2;
+  border-radius: 3px/6px;  
+  box-shadow: 1px 1px 2px #fff inset,
+              -1px -1px 2px #fff inset;
 }
 
 .task {
@@ -51,4 +65,41 @@ input {
   min-width: 150px;
   border: 1px solid black;
   text-align: center;
+}
+
+#task {
+  font-family: 'Roboto', sans-serif;
+  color: #333;
+  font-size: 1.2rem;
+	margin: 30px auto;
+  padding: 1rem 1.5rem;
+  border-radius: 0.2rem;
+  background-color: rgb(255, 255, 255);
+  border: none;
+  width: 90%;
+  display: block;
+  border-bottom: 0.3rem solid transparent;
+  transition: all 0.3s;
+}
+
+.lists {
+  margin-top: 10px;
+}
+
+#task-button, #retrieve {
+  background-color: #555555; /* Green */
+  border: none;
+  color: white;
+  padding: 16px 32px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 16px;
+  margin: 4px 2px;
+  transition-duration: 0.4s;
+  cursor: pointer;
+}
+#task-button:hover, #retrieve:hover {
+  background-color: #288CBA;
+  color: white;
 }
