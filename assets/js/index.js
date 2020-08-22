@@ -19,7 +19,7 @@ function prependTask(task) {
 // Get all tasks
 function getTasks() {
   const ul = document.getElementById('task-list');
-  ul.querySelectorAll('*').forEach((n) => n.remove());
+  ul.querySelectorAll('li').forEach((n) => n.remove());
   fetch('/getTasks')
     .then((resp) => resp.json())
     .then((resp) => resp.forEach((task) => prependTask(task)));
