@@ -35,6 +35,14 @@ app.get('/tasks', taskController.getTasks, (req, res) => {
   return res.status(200).json(res.locals.tasks);
 })
 
+app.post('/add', taskController.postTask, (req, res) => {
+  return res.status(200).json(res.locals.item);
+})
+
+app.delete("/delete", taskController.deleteTask, (req, res) => {
+  return res.status(200).json("DELETED");
+})
+
 app.get('/secret', (req, res) => {
   return res.status(200).sendFile(path.resolve(__dirname, '../views/secret.html'));
 })

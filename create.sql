@@ -1,7 +1,7 @@
 CREATE TABLE Tasks
 (
   "taskid" serial PRIMARY KEY,
-  "item" varchar NOT NULL,
+  "item" varchar NOT NULL CHECK (item <> ''),
   "created_at" time NOT NULL,
   UNIQUE (item)
 );

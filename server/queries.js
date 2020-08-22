@@ -38,6 +38,7 @@ const queryValues3 = ['eat'];
 //     console.log(data.rows)
 //   });
 
+// DELETE FROM Tasks WHERE item = 'R';
 
 
 module.exports = queries;
