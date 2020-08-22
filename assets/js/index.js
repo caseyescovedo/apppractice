@@ -23,8 +23,33 @@ getTasksButton.addEventListener(('click'), ()=>{
 
         // const remove = document.querySelector(".remove")
         listButton.addEventListener(('click'), (event)=>{
-          console.log(event.target)
+          const parent = event.target.parentNode
+          const parentText = parent.innerHTML
+          let output = "";
+          for (let i = 0; i < parentText.length; i += 1) {
+            if (parentText[i] === '<') {
+              break;
+            } else {
+              output += parentText[i]
+            }
+          }
+          console.log(output)
+          // remove element from list
+          const grandparent = parent.parentNode;
+          grandparent.removeChild(parent)
+          // post to database to delete it
+          const delSend = {
+            name: output
+          }
+          fetch('/deleteTask', {
+            method: 'POST', 
+            headers: {
+              'Content-Type': 'application/json',
+            },
+            body: JSON.stringify(delSend),
+          })
           
+
         })
       })
     })

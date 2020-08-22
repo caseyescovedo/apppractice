@@ -36,13 +36,12 @@ module.exports = {
   },
 
   deleteTask: function(req, res, next) {
-    const {id} = req.body;
-    const idString = id.toString();
+    const {name} = req.body;
     const query = `
       DELETE FROM task
-      WHERE id = $1;
+      WHERE item = $1;
     `
-    const value = [idString]
+    const value = [name]
     db.query(query, value)
       .then((data)=>{
         res.status(200)

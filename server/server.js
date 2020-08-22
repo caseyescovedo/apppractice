@@ -14,7 +14,10 @@ app.get('/secret', (req, res) => {
 
 app.post('/addTask', taskController.postTask)
 
+app.post('/deleteTask', taskController.deleteTask)
+
 app.get('/getItems', taskController.getTasks)
+
 
 
 app.get('/', (req, res) => {
