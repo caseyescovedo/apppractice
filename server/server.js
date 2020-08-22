@@ -75,7 +75,11 @@ app.delete('/delete',
 // Global error handler
 
 app.use((err, req, res, next) => {
-  res.status(400).json(err);
+  if (err === 'You must be signed in to view this page' || err === 'unsuccessful login attempt') {
+    res.status(400).send(err);
+  } else {
+    res.status(400).json(err);
+  }
 })
 
 

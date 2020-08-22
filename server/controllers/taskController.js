@@ -4,13 +4,16 @@ const taskController = {};
 
 taskController.postTask = async (req, res, next) => {
   
-  // need to grab the right task here.
-  // might need to wrap NOW around quotes
+  const taskToInsert = req.query.newtask;
 
-  const now = new Date();
+  const timeObj = new Date();
+  const convertedTimeObj = timeObj.toISOString();
+  const slicedTime = convertedTimeObj.slice(0, 19);
+  const finalTime = slicedTime.replace('T', ' ');
+
   const queryMsg = `
     INSERT INTO Task (item, created_at)
-    VALUES ('I am a new task', ${now});
+    VALUES ('${taskToInsert}', '${finalTime}');
     `
   try {
     await db.query(queryMsg);
@@ -25,13 +28,12 @@ taskController.postTask = async (req, res, next) => {
 taskController.getTasks = async (req, res, next) => {
 
   const queryMsg = `
-    SELECT * FROM Task
-    RETURNING *;
+    SELECT * FROM Task;
     `
   
   try {
     const result = await db.query(queryMsg);
-    res.locals.tasks = result;
+    res.locals.tasks = result.rows;
     return next();
   } catch (err) {
     console.log('Error with retrieving all tasks into database: ', err);
@@ -40,9 +42,21 @@ taskController.getTasks = async (req, res, next) => {
 }
 
 taskController.deleteTask = async (req, res, next) => {
-  // need to figure out how to delete tasks based on ID number...??
-  console.log('hi I am the deleteTask controller');
-  return next();
+  
+  const itemToDelete = req.query.itemid;
+
+  const queryMsg = `
+  DELETE FROM task
+  WHERE id = ${itemToDelete};
+  `
+  
+  try {
+    await db.query(queryMsg);
+    return next();
+  } catch(err) {
+    console.log('Error with trying to delete task from database: ', err)
+    return next('Error with the database');
+  }
 }
 
 module.exports = taskController;
