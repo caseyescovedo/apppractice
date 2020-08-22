@@ -13,7 +13,7 @@ const app = express();
 
 // Parse body and cookies
 app.use(express.json());
-app.use(bodyParser.urlencoded({ extended: false }))
+app.use(bodyParser.urlencoded({ extended: false }));
 app.use(cookieParser());
 
 // Serve static files (CSS, JS, etc.)
