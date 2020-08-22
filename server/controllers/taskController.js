@@ -10,7 +10,7 @@ module.exports = {
       .then(data => {
         res.locals.newTask = data.rows[0]
         console.log(res.locals.newTask)
-        next();
+        return next();
       })
       .catch(err => next(err))
   },
@@ -19,7 +19,7 @@ module.exports = {
     db.query(queryString)
       .then(data => {
         res.locals.tasks = data.rows
-        next();
+        return next();
       })
       .catch(err => {
         console.log('err')
@@ -32,7 +32,7 @@ module.exports = {
     const queryString = `DELETE FROM Task WHERE id=$1`
     db.query(queryString, [id])
       .then(data => {
-        next();
+        return next();
       })
       .catch(err => next(err))
   },

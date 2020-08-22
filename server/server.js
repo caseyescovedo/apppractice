@@ -1,6 +1,7 @@
 const express = require('express');
 const app = express();
 const path = require("path")
+const cookieParser = require('cookie-parser');
 const authController = require("./controllers/authController")
 const taskController = require("./controllers/taskController")
 
@@ -9,16 +10,18 @@ const PORT = 3333;
 // GLOCAL MIDDLEWARE
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
-// app.use(cookieParser());
+app.use(cookieParser());
 
 app.get("/", (req, res) => res.sendFile(path.resolve(__dirname, '../views/index.html')));
 
-app.get("/secret", (req, res) => res.sendFile(path.resolve(__dirname, '../views/secret.html')));
+app.get("/secret",
+  authController.checkCookie,
+  (req, res) => res.sendFile(path.resolve(__dirname, '../views/secret.html')));
 
 app.use(express.static('assets'));
 
 app.post("/signin",
-  // authenticationController.addCookie,
+  authController.checkLogin,
   (req, res) => res.redirect("/secret")
 )
 
