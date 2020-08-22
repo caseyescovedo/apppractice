@@ -5,9 +5,19 @@ const myURI = '';
 // const URI = process.env.MONGO_URI || myURI;
 
 // UNCOMMENT THE LINE BELOW IF USING POSTGRESQL
-// const URI = process.env.PG_URI || myURI;
+const URI = process.env.PG_URI || myURI;
 
+/** ===== Require Pool from node-postgress ===== */
+const { Pool } = require('pg');
 
+/** ===== Create new instance of Pool ===== */
+const pool = new Pool({
+  connectionString: URI,
+});
 
-
-module.exports = null; // <-- export your model
+/** ===== Export model ===== */
+module.exports = {
+  query: (queryString, params, cb) => {
+    return pool.query(queryString, params, cb);
+  },
+};
