@@ -1,5 +1,14 @@
 body {
   font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+  background-image: url("https://icatcare.org/app/uploads/2018/06/Layer-1704-1200x630.jpg");
+  background-repeat: no-repeat;
+  background-size: cover;
+}
+
+h1 {
+  font-size: 60px;
+  text-align: center;
+  color: rgb(46, 46, 46);
 }
 
 .title {
@@ -12,8 +21,9 @@ body {
 .remove {
   display: inline-block;
   float: right;
-  width: 15px;
-  height: 15px;
+  width: 80px;
+  height: 30px;
+  background-color: rgba(255, 86, 86, 0.959);
 }
 
 #signin {
@@ -44,6 +54,9 @@ input {
   width: 50%;
   margin: 0 auto;
   text-align: center;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
 }
 
 .task {
@@ -51,4 +64,18 @@ input {
   min-width: 150px;
   border: 1px solid black;
   text-align: center;
+}
+
+
+li {
+  display: flex;
+  height: 30px;
+  border-radius: 10px;
+  border: 3px solid white;
+  text-align: center;
+  background-color: rgb(207, 207, 207);
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 50px;
+  margin: 10px 0;
 }
