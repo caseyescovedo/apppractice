@@ -1,5 +1,6 @@
 const { Pool } = require('pg');
-const myURI = 'postgres://riepgovf:Xkl-oJ1PvI4Z6LzFKW_KVx0_twhObpBd@lallah.db.elephantsql.com:5432/riepgovf';
+//removed myURI
+const myURI = '';
 
 const URI = process.env.PG_URI || myURI;
 

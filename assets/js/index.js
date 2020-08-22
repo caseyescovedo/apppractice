@@ -20,7 +20,7 @@ const getTasks = function () {
 }
 
 const postTask = function () {
-
+  //post task to server
   fetch(`/tasks`, {
     method: 'POST',
     headers: { 'Content-Type': 'application/json' },
@@ -28,13 +28,14 @@ const postTask = function () {
   })
     .then(res => res.json())
     .then(task => {
-      //after response post item
+      //after response attach item
       taskText.value = "";
       taskFeed.appendChild(listFactory(task))
     })
 }
 
 const deleteTask = function (id) {
+  //delete request to server
   fetch(`/tasks/${id}`, { method: 'DELETE' })
     .then(res => res.json())
     .then(data => {
