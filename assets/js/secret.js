@@ -1,4 +1,4 @@
-console.log('hello');
+console.log('hello from secret.js');
 $(document).ready(function () {
 
   // ==================== GET ALL TASKS ==================== //
@@ -125,7 +125,7 @@ $(document).ready(function () {
       })
       .then(newPtag => {
         console.log(newPtag);
-        setTimeout(window.location.reload(true), 6000);
+        setTimeout(window.location.reload(true), 10000);
       })
       .catch(err => {
         console.log('index.js /api/login error: ', err)

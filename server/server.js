@@ -24,9 +24,13 @@ app.use("/style.css", (req, res, next) => {
     .sendFile(path.resolve(__dirname, "../assets/css/style.css"));
 });
 
-// =============== SERVE UP MAIN APP =============== //
+
+app.post("/signin", authController.verifyUser, (req, res) => {
+  // return res.status(200).sendFile(path.resolve(__dirname, '../views/secret.html'));
+  return res.status(200).redirect('/secret');
+})
+
 app.get('/',
-  // authController.setCookie,
   (req, res) => {
     return res.status(200).sendFile(path.resolve(__dirname, '../views/index.html'));
   })
@@ -43,7 +47,7 @@ app.delete("/delete", taskController.deleteTask, (req, res) => {
   return res.status(200).json("DELETED");
 })
 
-app.get('/secret', (req, res) => {
+app.get('/secret', authController.checkCookie, (req, res) => {
   return res.status(200).sendFile(path.resolve(__dirname, '../views/secret.html'));
 })
 
