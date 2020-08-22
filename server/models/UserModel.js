@@ -18,12 +18,12 @@ mongoose.connect(URI, {
 
 const Schema = mongoose.Schema;
 
-const taskSchema = new Schema({
-	item: { type: String, required: true, },
-	created_at: { type: Date, default: Date.now }
+const userSchema = new Schema({
+	username: { type: String, required: true, },
+	password: { type: String, required: true }
 })
 
-const taskModel = mongoose.model('task', taskSchema)
+const userModel = mongoose.model('user', userSchema)
 
 
-module.exports = taskModel; // <-- export your model
+module.exports = userModel; // <-- export your model
