@@ -16,7 +16,7 @@ module.exports = {
         console.log(err);
         return next({
           err: err,
-        })
+        });
       });
   },
 
@@ -29,13 +29,13 @@ module.exports = {
         console.log(err);
         return next({
           err: err,
-        })
+        });
       });
   },
 
   deleteTasks: (req, res, next) => {
     // Grab item id from body
-    const values = [req.body.itemId]
+    const values = [req.body.itemId];
 
     db.query(queries.deleteTask, values)
       .then(data => {
@@ -45,7 +45,7 @@ module.exports = {
         console.log(err);
         return next({
           err: err,
-        })
+        });
       });
   }
 

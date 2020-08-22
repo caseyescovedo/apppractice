@@ -23,8 +23,8 @@ pool.connect((err, client, release) => {
     release();
     if (err) return console.error('Error executing createTable', err.stack);
     console.log('Successfully checked task table');
-  })
-})
+  });
+});
 
 module.exports = {
   query: (text, params, callback) => {

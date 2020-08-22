@@ -66,8 +66,8 @@ postTaskButton.addEventListener('click', () => {
   })
   .catch(err => {
     console.log(err);
-  })
-})
+  });
+});
 
 // Remove task functionality
 const removeThisTask = e => {
@@ -83,7 +83,7 @@ const removeThisTask = e => {
   })
   .catch(err => {
     console.log(err);
-  })
+  });
 };
 
 };
