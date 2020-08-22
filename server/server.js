@@ -25,17 +25,18 @@ app.use("/style.css", (req, res, next) => {
 });
 
 // =============== SERVE UP MAIN APP =============== //
-app.get('/', (req, res) => {
-  return res.status(200).sendFile(path.resolve(__dirname, '../views/index.html')); // we specify which file to serve
-})
-
+app.get('/',
+  // authController.setCookie,
+  (req, res) => {
+    return res.status(200).sendFile(path.resolve(__dirname, '../views/index.html'));
+  })
 
 
 app.get('/secret', (req, res) => {
-  return res.status(200).render("../secret.html");
+  return res.status(200).sendFile(path.resolve(__dirname, '../views/secret.html'));
 })
 
-app.get('/tasks', (req, res) => {
+app.get('/tasks', taskController.getTasks, (req, res) => {
   return res.status(200).json(res.locals.tasks);
 })
 
