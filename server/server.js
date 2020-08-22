@@ -12,6 +12,8 @@ app.get('/secret', (req, res) => {
   res.sendFile(path.resolve(__dirname, '../views/secret.html'))
 })
 
+app.post('/addTask', taskController.postTask)
+
 app.get('/getItems', taskController.getTasks)
 
 

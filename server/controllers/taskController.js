@@ -3,12 +3,12 @@ const db = require('../models/TaskModel')
 
 module.exports = {
   postTask: function(req, res, next) {
-    const {id, addItem} = req.body;
+    const {addItem} = req.body;
     const query = `
-      INSERT INTO Task(ID, item)
-      VALUES ($1, $2);
+      INSERT INTO Task(item)
+      VALUES ($1);
     `
-    const value = [id, addItem]
+    const value = [addItem]
     db.query(query, value)
       .then((data)=>{
         console.log(data)
