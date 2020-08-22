@@ -18,4 +18,3 @@ module.exports = {
       return pool.query(text, params, callback);
     },
   };
-// psql -d postgres://vyyzxibf:h4h6QOkefVgLk8zC2dOMIuOJVSP0_VSQ@lallah.db.elephantsql.com:5432/vyyzxibf -f create.sql
