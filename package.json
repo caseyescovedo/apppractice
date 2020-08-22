@@ -22,5 +22,22 @@
     "request": "^2.81.0",
     "supertest": "^3.0.0",
     "zombie": "^5.0.7"
+  },
+  "directories": {
+    "test": "test"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/xkiso/app-assessment-mod-0.git"
+  },
+  "keywords": [],
+  "bugs": {
+    "url": "https://github.com/xkiso/app-assessment-mod-0/issues"
+  },
+  "homepage": "https://github.com/xkiso/app-assessment-mod-0#readme",
+  "dependencies": {
+    "cookie-parser": "^1.4.5",
+    "express": "^4.17.1",
+    "pg": "^8.3.2"
   }
 }
