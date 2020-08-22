@@ -1,3 +1,4 @@
+const db = require("../models/TaskModel.js");
 const queries = require("../queries");
 
 const taskController = {};
@@ -29,17 +30,17 @@ taskController.postTask = (req, res, next) => {
 
 taskController.getTasks = (req, res, next) => {
   // console.log("req.cookie: ", req.cookies)
-  console.log("req.body: ", req.body)
-  console.log("req.query: ", req.query)
-  console.log("req.params: ", req.params)
+  // console.log("req.body: ", req.body)
+  // console.log("req.query: ", req.query)
+  // console.log("req.params: ", req.params)
 
   const queryString = `SELECT * FROM Tasks`;
 
   db.query(queryString)
     .then(data => {
-      console.log('taskController.getTasks data.rows: ', data.rows[0]);
+      console.log('taskController.getTasks data.rows: ', data.rows);
       // query returns all itemObj: [{ item: 'eat', created_at }, { item: 'drink' }, { item: 'sleep' }]
-      res.locals.tasks = data.rows[0]
+      res.locals.tasks = data.rows;
       return next();
     })
     .catch(err => {

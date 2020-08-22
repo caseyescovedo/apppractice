@@ -31,14 +31,15 @@ app.get('/',
     return res.status(200).sendFile(path.resolve(__dirname, '../views/index.html'));
   })
 
+app.get('/tasks', taskController.getTasks, (req, res) => {
+  return res.status(200).json(res.locals.tasks);
+})
 
 app.get('/secret', (req, res) => {
   return res.status(200).sendFile(path.resolve(__dirname, '../views/secret.html'));
 })
 
-app.get('/tasks', taskController.getTasks, (req, res) => {
-  return res.status(200).json(res.locals.tasks);
-})
+
 
 // =============== CATCH ALL FOR UNDEFINED ENDPOINTS =============== //
 app.use((req, res) => res.sendStatus(404)); // 404 NOT FOUND
