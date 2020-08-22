@@ -36,7 +36,7 @@ app.delete('/tasks', deleteTask);
 
 
 // cookie authentication
-app.post('/signup', saveUserCookie, (req, res) => {
+app.post('/signin', saveUserCookie, (req, res) => {
     res.redirect('/secret');
 });
 

@@ -1,5 +1,5 @@
 module.exports = {
-  saveUserCookie: (req, res) => {
+  saveUserCookie: (req, res, next) => {
     let user = req.body.user;
     let pw = req.body.pw;
     if (user === codesmith && pw === ilovetesting) {
@@ -8,5 +8,9 @@ module.exports = {
     } else {
       res.send('You must be signed in to view this page');
     }
+  }
+
+  checkUserCookie: (req, res, next) => {
+
   }
 };
