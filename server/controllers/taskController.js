@@ -5,19 +5,19 @@ module.exports = {
   postTask: (req, res, next) => {
     const { task } = req.body;
 
-    const queryString = `INSERT INTO Task (item) VALUES ($1)`
+    const queryString = `INSERT INTO Task (item) VALUES ($1) RETURNING id, item, created_at`
     db.query(queryString, [task])
       .then(data => {
+        res.locals.newTask = data.rows[0]
+        console.log(res.locals.newTask)
         next();
       })
       .catch(err => next(err))
   },
   getTasks: (req, res, next) => {
     const queryString = `SELECT * FROM Task`
-    console.log("im here")
     db.query(queryString)
       .then(data => {
-        console.log("OK")
         res.locals.tasks = data.rows
         next();
       })

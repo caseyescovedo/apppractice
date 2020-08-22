@@ -17,6 +17,11 @@ app.get("/secret", (req, res) => res.sendFile(path.resolve(__dirname, '../views/
 
 app.use(express.static('assets'));
 
+app.post("/signin",
+  // authenticationController.addCookie,
+  (req, res) => res.redirect("/secret")
+)
+
 /***********************************************************
  ****************   TASK ROUTES   **************************
  ***********************************************************/
@@ -27,18 +32,13 @@ app.get("/tasks",
 
 app.post("/tasks",
   taskController.postTask,
-  (req, res) => res.status(200).json({})
+  (req, res) => res.status(200).json(res.locals.newTask)
 )
 
 app.delete("/tasks/:id",
   taskController.deleteTask,
   (req, res) => res.status(200).json({})
 )
-
-// app.get("/login",
-//   authenticationController.addCookie,
-//   (req, res) => res.redirect("/")
-// )
 
 // UNKOWN URL
 app.use('*', (req, res) => {
