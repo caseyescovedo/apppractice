@@ -1,0 +1,7 @@
+CREATE TABLE Task (
+  id SERIAL PRIMARY KEY,
+  item VARCHAR (255) NOT NULL,
+  created_at TIMESTAMP NOT NULL
+);
+
+DROP TABLE Task;
