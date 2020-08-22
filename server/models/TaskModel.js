@@ -13,9 +13,10 @@ const pool = new Pool({
   connectionString: URI,
 });
 
+// below CREATE TABLE Task is for reference only, I created the db using ElephantSQL in browser
 const task = `
 CREATE TABLE Task (
-  ID VARCHAR,
+  ID SERIAL,
   item TEXT,
   created_at TIME DEFAULT CURRENT_TIME
 );
