@@ -2,12 +2,10 @@
 // all tasks from the database should be displayed as list items in the #task-list elements.
 // These list items should display the task item followed by a button (inside the list item)
 // with a class of remove and display an X.
-// As an example, one list item might look like
-// <li>Go shopping <button class="remove">X</button></li>
-// Multiple clicks of the button to get tasks should not display the list items multiple times
 
-document.getElementById('retrieve').onclick = taskController.getTasks;
-// <li>${item}<button class="remove">X</button></li>
+// Multiple clicks of the button to get tasks should not display the list items multiple times
+$('retrieve').one('click', taskController.getTasks);
+// render <li>${item}<button class="remove">X</button></li>.....
 
 // Clicking on the button to add a task should take the text from the input field
 // and create a new task in the database.

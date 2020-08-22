@@ -24,7 +24,7 @@ taskController.getTasks = (req, res, next) => {
     `;
   db.query(queryString)
     .then((data) => {
-      res.locals.tasks = data.rows[0];
+      // send data back to client as JSON
     })
     .catch((err) => {
       return next({
@@ -38,7 +38,7 @@ taskController.getTasks = (req, res, next) => {
 // Function deleteTask should find items in the database based on an ID number and delete that item if it exists
 taskController.deleteTask = (req, res, next) => {
   const queryString = `
-    DELETE FROM Task WHERE item = 1;
+    DELETE FROM Task WHERE item = ${_id};
     `;
   db.query(queryString).catch((err) => {
     return next({
