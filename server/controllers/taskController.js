@@ -1,4 +1,4 @@
-const db = require('../models/TaskModel.js')
+const db = require('../models/TaskModel')
 
 
 module.exports = {
