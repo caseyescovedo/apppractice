@@ -2,14 +2,15 @@ const express = require('express');
 const app = express();
 const fs = require('fs');
 const path = require('path');
+const cookieParser = require('cookie-parser');
 
 const { postTask, getTask, deleteTask } = require('./controllers/taskController')
-console.log(postTask, getTask, deleteTask)
+const { saveUserCookie } = require('./controllers/authController')
+
 const PORT = 3333;
 
-// const cookieParser = require('cookie-parser');
-// // parse cookies
-// app.use(cookieParser());
+// parse cookies
+app.use(cookieParser());
 
 // parse req body:
 app.use(express.json());
@@ -33,6 +34,11 @@ app.post('/tasks', postTask);
 
 app.delete('/tasks', deleteTask);
 
+
+// cookie authentication
+app.post('/signup', saveUserCookie, (req, res) => {
+    res.redirect('/secret');
+});
 
 // error handler for unknown routes
 app.use((req, res) => {
