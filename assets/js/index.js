@@ -7,11 +7,12 @@ const postTaskButton = document.getElementById('task-button');
 const getTasksButton = document.getElementById('retrieve');
 const taskList = document.getElementById('task-list');
 
-// Checking to see if we've already retrieved our tasks
+// Tracks if we've already retrieved our tasks
 let retrieved = false;
 
 // Get tasks functionality
 getTasksButton.addEventListener('click', () => {
+  // Abort if we've already retrieved
   if (retrieved) return;
   fetch('/tasks')
     .then(res => res.json())
@@ -26,8 +27,9 @@ getTasksButton.addEventListener('click', () => {
         removeButton.class = 'remove';
         removeButton.innerText = 'X';
         removeButton.addEventListener('click', removeThisTask);
+        // Add button to li node
         taskListItem.appendChild(removeButton);
-        // Add entire node to list
+        // Add entire li node to list
         taskList.appendChild(taskListItem);
       });
       // Make sure it only happens once
@@ -58,8 +60,9 @@ postTaskButton.addEventListener('click', () => {
     removeButton.class = 'remove';
     removeButton.innerText = 'X';
     removeButton.addEventListener('click', removeThisTask);
+    // Add button to li node
     taskListItem.appendChild(removeButton);
-    // Add entire node to list
+    // Add entire li node to list
     taskList.appendChild(taskListItem);
     // Reset input field
     itemInput.value = '';
@@ -79,6 +82,7 @@ const removeThisTask = e => {
     body: JSON.stringify({itemId: e.target.parentNode.id})
   })
   .then(data => {
+    // Remove the node from the DOM if we succesfully deleted it in the database
     taskList.removeChild(e.target.parentNode);
   })
   .catch(err => {

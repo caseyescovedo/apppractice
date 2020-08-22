@@ -1,6 +1,6 @@
 module.exports = {
 
-  // Create Tables
+  // Create Table
 
   createTable: `
     CREATE TABLE IF NOT EXISTS task (
