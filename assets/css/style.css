@@ -44,6 +44,13 @@ input {
   width: 50%;
   margin: 0 auto;
   text-align: center;
+
+}
+
+#title{
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
 }
 
 .task {
@@ -51,4 +58,17 @@ input {
   min-width: 150px;
   border: 1px solid black;
   text-align: center;
+}
+h3{
+  margin: 30px
+}
+
+.allTask{
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+}
+
+.time, .item, .delete {
+margin: 10px
 }
