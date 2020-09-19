@@ -19,8 +19,13 @@
     "babel-register": "^6.24.1",
     "expect": "^1.20.2",
     "nodemon": "^1.11.0",
+    "path": "^0.12.7",
     "request": "^2.81.0",
     "supertest": "^3.0.0",
     "zombie": "^5.0.7"
+  },
+  "dependencies": {
+    "express": "^4.17.1",
+    "pg": "^8.3.3"
   }
 }
