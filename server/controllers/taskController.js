@@ -15,6 +15,7 @@ module.exports = {
       .then((data) => {
         //store the return value of the query to access in the route handler.
         res.locals.result = data.rows[0];
+        console.log(res.locals.result)
         return next();
       })
       .catch((err) => {

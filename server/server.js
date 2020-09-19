@@ -1,9 +1,11 @@
 const express = require('express');
 const path = require('path');
 const bodyParser = require('body-parser');
+const cookieParser = require('cookie-parser');
 
 //import controller to use as middleware.
 const taskController = require('./controllers/taskController');
+const authController = require('./controllers/authController');
 
 // Port variable at which the server will listen.
 const PORT = 3333;
@@ -11,9 +13,11 @@ const PORT = 3333;
 
 const app = express();
 
-//parse bodies of incoming requests
+// Parse bodies of incoming requests.
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({extended: true}));
+// Parse incoming cookies.
+app.use(cookieParser());
 
 
 // serves static files within the assets file.
@@ -41,6 +45,16 @@ app.get('/secret/api', taskController.getTasks, (req, res) => {
   }
 });
 
+// redirect upon signin
+app.post('/signin', authController.authenticate, (req, res) => {
+  if(res.locals.success) {
+    res.redirect('/secret');
+  } else {
+    res.send('unsuccessful login attempt');
+  }
+  
+})
+
 app.delete('/secret/api/:task_id', taskController.deleteTask, (req, res) => {
   if(res.locals.result instanceof Error) {
     // if the result is an Error then we'll send back a sorry message.
@@ -51,7 +65,7 @@ app.delete('/secret/api/:task_id', taskController.deleteTask, (req, res) => {
   }
 });
 
-app.get('/secret', (req, res) => {
+app.get('/secret', authController.checkCookie, (req, res) => {
   res.status(200).sendFile(path.resolve(__dirname, '../views/secret.html'));
 });
 
