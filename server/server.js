@@ -4,6 +4,7 @@ const app = express();
 const { urlencoded } = require('express');
 const path = require('path');
 const taskRouter = require('./routers/taskRouter');
+const authController = require('./controllers/authController');
 
 // define port as 3333
 const PORT = 3333;
@@ -19,6 +20,9 @@ app.use('/task', taskRouter);
 // serve secret.html request is made to '/secret'
 app.use('/secret', (req, res) => res.type('html').sendFile(path.resolve(__dirname, '../views/secret.html')));
 
+app.post('/signin',
+  authController.login,
+  (req, res) => res.status(200).send(res.locals.failed));
 // serve index.html when request is made to '/'
 app.use('/', (req, res) => res.type('html').sendFile(path.resolve(__dirname, '../views/index.html')));
 
