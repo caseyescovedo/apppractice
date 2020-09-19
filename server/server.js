@@ -25,6 +25,11 @@ app.get('/', (req, res) => {
     res.sendFile(path.join(__dirname, '../views/index.html'))
 });
 
+// response to secret endpoint
+app.get('/secret', (req, res) => {
+    res.sendFile(path.join(__dirname, '../views/secret.html'))
+});
+
 // routes to the routers - Create, Read, Delete will be handled in routes.js
 app.use('/api', router);
 

@@ -8,6 +8,7 @@ const controller = require('./controllers/taskController');
 // get tasks
 router.get ('/getTask', controller.getTask, (req, res) => {
   // some action
+  console.log('back to router, res.locals.getTask = ', res.locals.getTask)
   res.sendStatus(200).json(res.locals.getTask)
 });
 
@@ -20,15 +21,11 @@ router.post('/postTask', controller.postTask, (req, res) => {
   res.sendStatus(200).json(res.locals.postTask)
 });
 
-// delete tasks
-
-
-
-
-
-
-
-
+// delete tasks - NOT working in the middelware (postman shows OK though)
+router.delete('/deleteTask', controller.deleteTask, (req, res) => {
+    console.log('back to router')
+    res.sendStatus(200).json(res.locals.deleteTask)
+});
 
 
 

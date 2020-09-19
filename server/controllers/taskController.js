@@ -4,78 +4,56 @@ const Task = require('../models/models.js')
 
 taskControllers= {};
 
-taskControllers.getTask = (req, res, next) => {
-  axios.get('/api/getTask')
-    .then(res => res.json())
-    .then(data => {
-        res.locals.getTask = data;
-        return next();
-    }).exec() // needed for catch - mongoose does not return a true promise
-    .catch((err) => {
-        console.log(err);
-        return next(err)
-    })
+// get Tasks from mongoDB and send back to client
+taskControllers.getTask = async (req, res, next) => {
+  try{
+    const myTask = await Task.find().exec();
+    res.locals.getTask = myTask;
+    console.log('got tasks from DB!!', myTask);
+    return next();
+  } catch (err) {
+    return next(err);
+  }
 }
 
+// post task obj data sent from client to mongoDB
 taskControllers.postTask = async (req, res, next) => {
     console.log('reached controller')
-  const { task, date, time, cost } = req.body;
+  const { item, date, time, cost } = req.body;
   
   const myTask = new Task({ 
-      task,
+      item,
       date,
       time,
       cost
     }); 
     console.log(myTask)
     try {
-      await myTask.save() // save to db
+     // save/post task obj info to db
+      await myTask.save() 
       console.log('post complete myTask =', myTask)
       res.locals.postTask = myTask;
       return next();
-    } catch (err) {
+    } 
+    catch (err) {
         return next(err);
     }
 }
 
-
-// taskControllers.postTask = () => {
-//     console.log('reached controller')
-//   const { task, date, time, cost } = req.body;
-//     axios.post('/api/postTask', {
-//         task: task,
-//         date: date,
-//         time: time,
-//         cost: cost,
-//     })
-//     .then(res => res.json())
-//     .then( data => {
-//         res.locals.postTask = data;
-//         console.log('reached after axios post')
-//         return next();
-//     }).exec()
-//     .catch((err) => {
-//         console.log(err);
-//         return next(err);
-//     })
-// }
-
-taskControllers.deleteTask = () => {
-
-    const task = req.body.task;
-    axios.delete('/api/deleteTask', {
-    // how to refer to specific one
-    task: task,
-    })
-    .then(res => res.json())
-    .then(data => {
-        res.locals.deleteTask = data;
-    }).exec()
-    .catch((err) => {
-        console.log(err);
-        return next(err);
-    })
+// delete task from mongoDB by searching id(sent from client)
+taskControllers.deleteTask = async (req, res, next) => {
+  // NOTE: id is saved in req.params
+  const { id } = req.params;
+  try {
+    await Task.findByIdAndDelete(id).exec();
+    res.locals.deleteTask = id;
+    console.log('we have deleted task')
+    return next();
+  }
+  catch (err) {
+    return next(err);
+  } 
 }
 
-
 module.exports = taskControllers;
+
