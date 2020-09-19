@@ -21,7 +21,7 @@ app.use(express.urlencoded({ extended: true }));
 // SERVE STATIC FILES
 app.use(express.static('assets'));
 
-// ROUTE LOGIN
+// ROUTE LOGIN --> INCOMPLETE
 // app.use('/', (req, res) => {
 //   res
 //     .status(200)
