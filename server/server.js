@@ -2,7 +2,6 @@ const express = require('express');
 const app = express();
 const pool = require('./models/TaskModel');
 const path = require('path');
-const cors = require('cors');
 
 // PORT NUMBER
 const PORT = 3333;
@@ -11,10 +10,7 @@ const PORT = 3333;
 const { urlencoded } = require('body-parser');
 
 // IMPORT ROUTER FROM ROUTES.JS
-const router = require('./routes');
-
-// PREVENT CORS ERRORS
-app.use(cors());
+const router = require('/Users/casesimmons/Codesmith/app-assessment-mod-0/server/routes.js');
 
 // REQUIRE ALL INTERATION TO USE/PARSE JSON
 app.use(express.json());
@@ -26,27 +22,26 @@ app.use(express.urlencoded({ extended: true }));
 app.use(express.static('assets'));
 
 // ROUTE LOGIN
-app.get('/', (req, res) => {
-  res
-    .status(200)
-    .cookie('raisin', 7)
-    .sendFile(
-      '/Users/casesimmons/Codesmith/app-assessment-mod-0/views/index.html'
-    );
-});
+// app.use('/', (req, res) => {
+//   res
+//     .status(200)
+//     .cookie('cookie-text', 10)
+//     .sendFile(
+//       '/Users/casesimmons/Codesmith/app-assessment-mod-0/views/index.html'
+//     );
+// });
 
 // ROUTE SECRET
 app.use('/secret', (req, res) => {
   res
     .status(200)
-    .cookie('raisin', 7)
     .sendFile(
       '/Users/casesimmons/Codesmith/app-assessment-mod-0/views/secret.html'
     );
 });
 
 // ROUTE ALL METHODS TO ROUTER
-// app.use('/api', router);
+app.use('/api', router);
 
 // GLOBAL CATCH ALL
 app.use('/', (err, req, res, next) => {
