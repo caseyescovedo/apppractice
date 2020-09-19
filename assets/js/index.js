@@ -66,3 +66,24 @@ function deleteTask(id) {
   })
   .catch(err => console.log(err));
 }
+
+// Function that checks username and password
+// function authUser() {
+//   // Get user and pass and add to request body
+//   const user = document.getElementById('user').value;
+//   const pass = document.getElementById('pass').value;
+//   const reqBody = {user, pass};
+//   // Prevent default of form
+//   document.getElementById('signin')
+//   // Fetch to /signin
+//   fetch('/signin', {
+//     method: 'POST',
+//     headers: {
+//       'Content-Type': 'application/json'
+//     },
+//     body: JSON.stringify(reqBody)
+//   })
+//   .then(res => res.json())
+//   .then(data => console.log(data))
+//   .catch(err => console.log(err));
+// }
