@@ -4,20 +4,20 @@ const taskController = {};
 
 taskController.postTask = (req, res, next) => {
   // use destructuring to pull item out of request body
-  const { item } = req.body;
+  const { item, createdAt } = req.body;
   // define query string to insert item into tasks table
   const string = `
-  INSERT INTO tasks(item)
-  VALUES ($1)
+  INSERT INTO tasks(item, created_at)
+  VALUES ($1, $2)
   returning *;
   `;
   // put item into array to easily inject it into query string using bang operator
-  const values = [item];
+  const values = [item, createdAt];
   // query database with string and array of values
   db.query(string, values)
     // store returned array in res.locals
     .then((response) => {
-      res.locals.responst = response.rows;
+      res.locals.response = response.rows;
       return next();
     })
     // if there's an error, throw err

@@ -15,7 +15,7 @@ app.use(express.urlencoded({ extended: true }));
 // serve css and js files
 app.use(express.static('assets'));
 
-app.use('/secret/task', taskRouter);
+app.use('/task', taskRouter);
 // serve secret.html request is made to '/secret'
 app.use('/secret', (req, res) => res.type('html').sendFile(path.resolve(__dirname, '../views/secret.html')));
 

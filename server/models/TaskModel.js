@@ -11,5 +11,8 @@ const URI = process.env.PG_URI || myURI;
 const pool = new Pool({ connectionString: URI });
 
 module.exports = {
-  query: (text, params, cb) => pool.query(text, params, cb),
+  query: (text, params, cb) => {
+    console.log('*SQL QUERY*', text);
+    return pool.query(text, params, cb);
+  },
 };
