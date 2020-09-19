@@ -18,7 +18,7 @@ module.exports = {
         return next();
       })
       .catch((err) => {
-        //store the error of the query to access in the route handler. We'll check to see if its an instance of Error before sending a response.
+        //store the error of the query to access in the route handler. We'll check to see if the result an instance of Error before sending a response.
         res.locals.result = err;
         return next();
       })
@@ -38,7 +38,7 @@ module.exports = {
         return next();
       })
       .catch((err) => {
-        //store the error of the query to access in the route handler. We'll check to see if its an instance of Error before sending a response.
+        //store the error of the query to access in the route handler. We'll check to see if the result is an instance of Error before sending a response.
         res.locals.result = err;
         return next();
       })
@@ -47,6 +47,24 @@ module.exports = {
 
   // Should find items in the database based on an ID number and delete that item if it exists.
   deleteTask: (req, res, next) => {
+
+    //req params will contain the task_id which will be equivalent to _id in the task table.
+    const {task_id} = req.params;
+
+    // Query string that will be used to delete a task (1 row) from the database
+    const QUERY = "DELETE FROM Task WHERE _id=$1 RETURNING _id;"
+
+    db.query(QUERY, [task_id])
+      .then((data) => {
+        // We'll save the task id that was just deleted.
+        res.locals.result = data.rows[0];
+        return next();
+      })
+      .catch((err) => {
+        //store the error of the query to access in the route handler. We'll check to see if the result is an instance of Error before sending a response.
+        res.locals.result = err;
+        return next();
+      })
 
   },
 

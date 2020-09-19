@@ -36,7 +36,17 @@ app.get('/secret/api', taskController.getTasks, (req, res) => {
     // if the result is an Error then we'll send back a sorry message.
     res.status(200).json('Sorry. Could not retrieve tasks at this moment. If problem persists, contact website administrator.');
   } else {
-    // sends an json object to the clinet. This JSON object will be an array of object.
+    // sends a json object to the client. This JSON object will be an array of object.
+    res.status(200).json(res.locals.result);
+  }
+});
+
+app.delete('/secret/api/:task_id', taskController.deleteTask, (req, res) => {
+  if(res.locals.result instanceof Error) {
+    // if the result is an Error then we'll send back a sorry message.
+    res.status(200).json('Sorry. Could not delete at this moment. If problem persists, contact website administrator.');
+  } else {
+    // sends the id of the recently deleted task.
     res.status(200).json(res.locals.result);
   }
 });
