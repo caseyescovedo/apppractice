@@ -30,7 +30,7 @@ app.use('/api', router);
 
 // catch-all route error handelr
 app.use('*', (req, res, next) => {
-    res.status(404).send('Sorry can\'t find that');
+    res.status(404).send('Sorry can\'t find that??');
 })
 
 // global error handler
@@ -38,7 +38,7 @@ app.use('/', (err, req, res, next) => {
   const defaultErr = {
       log: 'Express error handler caught unknown middleware error',
       status: 400,
-      message: {err: 'An error occured'},
+      message: {err: 'An error occured??'},
   };
   const errorObj = Object.assign({}, defaultErr, err);
   return res.status(400).json(errorObj.message);

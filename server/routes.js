@@ -8,7 +8,7 @@ const controller = require('./controllers/taskController');
 // get tasks
 router.get ('/getTask', controller.getTask, (req, res) => {
   // some action
-  res.send(200).json(res.locals.getTask)
+  res.sendStatus(200).json(res.locals.getTask)
 });
 
 
@@ -16,7 +16,8 @@ router.get ('/getTask', controller.getTask, (req, res) => {
 // post tasks
 router.post('/postTask', controller.postTask, (req, res) => {
   //  some action
-  res.send(200).json(res.locals.postTask)
+  console.log('back to router')
+  res.sendStatus(200).json(res.locals.postTask)
 });
 
 // delete tasks
