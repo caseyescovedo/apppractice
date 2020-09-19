@@ -19,12 +19,12 @@ taskControllers.getTask = async (req, res, next) => {
 // post task obj data sent from client to mongoDB
 taskControllers.postTask = async (req, res, next) => {
     console.log('reached controller')
-  const { item, date, time, cost } = req.body;
+  const { item, date, created_at, cost } = req.body;
   
   const myTask = new Task({ 
       item,
       date,
-      time,
+      created_at,
       cost
     }); 
     console.log(myTask)

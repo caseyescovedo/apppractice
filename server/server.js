@@ -18,16 +18,16 @@ app.use(express.json());
 app.use(urlencoded({ extended: true }));
 
 // static file handling
-app.use(express.static('views'));
+app.use(express.static('assets'));
 
 // respond to main app
 app.get('/', (req, res) => {
-    res.sendFile(path.join(__dirname, '../views/index.html'))
-});
+    return res.sendFile(path.resolve(__dirname, '../views/index.html'))
+});//resolve vs join
 
 // response to secret endpoint
 app.get('/secret', (req, res) => {
-    res.sendFile(path.join(__dirname, '../views/secret.html'))
+    return res.sendFile(path.resolve(__dirname, '../views/secret.html'))
 });
 
 // routes to the routers - Create, Read, Delete will be handled in routes.js
