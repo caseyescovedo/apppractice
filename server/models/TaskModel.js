@@ -17,16 +17,3 @@ module.exports = {
     return pool.query(text, params, cb);
   },
 };
-
-/*
-SQL QUERIES
-
-// Create table task 
-// CREATE TABLE TASK (_id SERIAL PRIMARY KEY, item VARCHAR(1000) NOT NULL, created_at TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP);
-
-// INSERT INTO todo (item, description, date, status) VALUES ('CRUD', 'with codesmith friends', '09-18-20', 'incomplete'), ('AJAX', 'with codesmith friends', '09-18-20', 'incomplete'), ('data structures', 'with codesmith friends', '09-19-20', 'incomplete'), ('test', 'cs', '09-19-20', 'incomplete');
-
-//SELECT * from todo; 
-
-
-*/
