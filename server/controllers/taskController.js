@@ -3,8 +3,11 @@ const db = require('../models/TaskModel');
 const taskController = {};
 
 taskController.postTask = (req, res, next) => {
+  //write query text
   const postQuery = 'INSERT INTO task (item) VALUES ($1)';
-  const task = req.body;
+  //destrucutre task from body
+  const { task } = req.body;
+  //avoid SQL injection
   const queryObj = {
     text: postQuery,
     values: [task]
@@ -29,12 +32,16 @@ taskController.getTasks = (req, res, next) => {
     })
 };
 
+//delete the task
 taskController.deleteTask = (req, res, next) => {
+  //write query text
   const deleteQuery = 'DELETE FROM task WHERE id=($1)';
-  const id = req.body;
+  //destructure value from req.body
+  const { task } = req.body;
+  //avoid SQL injection
   const queryObj = {
     text: deleteQuery,
-    values: [id]
+    values: [task]
   }
   db.query(queryObj)
     .then(data => {
