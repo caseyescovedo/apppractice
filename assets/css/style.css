@@ -1,5 +1,6 @@
 body {
-  font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+  font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+  background-color: blue;
 }
 
 .title {
@@ -12,14 +13,12 @@ body {
 .remove {
   display: inline-block;
   float: right;
-  width: 15px;
-  height: 15px;
 }
 
 #signin {
   margin: auto;
   width: 25%;
-  padding-top:5%;
+  padding-top: 5%;
   text-align: center;
   background-color: #d3d3d3;
   border: 1px solid black;
@@ -31,10 +30,15 @@ body {
 
 input {
   margin-bottom: 10px;
+  padding: 1rem;
+  border-radius: 5px;
+  width: 100%;
 }
 
-#create{
-  margin: 0 auto;
+#create {
+  margin-bottom: 2rem;
+  margin-left: auto;
+  margin-right: auto;
   width: 50%;
   text-align: center;
   margin-top: 3%;
@@ -42,8 +46,12 @@ input {
 
 #task-list {
   width: 50%;
-  margin: 0 auto;
+  margin: 2rem auto;
   text-align: center;
+  list-style: none;
+  margin-block-start: 0;
+  margin-block-end: 0;
+  padding-inline-start: 0;
 }
 
 .task {
@@ -51,4 +59,15 @@ input {
   min-width: 150px;
   border: 1px solid black;
   text-align: center;
+}
+
+.todo-box {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background-color: whitesmoke;
+  border-radius: 5px;
+  box-shadow: 1px 1px 5px;
+  padding: 1rem;
+  margin: 0.5rem;
 }
