@@ -1,5 +1,5 @@
 body {
-  font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+  font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
 }
 
 .title {
@@ -12,14 +12,14 @@ body {
 .remove {
   display: inline-block;
   float: right;
-  width: 15px;
-  height: 15px;
+  width: 20px;
+  height: 20px;
 }
 
 #signin {
   margin: auto;
   width: 25%;
-  padding-top:5%;
+  padding-top: 5%;
   text-align: center;
   background-color: #d3d3d3;
   border: 1px solid black;
@@ -33,7 +33,7 @@ input {
   margin-bottom: 10px;
 }
 
-#create{
+#create {
   margin: 0 auto;
   width: 50%;
   text-align: center;
@@ -44,6 +44,7 @@ input {
   width: 50%;
   margin: 0 auto;
   text-align: center;
+  margin-top: 30px;
 }
 
 .task {
@@ -51,4 +52,5 @@ input {
   min-width: 150px;
   border: 1px solid black;
   text-align: center;
+  margin-bottom: 35px;
 }
